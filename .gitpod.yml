@@ -2,6 +2,7 @@ image: corise/dbt-course-gitpod
 tasks:
   - command: sudo /etc/init.d/postgresql start
   - command: export PGPASSWORD=corise PGUSER=corise PGDATABASE=dbt
+  - command: mkdir -p /workspace/.dbt && ln -snf /workspace/.dbt ~/.dbt
 ports:
   - port: 8000
     onOpen: open-preview
