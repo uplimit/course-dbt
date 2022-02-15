@@ -12,3 +12,7 @@ ports:
     onOpen: open-preview
   - port: 5432
     onOpen: ignore
+vscode:
+  extensions:
+    - github.vscode-pull-request-github
+    - cweijan.vscode-database-client2
