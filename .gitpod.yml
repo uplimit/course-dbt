@@ -2,11 +2,8 @@ image: corise/dbt-course-gitpod
 tasks:
   - init: |
       ./gitpod-init.sh
-  - command: |
+    command: |
       ./gitpod-command.sh
-    env:
-      PGPASSWORD: gitpod
-      PGDATABASE: dbt
 ports:
   - port: 8000
     onOpen: open-preview
