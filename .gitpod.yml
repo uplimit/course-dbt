@@ -6,7 +6,9 @@ tasks:
       ./gitpod-command.sh
 ports:
   - port: 8000
-    onOpen: open-preview
+    onOpen: open-browser
+  - port: 8081
+    onOpen: open-browser
   - port: 5432
     onOpen: ignore
 vscode:
