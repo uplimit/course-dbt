@@ -8,7 +8,7 @@ ports:
   - port: 8000
     onOpen: open-browser
   - port: 8081
-    onOpen: open-browser
+    onOpen: open-preview
   - port: 5432
     onOpen: ignore
 vscode:
