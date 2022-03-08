@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+
+  - name: greenery # name of the source 
+    schema: public # this is the schema our raw data lives in
+    database: dbt # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: addresses 
+        description: Contains addresses of users.
+
+      - name: events
+        loaded_at_field: created_at
+        description: User events.
+
+      - name: order_items
+        description: Contains information about the items for orders. One record per order-product combination.
+
+      - name: orders
+        loaded_at_field: created_at
+        description: One record per order.
+
+      - name: products
+        description: One record per product.
+      
+      - name: promos
+        description: One record per promo (inactive and active ones).
+
+      - name: users
+        loaded_at_field: created_at
+        description: One record per user.
