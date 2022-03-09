@@ -1,0 +1,86 @@
+version: 2
+
+sources:
+
+  - name: src_postgres
+    schema: public
+    database: dbt
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    # freshness:
+    #   warn_after: {count: 24, period: hour}
+    #   error_after: {count: 48, period: hour}
+
+    tables:
+      - name: users
+        description: >
+          Greenery user information
+        columns:
+          - name: user_id
+            description: Primary key for users
+            tests:
+              - unique
+              - not_null
+          - name: first_name
+          - name: last_name
+          - name: email
+          - name: phone_number
+          - name: created_at
+          - name: updated_at
+          - name: address_id
+
+      - name: addresses
+        columns:
+          - name: address_id
+          - name: address
+          - name: zipcode
+          - name: state
+          - name: country
+
+      - name: events
+        columns:
+          - name: event_id
+          - name: session_id
+          - name: user_id
+          - name: event_type
+          - name: page_url
+          - name: created_at
+
+      - name: orders
+        columns:
+          - name: order_id
+          - name: promo_id
+          - name: user_id
+          - name: address_id
+          - name: created_at
+          - name: order_cost
+          - name: shipping_cost
+          - name: order_total
+          - name: tracking_id
+          - name: shipping_service
+          - name: estimated_delivery_at
+          - name: delivered_at
+          - name: status
+
+      - name: order_items
+        columns:
+          - name: order_id
+          - name: product_id
+          - name: quantity
+
+      - name: products
+        columns:
+          - name: product_id
+          - name: name
+          - name: price
+          - name: inventory
+
+      - name: promos
+        columns:
+          - name: promo_id
+          - name: discount
+          - name: status
