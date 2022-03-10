@@ -16,7 +16,7 @@ Apache 2.0
 
 Query:
 ```ruby
-SELECT COUNT (DISTINCT user_id) FROM dbt_zoe_l.stg_users
+SELECT COUNT(DISTINCT user_id) FROM dbt_zoe_l.stg_users
 ```
 
 
