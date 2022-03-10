@@ -20,11 +20,27 @@ sources:
         loaded_at_field: created_at
         description: >
           Contains demographic information about each superhero
-      - name: users 
-        #loaded_at_field: created_at
-        description: >
-          Contains demographic information about each user
       - name: addresses 
-        #loaded_at_field: created_at
         description: >
-          Contains demographic information about each address
+          Contains location information about each address on the platform
+      - name: users
+        loaded_at_field: created_at
+        description: >
+          Contains identifying information about each user on the platform
+      - name: promos 
+        description: >
+          Contains information about different promotions
+      - name: products
+        description: > 
+          Contains information about every unique product on the platform
+      - name: orders
+        loaded_at_field: created_at
+        description: > 
+          Contains information about every unique order on the platform
+      - name: order_items
+        description: > 
+          Contains inventory information about every product on the platform
+      - name: events
+        loaded_at_field: created_at
+        description: > 
+          Contains information about every unique event on the platform
