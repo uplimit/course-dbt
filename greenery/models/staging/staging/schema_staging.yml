@@ -1,0 +1,147 @@
+version: 2
+
+models:
+  - name: stg_superheroes
+    description: Demographics about each superhero such as name, hair color, height and weight. For course practice uses, not a part of the greenery data.
+    columns:
+      - name: name
+        tests: 
+          - not_null
+      - name: height
+        tests: 
+          - positive_values
+      - name: weight_lbs 
+        tests: 
+          - positive_values
+  - name: stg_addresses
+    description: User address information, includes address, zipcode, state and country. 
+    columns:
+      - name: address_id
+        description: Primary key
+        tests: 
+          - unique
+          - not_null
+      - name: address
+      - name: zipcode
+      - name: state 
+      - name: country
+  - name: stg_events
+    description: User events tracking, such as page view, add to cart or checkout. 
+    columns: 
+      - name: event_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: session_id
+      - name: user_id
+        description: Foreign key to users table
+        tests:
+          - not_null
+          - relationships:
+             to: source('tutorial', 'users')
+             field: user_id
+      - name: event_type
+      - name: page_url
+      - name: created_at
+  - name: stg_orders
+    description: Order details, such as status, order cost, shipping cost, expected delivery date, etc. 
+    columns:
+      - name: order_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: promotion_id
+        description: Foreign key to promotions table
+        tests:
+          - relationships:
+              to: source('tutorial', 'promos')
+              field: promo_id
+      - name: user_id
+        description: Foreign key to users table
+        tests:
+          - not_null
+          - relationships:
+              to: source('tutorial', 'users')
+              field: user_id
+      - name: address_id
+        description: Foreign key to addresses table
+        tests:
+          - not_null
+          - relationships:
+              to: source('tutorial', 'addresses')
+              field: address_id
+      - name: created_at
+      - name: order_cost
+      - name: shipping_cost
+      - name: order_total
+      - name: tracking_id
+      - name: shipping_service
+      - name: estimated_delivery_at
+      - name: delivered_at
+      - name: status
+  - name: stg_order_items
+    description: Ordered item details, such as relevant product and quantities. 
+    columns:
+      - name: order_id
+        description: Foreign key to orders table
+        tests:
+          - not_null
+          - relationships:
+              to: source('tutorial', 'orders')
+              field: order_id
+      - name: product_id
+        description: Foreign key to products table
+        tests:
+          - not_null
+          - relationships:
+              to: source('tutorial', 'products')
+              field: product_id 
+      - name: quantity
+        tests:
+          - positive_values
+  - name: stg_products
+    description: Product details, such as name, price, and inventory. 
+    columns:
+      - name: product_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: name
+      - name: price
+        tests:
+          - positive_values
+      - name: inventory
+  - name: stg_promos
+    description: Product promotions, includes discount details and status.
+    columns:
+      - name: promotion_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: discount
+      - name: status
+  - name: stg_users
+    description: User details, such as name, contact number and address.
+    columns:
+      - name: user_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+      - name: last_name
+      - name: email
+      - name: phone_number
+      - name: created_at
+      - name: updated_at
+      - name: address_id
+        description: Foreign key to addresses table
+        tests:
+          - not_null
+          - relationships:
+              to: source('tutorial', 'addresses')
+              field: address_id
