@@ -1,0 +1,131 @@
+
+version: 2
+
+models:
+  - name: stg_addresses
+    description: Delivery addresses 
+    columns:
+      - name: address_id
+        description: UUID for each unique address on platform
+      - name: address 
+        description: The first few lines of the address
+      - name: zipcode
+        description: zipcode of the address
+      - name: state
+        description: state this delivery address is based in
+      - name: country
+        description: country this delivery address is based in
+  - name: stg_events
+    description: Events that happen on the platform
+    columns:
+      - name: event_id
+        description: UUID of each unique event on the platform
+      - name: session_id
+        description: UUID of each browsing session on the platform which can contain many events
+      - name: user_id
+        description: UUID of the user that this event is associated with
+      - name: page_url
+        description: URL that the event happened on
+      - name: created_at
+        description: Timestamp of the event
+      - name: event_type
+        description: Type of event
+      - name: order_id
+        description: If the event is specific to an order (mostly used for checkout)
+      - name: product_id
+        description: If the event is specific to a product
+  - name: stg_order_items
+    description: Line items of each order 
+    columns:
+      - name: order_id
+        description: OrderId of this order
+      - name: product_id
+        description: ProductId of a single item in this order 
+      - name: quantity
+        description: Number of units of the product in this order
+  - name: stg_orders 
+    description: Each order made by a customer 
+    columns:
+      - name: order_id
+        description: UUID for each unique order on platform
+      - name: user_id
+        description: UserId of the user that placed this order
+      - name: promo_id
+        description: PromoId if any was used in the order
+      - name: address_id
+        description: Delivery address for this order
+      - name: created_at
+        description: timestamp when the order was created
+      - name: order_cost
+        description: Dollar about of the items in the order
+      - name: shipping_cost
+        description: Cost of shipping for the order
+      - name: order_total
+        description: Total cost of the order including shipping
+      - name: tracking_id
+        description: Tracking number for the order/package
+      - name: shipping_service
+        description: Company that was used for shipping
+      - name: estimated_delivery_at
+        description: Estimated date of delivery
+      - name: delivered_at
+        description: Actual timestamp of delivery
+      - name: status
+        description: Status of the order
+  - name: stg_products
+    description: Each product sold by greenery 
+    columns:
+      - name: product_id
+        description: UUID for each unique product on platform
+      - name: name
+        description: Name of the product
+      - name: price
+        description: Price of the product
+      - name: inventory 
+        description: Amount of the inventory we have for this product
+  - name: stg_promos 
+    description: Promo codes on the platform 
+    columns:
+      - name: promo_id
+        description: Each unique promocode on platform
+      - name: discount
+        description: Absolute dollar amount that is given off with the code
+      - name: status 
+        description: Is the promo code active or disabled
+  - name: stg_users 
+    description: All users on the platform
+    columns:
+      - name: user_id
+        description: UUID for each unique user on platform
+      - name: first_name
+        description: first name of the user
+      - name: last_name 
+        description: last name of the user
+      - name: email 
+        description: email address of the user
+      - name: phone_number
+        description: phone number of the user
+      - name: created_at
+        description: timestamp the user was created
+      - name: updated_at
+        description: timestamp the user was last updated
+      - name: address_id
+        description: default delivery address for the user
+
+  - name: my_first_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: my_second_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null

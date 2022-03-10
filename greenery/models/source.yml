@@ -1,0 +1,18 @@
+version: 2
+
+sources: 
+  - name: greenery
+    description: The main database for this tutorial 
+    database: dbt
+    schema: public
+    tables:
+      - name: addresses
+        description: Delivery addresses for greenery.
+      - name: events
+      - name: order_items
+      - name: orders 
+      - name: products
+      - name: promos
+      - name: superheroes
+      - name: users
+        
