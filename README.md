@@ -46,7 +46,7 @@ FROM
 (SELECT CAST(delivered_at_utc AS DATE) - CAST(created_at_utc AS DATE) AS delivery_days
 FROM dbt_zoe_l.stg_orders) b
 ```
-
+*Note: Here I converted timestamp field to dates then calculated days instead of hours. 
 
 *4. How many users have only made one purchase? Two purchases? Three+ purchases?*
 
