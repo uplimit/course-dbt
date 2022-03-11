@@ -1,5 +1,5 @@
 SELECT 
-order_id AS order_id,
-product_id AS product_id,
-quantity AS quantity
+order_id,
+product_id,
+quantity
 FROM {{ source('greenery', 'order_items') }}

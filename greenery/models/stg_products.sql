@@ -1,6 +1,6 @@
 SELECT 
-product_id AS product_id,
-name AS name,
-price AS price,
-inventory AS inventory
+product_id,
+name,
+price,
+inventory
 FROM {{ source('greenery', 'products') }}
