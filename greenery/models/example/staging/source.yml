@@ -20,3 +20,15 @@ sources:
         loaded_at_field: created_at
         description: >
           Contains demographic information about each superhero
+  - name: raw # name of the source 
+    schema: public # this is the schema our raw data lives in
+    database: dbt # this is the name of our database
+
+    tables:
+      - name: users
+      - name: addresses
+      - name: events
+      - name: orders    
+      - name: order_items
+      - name: products
+      - name: promos
