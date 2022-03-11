@@ -45,6 +45,7 @@ Try running the following commands:
                     ELSE '3+' END
                 , count(distinct user_id) as number_of_users
         from(
+            
             select user_id,count(distinct order_id) as count_of_orders
             from dbt."dbt_Marios_A".stg_orders 
             group by 1
