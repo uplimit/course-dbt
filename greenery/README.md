@@ -39,14 +39,17 @@ Try running the following commands:
 -How many users have only made one purchase? Two purchases? Three+ purchases?
     A: 1->25
        2->28
-       3->34
-       (select count_of_orders, count(distinct user_id) as number_of_users
+       3+->71
+       (select CASE WHEN count_of_orders = 1 then '1'
+                    WHEN count_of_orders = 2 then '2'
+                    ELSE '3+' END
+                , count(distinct user_id) as number_of_users
         from(
-        select user_id,count(distinct order_id) as count_of_orders
-        from dbt."dbt_Marios_A".stg_orders 
-        group by 1
+            
+            select user_id,count(distinct order_id) as count_of_orders
+            from dbt."dbt_Marios_A".stg_orders 
+            group by 1
         ) a 
-        where count_of_orders <=3
         group by 1;)
 -On average, how many unique sessions do we have per hour?
     A: On average we have 16.32 sessions per hour
