@@ -5,9 +5,9 @@
 }}
 
 SELECT 
-    address_id,
+    address_id AS address_guid,
     address,
-    zipcode
+    zipcode,
     state,
     country
 FROM {{ source('tutorial', 'addresses') }}
