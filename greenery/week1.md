@@ -39,8 +39,11 @@ AVG(time_until_fulfillment)
 FROM time_to_order_fulfillment;
 ~~~~
 ## How many users have only made one purchase? Two purchases? Three+ purchases?
--- 1 order | 2 orders | 3+ orders 
-    25     |    28    |   71
+| count_orders_group | count_users |
+| ----------- | ----------- |
+| 1 | 25 |
+| 2 | 28 |
+| 3+ | 71 |
 ~~~~sql
 WITH user_count AS(
 SELECT
