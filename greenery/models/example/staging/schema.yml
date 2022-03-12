@@ -10,7 +10,15 @@ models:
       - name: height
         tests:
           - positive_values
-      - name: weight
+      - name: weight_lbs
         tests:
           - positive_values
-        
+      - name: weight_kg
+        tests:
+          - positive_values
+  - name: stg_addresses
+    description: Contains location information about each address on the platform. 
+    columns:
+      - name: address_id
+        tests:
+          - not_null
