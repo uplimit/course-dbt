@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+
+  - name: greenery
+    schema: public
+    database: dbt
+    tables:
+      - name: users
+      - name: addresses
+      - name: events
+      - name: orders
+      - name: products
+      - name: order_items
+      - name: promos
+
+    # It doesn't seem like we need these now, we haven't scheduled our dbt run. 
+    
+    # quoting:
+    #   database: false
+    #   schema: false
+    #   identifier: false
+    
+    # freshness:
+    #   warn_after: {count: 24, period: hour}
+    #   error_after: {count: 48, period: hour}
