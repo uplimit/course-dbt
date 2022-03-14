@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+
+  - name: greenery # name of the source 
+    schema: public # this is the schema our raw data lives in
+    database: dbt # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+    
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+
+    tables:
+      - name: addresses 
+      - name: events 
+      - name: order_items 
+      - name: orders 
+        loaded_at_field: created_at
+      - name: products 
+      - name: promos 
+      - name: users 
+        description: >
+          Contains users email, name, and phone number.   
+    
