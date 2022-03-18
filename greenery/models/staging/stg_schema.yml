@@ -74,8 +74,14 @@ models:
               field: address_id
       - name: created_at
       - name: order_cost
+        tests:
+          - positive_values
       - name: shipping_cost
-      - name: order_total
+        tests:
+          - positive_values
+      - name: order_total_amount
+        tests:
+          - positive_values
       - name: tracking_id
       - name: shipping_service
       - name: estimated_delivery_at
@@ -101,6 +107,8 @@ models:
       - name: quantity
         tests:
           - positive_values
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: integer
   - name: stg_products
     description: Product details, such as name, price, and inventory. 
     columns:
@@ -123,6 +131,8 @@ models:
           - unique
           - not_null
       - name: discount
+        tests:
+          - positive_values
       - name: status
   - name: stg_users
     description: User details, such as name, contact number and address.
