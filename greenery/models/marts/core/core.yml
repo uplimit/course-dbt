@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: int_orders_grouped_by_user
+    description: Order data grouped by user
+  - name: int_events_grouped_by_user
+    description: events data grouped by user  
+  - name: int_events_grouped_by_sessions 
+    description: events data grouped by session
+ 
+  - name: dim_users
+    description:  
+  
