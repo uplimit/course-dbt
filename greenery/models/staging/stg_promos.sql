@@ -1,11 +1,11 @@
 {{
   config(
-    materialized='table'
+    materialized='view'
   )
 }}
 
 SELECT 
-    promo_id,
+    promo_id as promotion_id,
     discount,
     status    
 FROM {{ source('raw', 'promos') }}

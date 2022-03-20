@@ -1,0 +1,17 @@
+
+version: 2
+
+models:
+  - name: fact_page_views
+    description: Information about the users of the orders and the quantity of each order
+    columns:
+    - name: session_id
+      description: PK - Primary key
+      tests:
+      - not_null
+    - name: event_id as page_view_id
+    - name: user_id
+    - name: page_url
+    - name: created_at_utc
+    - name: order_id
+    - name: product_id
