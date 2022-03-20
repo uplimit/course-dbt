@@ -1,6 +1,6 @@
 {{
   config(
-    materialized='table'
+    materialized='view'
   )
 }}
 
@@ -10,6 +10,7 @@ SELECT
     last_name,
     email,
     phone_number,
-    created_at,
+    created_at as user_registerion_date,
+    updated_at,
     address_id
 FROM {{ source('raw', 'users') }}

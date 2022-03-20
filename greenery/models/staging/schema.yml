@@ -11,6 +11,6 @@ models:
       - name: height
         tests:
           - positive_values
-      - name: weight
+      - name: weight_kg
         tests:
           - positive_values

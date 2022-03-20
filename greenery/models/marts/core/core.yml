@@ -1,0 +1,87 @@
+
+version: 2
+
+models:
+  - name: dim_order_items
+    description: Information about products of the orders and the quantity of each order
+    columns:
+    - name: order_id
+      description: PK - Primary key
+      tests:
+      - not_null
+    - name: product_id
+      tests:
+        - not_null
+    - name: quantity
+        
+  - name: dim_products
+    description: Information about products and quantity of each order
+    columns:
+    - name: product_id
+      description: PK - Primary key
+      tests:
+      - not_null
+      - unique
+    - name: name
+    - name: price
+    - name: inventory
+    - name: num_products_ordered
+      description: The number of products order per product_id
+
+  - name: dim_users
+    description: Information about users, includes PII
+    columns:
+    - name: user_id
+      tests:
+      - not_null
+      - unique
+    - name: first_name
+    - name: last_name
+    - name: user_registerion_date
+    - name: address
+    - name: zipcode
+    - name: first_order_date
+    - name: repeated_customer
+      tests:
+          - not_null
+
+  - name: fact_events
+    description: Information about the events of greenery
+    columns: 
+    - name: event_id
+      description: PK - Primary key
+      tests:
+      - not_null
+    - name: session_id
+      tests:
+      - not_null
+    - name: user_id
+      tests:
+      - not_null
+    - name: page_url
+    - name: created_at_utc
+    - name: event_type
+    - name: order_id
+    - name: product_id
+    
+  - name: fact_orders
+    description: Information about the orders of greenery
+    columns:
+    - name: order_id
+      description: PK - Primary key
+      tests:
+      - not_null
+    - name: order_creation_date
+    - name: shipping_service
+    - name: order_total
+      tests:
+      - positive_values
+    - name: order_status
+    - name: promo_code_discount
+    - name: user_id
+    - name: delivery_credibility
+    - name: user_first_name
+    - name: num_of_prods_in_order
+      tests:
+      - not_null
+    - name: promo_used

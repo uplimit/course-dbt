@@ -1,0 +1,23 @@
+
+version: 2
+
+models:
+  - name: user_order_facts
+    description: Information about the users of the orders and the quantity of each order
+    columns:
+    - name: user_id
+      description: PK - Primary key
+      tests:
+      - not_null
+    - name: first_name
+    - name: last_name
+    - name: repeated_customer
+    - name: address
+    - name: zipcode
+    - name: state
+    - name: email
+    - name: order_total
+    - name: shipping_service
+    - name: max_delivery_delay
+    - name: average_product_quantity
+    - name: count_promos_used
