@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: int_events_grouped_by_product_date.sql
+    description: event data grouped by product x date 
+  
+  - name: int_orders_grouped_by_product_date
+    description: orders data grouped by product x date
+
+  - name: facts_products_date 
+    description: product date grouped by product x date  

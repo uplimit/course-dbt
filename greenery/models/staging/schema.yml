@@ -8,6 +8,12 @@ models:
         tests:
           - not_null
           - unique 
+          - relationships:
+              to: ref('stg_events')
+              field: user_id
+          - relationships:
+              to: ref('stg_orders')
+              field: user_id
   -  name: stg_addresses 
      description: Address information. 
      columns: 
@@ -16,6 +22,9 @@ models:
         tests: 
           - unique 
           - not_null 
+          - relationships:
+              to: ref('stg_orders')
+              field: address_id 
   -  name: stg_events
      description: Information anytime an item is added to the cart, someone checks out, someone visits a page, and when a package is shipped.
      columns: 
@@ -36,10 +45,16 @@ models:
         description:  "Unique ID for order in this schema"
         tests: 
           - not_null 
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id 
       - name: product_id 
         description:  "Unique ID for product in this schema"
         tests: 
           - not_null 
+          - relationships:
+              to: ref('stg_products')
+              field: product_id 
   -  name: stg_orders 
      description: Information on the order like how much it cost, tracking id, and delivery date.   
      columns: 
@@ -72,4 +87,7 @@ models:
         tests:
           - not_null
           - unique 
+          - relationships:
+              to: ref('stg_orders')
+              field: promo_id 
 

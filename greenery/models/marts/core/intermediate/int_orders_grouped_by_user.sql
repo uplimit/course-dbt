@@ -10,6 +10,7 @@ with stg_orders as (
     
 )
 
+
 , order_agg as (
 SELECT 
     user_id

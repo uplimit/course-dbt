@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_not_checked_out 
+    description: Users who went on a page or added an item to a cart, but didn't checkout. 

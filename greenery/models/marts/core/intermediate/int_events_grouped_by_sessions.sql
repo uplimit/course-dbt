@@ -30,7 +30,6 @@ SELECT
     , count(case 
             when event_type = 'package_shipped' 
             then event_id ELSE NULL END) as num_of_package_shipped_events
-
 FROM stg_events 
 GROUP BY session_id, user_id ) 
 

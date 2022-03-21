@@ -27,11 +27,15 @@ with stg_users as (
 SELECT 
     stg_users.* 
     ,  stg_users.first_name || stg_users.last_name as full_name 
+    , stg_addresses.address
+    , stg_addresses.zipcode 
+    , stg_addresses.state 
+    , stg_addresses.country 
     , int_orders.num_of_orders 
     , int_orders.num_of_promos
     , int_orders.first_order_created_at 
     , int_orders.last_order_created_at 
-    , int_orderstotal_order_cost 
+    , int_orders.total_order_cost 
     , int_orders.total_shipping_cost  
     , int_orders.total_order_total
     , int_sessions.num_of_events 
@@ -49,4 +53,4 @@ LEFT JOIN int_orders
 LEFT JOIN int_sessions 
     ON stg_users.user_id = int_sessions.user_id 
 LEFT JOIN stg_addresses 
-    ON stg_users.user_id = stg_addresses.user_id 
+    ON stg_users.address_id = stg_addresses.address_id
