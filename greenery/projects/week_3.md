@@ -4,7 +4,7 @@
 
 NOTE: conversion rate is defined as the # of unique sessions with a purchase event / total number of unique sessions. Conversion rate by product is defined as the # of unique sessions with a purchase event of that product / total number of unique sessions that viewed that product
 
-#### What is our overall conversion rate?
+#### 1) What is our overall conversion rate?
 62.46% 
 
 
@@ -14,7 +14,7 @@ from dbt_mahelet_f.facts_conversions
 ```
 
 
-#### What is our conversion rate by product?
+#### 2) What is our conversion rate by product?
 
 ``` sql 
 select product_id
@@ -63,5 +63,23 @@ We’re getting really excited about dbt macros after learning more about them a
 
 Create a macro to simplify part of a model(s). Think about what would improve the usability or modularity of your code by applying a macro. Large case statements, or blocks of SQL that are often repeated make great candidates. Document the macro(s) using a .yml file in the macros directory.
 
-Note: One potential macro in our data set is aggregating event types per session. Start here as your first macro and add other macros if you want to go further.
+marco: calculate_rates 
+
+Looking at the code I wrote for Part 1, 
+
+page view --> adding to cart, adding to cart --> purchasing, page view --> purcahases 
+
+used in 
+facts_product_conversions (location: model/marts/product)
+facts_conversions (location: model/marts/product) 
+
+### PART 3
+
+We’re starting to think about granting permissions to our dbt models in our postgres database so that other roles can have access to them.
+
+Add a post hook to your project to apply grants to the role “reporting”. Create reporting role first by running CREATE ROLE reporting in your database instance.
+
+NOTE: After you create the role you still need to grant it usage access on your schema dbt_<firstname>_<lastinitial> (what you set in your profiles.yml in week 1) which can be done using on-run-end
+
+HINT: you can use the grant macro example from this week and make any necessary changes for postgres syntax
 
