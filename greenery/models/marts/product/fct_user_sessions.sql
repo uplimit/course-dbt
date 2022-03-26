@@ -1,3 +1,8 @@
+{{ config(
+    tags=['PII']
+)
+}}
+
 WITH session_length AS (
     SELECT 
         session_id

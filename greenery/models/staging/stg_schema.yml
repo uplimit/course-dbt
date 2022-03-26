@@ -41,8 +41,13 @@ models:
           - relationships:
              to: source('tutorial', 'users')
              field: user_id
+      - name: order_id
+      - name: product_id
       - name: event_type
       - name: page_url
+        description: The page url of which the event happened.
+        tests:
+          - not_null
       - name: created_at
   - name: stg_orders
     description: Order details, such as status, order cost, shipping cost, expected delivery date, etc. 

@@ -3,4 +3,6 @@ packages:
     version: 0.8.2
   - package: calogica/dbt_expectations
     version: [">=0.5.0", "<0.6.0"]
-  
+  - package: dbt-labs/codegen
+    version: 0.5.0
+    

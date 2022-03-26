@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: int_session_events_agg
+    description: Aggregated event types per session. 
+    columns:
+      - name: unique_key
+        description: Surrogate key. It is the combination of the session, event type, user, page url, and the event created time. 
+        tests:
+          - not_null
+          - unique
+
+      - name: session_id
+        description: The session id of the event
+        tests:
+          - not_null
+
+      - name: created_at_utc
+        description: Time when the event was created
+        tests:
+          - not_null
+
+      - name: user_id
+        description: The id of the user who completed the session
+        tests:
+          - not_null
+
+      - name: product_id
+        description: The id of the product in this session
+
+      - name: page_view
+        description: The number of page views in this session
+
+      - name: add_to_cart
+        description: The number of add to cart actions in this session
+
+      - name: checkout
+        description: The number of checkout actions in this session
+
+      - name: package_shipped
+        description: The number of package shipped actions in this session

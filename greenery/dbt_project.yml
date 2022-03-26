@@ -39,3 +39,8 @@ models:
     marts:
       +materialized: table
 
+  post-hook:
+    - "GRANT SELECT ON {{ this }} TO reporting"
+
+on-run-end: 
+  - "GRANT USAGE ON ALL SEQUENCES IN SCHEMA dbt_zoe_l TO reporting "

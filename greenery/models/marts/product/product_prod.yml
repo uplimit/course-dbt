@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: fct_product_conversions
+    description: Conversion rate metric calculation for products.
+    columns:
+      - name: product_id
+        description: The id of the product 
+        tests: 
+          - not_null
+          - unique
+
+      - name: product_name
+        description: The name of the product
+        tests:
+          - not_null
+
+      - name: number_of_purchase_events
+        description: The aggregated number of purchasing events of this product 
+        tests: 
+          - not_null
+          - positive_values
+
+      - name: number_of_page_views
+        description: The aggregated number of page view events of this product 
+        tests: 
+          - not_null
+          - positive_values
+
+      - name: product_conversion_rate
+        description: Conversion by product. It is defined as the number of unique sessions with a purchase event of that product / total number of unique sessions that viewed that product
+        tests: 
+          - not_null
+
+  - name: fct_user_sessions
+    description: Combining events and users for user behavior tracking.
+    columns:
+      - name: session_id
+        description: The id of the event session
+        tests: 
+          - not_null
+
+      - name: user_id
+        description: The user who completed that session
+        tests: 
+          - not_null
+
+      - name: user_name
+        description: The name of the user. 
+
+      - name: email
+        description: The email of the user
+
+      - name: page_view
+        description: Number of page view events 
+        tests: 
+          - positive_values
+
+      - name: add_to_cart
+        description: Number of add to cart events
+        tests: 
+          - positive_values
+
+      - name: checkout
+        description: Number of checkout events
+        tests: 
+          - positive_values
+
+      - name: package_shipped
+        description: Number of package shipped events
+        tests: 
+          - positive_values
+
+      - name: first_event_time
+        description: The first event session
+
+      - name: last_event_time
+        description: The last event session
+
+      - name: session_length_minutes
+        description: The duration of the event
+        tests: 
+          - positive_values

@@ -1,3 +1,8 @@
+{{ config(
+    tags=['PII']
+)
+}}
+
 SELECT 
      users.user_id
     ,CONCAT(users.first_name, ' ', users.last_name) AS user_name

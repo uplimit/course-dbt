@@ -1,3 +1,8 @@
+{{ config(
+    tags=['PII']
+)
+}}
+
 SELECT
     user_id,
     first_name,

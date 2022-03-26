@@ -1,9 +1,15 @@
+{{ config(
+    tags=['PII']
+)
+}}
+
 WITH user_orders AS (
      SELECT user_id
             ,COUNT(order_id) AS number_of_orders
             ,SUM(order_total_amount) AS total_order_amount
-            ,SUM(number_of_products) AS total_number_of_purchased_products
+            ,SUM(number_of_purchased_products) AS total_number_of_purchased_products
             ,SUM(order_discount) AS total_discount_amount
+            ,SUM(order_profits) AS total_order_profits
     FROM {{ ref('fct_orders') }}
     GROUP BY user_id
 )
@@ -20,5 +26,6 @@ SELECT
     ,COALESCE(user_orders.total_order_amount, 0) AS total_order_amount
     ,COALESCE(user_orders.total_discount_amount, 0) AS total_discount_amount
     ,COALESCE(user_orders.total_number_of_purchased_products, 0) AS total_number_of_purchased_products
+    ,COALESCE(user_orders.total_order_profits, 0) AS customer_lifetime_value
 FROM {{ ref('dim_users') }} users
 LEFT JOIN user_orders ON users.user_id = user_orders.user_id
