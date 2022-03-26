@@ -8,15 +8,14 @@ with sessions as (
     select * from {{ref('int_events_grouped_by_sessions')}}
 )
 
+
 , sum_sessions as (
 
   select 
-  session_id 
-  , sum(page_view_session) as sum_page_view_session 
+   sum(page_view_session) as sum_page_view_session 
   , sum(add_to_cart_session) as sum_add_to_cart_session
   , sum(purchase_session) as sum_purchase_session
   from sessions 
-  group by 1 
 )
 
 -- calculate funnel conversion rates 
