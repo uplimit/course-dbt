@@ -5,6 +5,14 @@
 NOTE: conversion rate is defined as the # of unique sessions with a purchase event / total number of unique sessions. Conversion rate by product is defined as the # of unique sessions with a purchase event of that product / total number of unique sessions that viewed that product
 
 #### What is our overall conversion rate?
+62.46% 
+
+
+```sql 
+select view_purchase_conversion_rate as conversion_rate
+from dbt_mahelet_f.facts_conversions
+```
+
 
 #### What is our conversion rate by product?
 

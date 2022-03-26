@@ -36,11 +36,8 @@ SELECT
             when event_type = 'add_to_cart' 
             then 1 ELSE 0 END) as add_to_cart_session
      , max(case 
-            when event_type = 'checkout' 
-            then 1 ELSE 0 END) as checkout_session 
-    , max(case 
-            when event_type = 'package_shipped' 
-            then 1 ELSE 0 END) as package_shipped_session
+            when order_id is not NULL 
+            then 1 ELSE 0 END) as purchase_session 
 FROM stg_events 
 GROUP BY session_id) 
 
