@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: cnv_rate_per_product
+    description: One entry per product with the respective conversion rate.
+    tests:
+      - dbt_expectations.expect_column_values_to_be_unique:
+          row_condition: product_id
+      - dbt_expectations.expect_column_values_to_not_be_null:
+          row_condition: product_id
+
+
+    columns: 
+      - name: product_id
+        description: PK
+      - name: name
+        description: Product name.
+      - name: total_page_views
+        description: Number of unique sessions with page view of that product.
+      - name: total_purchases
+        description: Number of unique sessions with a purchase of this product.
+      - name: product_conv_rate
+        description: Current conversion rate.

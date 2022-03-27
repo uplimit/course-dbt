@@ -14,7 +14,7 @@ GROUP BY 1)
 
 select 
     pr.product_id,
-    pr.name,
+    pr.name as product_name,
     pr.price,
     pr.inventory,
     pc.num_products_ordered
