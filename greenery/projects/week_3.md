@@ -84,5 +84,5 @@ You can find my implementation of the test in `models/marts/product/product.yml`
 
 ### PART 5
 
-![DAG](course-dbt/greenery/projects/week_3_dag.png)
+![DAG](https://github.com/mahelet-fekade/course-dbt/blob/week3/greenery/projects/week_3_dag.png)
 
