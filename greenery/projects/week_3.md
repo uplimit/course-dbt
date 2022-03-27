@@ -2,8 +2,6 @@
 
 ### PART 1
 
-NOTE: conversion rate is defined as the # of unique sessions with a purchase event / total number of unique sessions. Conversion rate by product is defined as the # of unique sessions with a purchase event of that product / total number of unique sessions that viewed that product
-
 #### 1) What is our overall conversion rate?
 62.46% 
 
@@ -13,7 +11,7 @@ select view_purchase_conversion_rate as conversion_rate
 from dbt_mahelet_f.facts_conversions
 ```
 
-To calculate this, I updated intermediate model I built in week 2 (name: int_events_grouped_by_session.sql; location: models/marts/product/intermediate). This model aggeragtes stg_events table at the session-level. I added columns whether or not the session had a page view event, add-to-cart event, or purchase event. Then I created a fact model (name: facts_conversions, location: models/marts/product) to calcuate the different conversion rates that exist across the funnel like page view to add to cart, page view to purchase, add to cart to purchase. 
+To calculate this, I updated intermediate model I built in week 2 (name: `int_events_grouped_by_session.sql`; location: `models/marts/product/intermediate`). This model aggeragtes stg_events table at the session-level. I added columns whether or not the session had a page view event, add-to-cart event, and/or purchase event. Then I created a fact model (name: `facts_conversions.sql`, location: `models/marts/product`) to calcuate the different conversion rates that exist across the funnel like page view to add to cart, page view to purchase, add to cart to purchase. 
 
 
 #### 2) What is our conversion rate by product?
@@ -58,12 +56,7 @@ e706ab70-b396-4d30-a6b2-a1ccf3625b52	| 50
 e8b6528e-a830-4d03-a027-473b411c7f02	| 39.73
 fb0e8be7-5ac4-4a76-a1fa-2cc4bf0b2d80	| 60.94
 
-# finish thought
-To calculate this, I updated intermediate model I built in week 2 (name: int_sessions_grouped_by_product.sql; location: models/marts/product/intermediate). 
-
-This model aggeragtes stg_events table at the session-level. I added columns whether or not the session had a page view event, add-to-cart event, or purchase event. T
-
-hen I created a fact model (name: facts_product_conversions, location: models/marts/product) to calcuate the different conversion rates that exist across the funnel like page view to add to cart, page view to purchase, add to cart to purchase. 
+To calculate this, I created a new intermediate model (name: `int_sessions_grouped_by_product.sql`; location: `models/marts/product/intermediate`) that aggregates page view event, add-to-cart event, and/or purchase event at the product-level. Then I created a fact model (name: `facts_product_conversions.sql`, location: `models/marts/product`) to calcuate the different conversion rates that exist across the funnel like page view to add to cart, page view to purchase, add to cart to purchase. 
 
 
 ### PART 2
@@ -84,17 +77,12 @@ Post-hook set-up in `dbt_project.yml`
 
 I installed the dbt_expectations package. I used the test `expect_column_values_to_be_between` on the conversion rate columns in `facts_product_conversions` and `facts_conversions`. 
 
-I set the min and max arguments in the test to be 0 and 100, respectively. 
-
-# something here why i set the max to 100
+I set the min and max arguments in the test to be 0 and 100, respectively. If the conversion rates are more than 100 that would let me know that the denominator is greater than the numerator, which is unexpected behavior.  
 
 You can find my implementation of the test in `models/marts/product/product.yml`. 
 
 
-
 ### PART 5
 
-After improving our project with all the things that we have learned about dbt, we want to show off our work!
-
-Show (using dbt docs and the model DAGs) how you have simplified or improved a DAG using macros and/or dbt packages.
+![DAG](course-dbt/greenery/projects/week_3_dag.png)
 
