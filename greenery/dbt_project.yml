@@ -36,3 +36,8 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+    # post-hook: 
+    #   - "grant select on {{ this }} to REPORTING"
+
+on-run-end:
+  - "grant select on all tables in schema dbt_marios_a to reporting"
