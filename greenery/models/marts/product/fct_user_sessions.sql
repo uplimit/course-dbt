@@ -8,15 +8,15 @@ WITH session_length AS (
         session_id
         ,MIN(created_at_utc) AS first_event_time
         ,MAX(created_at_utc) AS last_event_time
-    FROM {{ ref('fct_events') }}
+    FROM {{ ref('stg_events') }}
     GROUP BY session_id
 )
 
 SELECT
     int_agg.session_id
     ,int_agg.user_id
-    ,dim_users.user_name
-    ,dim_users.email
+    ,users.user_name
+    ,users.email
     ,int_agg.page_view
     ,int_agg.add_to_cart
     ,int_agg.checkout
@@ -29,5 +29,5 @@ SELECT
     AS session_length_minutes
 
 FROM {{ ref('int_session_events_agg') }} int_agg
-LEFT JOIN {{ ref('dim_users') }} ON int_agg.user_id = dim_users.user_id
+LEFT JOIN {{ ref('int_user_address') }} users ON int_agg.user_id = users.user_id
 LEFT JOIN session_length ON int_agg.session_id = session_length.session_id

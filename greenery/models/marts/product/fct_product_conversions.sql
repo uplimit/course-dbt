@@ -20,12 +20,12 @@ page_views AS
  
 SELECT
     page_views.product_id
-    ,dim_products.product_name
+    ,products.product_name
     ,purchase_events.number_of_purchase_events
     ,page_views.number_of_page_views
     ,TO_CHAR((purchase_events.number_of_purchase_events/page_views.number_of_page_views)*100, 'fm00D00%') AS product_conversion_rate
 FROM page_views
 LEFT JOIN purchase_events ON page_views.product_id = purchase_events.product_id
-JOIN {{ ref('dim_products')}} ON page_views.product_id = dim_products.product_id
+JOIN {{ ref('stg_products')}} products ON page_views.product_id = products.product_id
 ORDER BY product_conversion_rate DESC
 
