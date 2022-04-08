@@ -1,0 +1,15 @@
+version: 2
+ 
+exposures:
+
+  - name: Product Funnel Dashboard
+    description: >
+      Models that are critical to our product funnel dashboard
+    type: dashboard
+    maturity: high
+    url: https://bi.tool/dashboards/1
+    owner:
+      name: Zoe Liang
+      email: zoe@greenery.com
+    depends_on:
+      - ref('fct_product_funnel_analysis')
