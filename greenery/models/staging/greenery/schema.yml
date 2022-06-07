@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_addresses
+    description: Contains delivery location information associated with greenery's users (GDPR)
+  
+  - name: stg_events
+    description: Contains information regarding greenery's users site events 
+  
+  - name: stg_order_items
+    description: Contains information regarding orders, deliveries and shipping 
+  
+  - name: stg_orders
+    description: Contains list of items per order 
+  
+  - name: stg_products
+    description: Contains information regarding greenery's products
+  
+  - name: stg_promos
+    description: Contains information regarding greenery's promotions
+  
+  - name: stg_users
+    description: Contains demographic information and contact details for greenery's users (GDPR)
