@@ -2,9 +2,9 @@ version: 2
 
 sources:
 
-  - name: tutorial # name of the source 
-    schema: public # this is the schema our raw data lives in
-    database: dbt # this is the name of our database
+  - name: tutorial
+    schema: public
+    database: dbt 
 
     quoting:
       database: false
