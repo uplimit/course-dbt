@@ -10,6 +10,6 @@ models:
       - name: height
         tests:
           - positive_values
-      - name: weight
+      - name: weight_lbs
         tests:
           - positive_values
