@@ -1,6 +1,6 @@
 {{
   config(
-    materialized='table'
+    materialized='view'
   )
 }}
 
@@ -8,4 +8,4 @@ SELECT
     promo_id,
     discount,
     status
-FROM {{ source('tutorial', 'promos')}}
+FROM {{ source('src_greenery', 'promos')}}

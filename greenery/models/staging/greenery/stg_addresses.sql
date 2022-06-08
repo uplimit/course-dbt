@@ -1,6 +1,6 @@
 {{
   config(
-    materialized='table'
+    materialized='view'
   )
 }}
 
@@ -8,6 +8,6 @@ SELECT
     address_id,
     address,
     zipcode,
-    state,
+    state, -- Is this an optional field, and is this field available outside USA?
     country
-FROM {{ source('tutorial', 'addresses')}}
+FROM {{ source('src_greenery', 'addresses')}}

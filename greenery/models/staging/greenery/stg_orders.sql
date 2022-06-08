@@ -1,6 +1,6 @@
 {{
   config(
-    materialized='table'
+    materialized='view'
   )
 }}
 
@@ -9,13 +9,13 @@ SELECT
     user_id,
     promo_id,
     address_id,
-    created_at,
-    order_cost,
-    shipping_cost,
+    created_at as created_at_utc,
+    order_cost as order_cost_usd,
+    shipping_cost as shipping_cost_usd,
     order_total,
     tracking_id,
     shipping_service,
-    estimated_delivery_at,
-    delivered_at,
+    estimated_delivery_at as estimated_delivery_at_utc,
+    delivered_at as delivered_at_utc,
     status
-FROM {{ source('tutorial', 'orders')}}
+FROM {{ source('src_greenery', 'orders')}}

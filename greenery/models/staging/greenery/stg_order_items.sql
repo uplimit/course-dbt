@@ -1,6 +1,6 @@
 {{
   config(
-    materialized='table'
+    materialized='view'
   )
 }}
 
@@ -8,4 +8,4 @@ SELECT
     order_id,
     product_id,
     quantity
-FROM {{ source('tutorial', 'order_items')}}
+FROM {{ source('src_greenery', 'order_items')}}
