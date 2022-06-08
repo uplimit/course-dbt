@@ -14,7 +14,7 @@ with event_source as (
     , user_id as user_guid
     , event_type
     , page_url
-    , created_at as created_as_utc
+    , created_at as event_created_as_utc
     , order_id as order_guid
     , product_id as product_guid
     from event_source

@@ -15,7 +15,7 @@ with order_source as (
     , promo_id as promo_guid
     , user_id as user_guid
     , address_id as address_guid
-    , created_at as created_as_utc
+    , created_at as order_created_at_utc
     , order_cost
     , shipping_cost
     , order_total

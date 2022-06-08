@@ -15,8 +15,8 @@ with user_source as (
     , last_name
     , email
     , phone_number
-    , created_at as created_as_utc
-    , updated_at as updated_as_utc
+    , created_at as user_created_as_utc
+    , updated_at as user_updated_as_utc
     , address_id as address_guid
     from user_source
 )
