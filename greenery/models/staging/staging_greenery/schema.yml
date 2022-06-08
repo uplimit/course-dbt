@@ -13,4 +13,9 @@ models:
       - name: name
         tests:
           - not_null
-        
+  - name: stg_orders
+    description: Order information such as the order's ID, total cost, and estimated shipping date   
+    columns:
+      - name: name
+        tests:
+          - not_null

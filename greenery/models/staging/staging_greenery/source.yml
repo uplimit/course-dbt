@@ -23,5 +23,9 @@ sources:
       - name: users
         loaded_at_field: created_at
         description: >
-          Name and contact information of customers     
+          Name and contact information of customers
+      - name: orders
+        loaded_at_field: created_at
+        description: >
+          order information such as the order's ID, total cost, and estimated shipping date    
         
