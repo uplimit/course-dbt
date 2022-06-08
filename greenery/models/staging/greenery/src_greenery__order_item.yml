@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: src_greenery__order_item
+    schema: public
+    tables:
+      - name: order_items
+    

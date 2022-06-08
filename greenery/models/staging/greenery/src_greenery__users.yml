@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: src_greenery__users
+    schema: public
+    tables:
+      - name: users
+    
