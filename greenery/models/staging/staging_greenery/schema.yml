@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: stg_addresses
+    description: Addresses of customers 
+    columns:
+      - name: name
+        tests:
+          - not_null
+  - name: stg_users
+    description: Name and contact information of customers   
+    columns:
+      - name: name
+        tests:
+          - not_null
+        
