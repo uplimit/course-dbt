@@ -11,9 +11,9 @@ SELECT
     eye_color,
     race,
     hair_color,
-    height,
+    NULLIF(height, -99) AS height,
     publisher,
     skin_color,
     alignment,
-    weight
+    NULLIF(weight, -99) AS weight
 FROM {{ source('tutorial', 'superheroes') }}
