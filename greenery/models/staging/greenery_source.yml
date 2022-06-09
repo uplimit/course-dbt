@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: greenery_source
+    database: dbt
+    schema: public
+
+    # Add tags to this source
+    tags:
+      - greenery
+      - seed
+
+    tables:
+      - name: orders
+        identifier: orders
+        columns:
+          - name: order_id
+            tests:
+              - unique
+
+          - name: order_id
+            tests:
+              - not_null        
