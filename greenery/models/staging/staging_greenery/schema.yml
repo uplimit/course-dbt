@@ -19,3 +19,27 @@ models:
       - name: name
         tests:
           - not_null
+  - name: stg_order_items
+    description: order information such as the products and quantity of products sold   
+    columns:
+      - name: name
+        tests:
+          - not_null
+  - name: stg_promos
+    description: ID of promos, the discount, and the active flag for a promo  
+    columns:
+      - name: name
+        tests:
+          - not_null
+  - name: stg_products
+    description: product information such as ID, name, price, and inventory
+    columns:
+      - name: name
+        tests:
+          - not_null
+  - name: stg_events
+    description: Event information such as when a user goes to checkout for an order  
+    columns:
+      - name: name
+        tests:
+          - not_null

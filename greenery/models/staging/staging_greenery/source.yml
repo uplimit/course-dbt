@@ -24,8 +24,24 @@ sources:
         loaded_at_field: created_at
         description: >
           Name and contact information of customers
+      - name: promos
+        loaded_at_field: created_at
+        description: >
+          ID of promos, the discount, and the active flag for a promo      
+      - name: products
+        loaded_at_field: created_at
+        description: >
+          product information such as ID, name, price, and inventory     
       - name: orders
         loaded_at_field: created_at
         description: >
-          order information such as the order's ID, total cost, and estimated shipping date    
+          order information such as the order's ID, total cost, and estimated shipping date
+      - name: order_items
+        loaded_at_field: created_at
+        description: >
+          order information such as the products and quantity of products sold
+      - name: events
+        loaded_at_field: created_at
+        description: >
+          Event information such as when a user goes to checkout for an order            
         
