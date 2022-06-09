@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: stg_greenery__addresses
+    description: Addresses including zipcode, state and country
+  - name: stg_greenery__events
+    description: Events including the session_id, user_id, event type, url of the page, date of creation, order_id and product_id
+  

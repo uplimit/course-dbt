@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: src_greenery__promos
+    schema: public
+    tables:
+      - name: promos
+    
