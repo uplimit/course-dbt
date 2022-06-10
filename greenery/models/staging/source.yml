@@ -1,0 +1,43 @@
+version: 2
+
+sources:
+  - name: src_orders
+    database: dbt
+    schema: public
+    tables:
+      - name: orders
+  - name: src_addresses
+    database: dbt
+    schema: public
+    tables:
+      - name: addresses
+  - name: src_events
+    database: dbt
+    schema: public
+    tables:
+      - name: events
+  - name: src_order_items
+    database: dbt
+    schema: public
+    tables:
+      - name: order_items
+  - name: src_products
+    database: dbt
+    schema: public
+    tables:
+      - name: products
+  - name: src_promos
+    database: dbt
+    schema: public
+    tables:
+      - name: promos 
+  - name: src_superheroes
+    database: dbt
+    schema: public
+    tables:
+      - name: superheroes
+  - name: src_users
+    database: dbt
+    schema: public
+    tables:
+      - name: users
