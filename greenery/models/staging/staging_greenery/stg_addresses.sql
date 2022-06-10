@@ -1,6 +1,6 @@
 {{
   config(
-    materialized= 'view'
+    materialized= 'table'
   )
 }}
 
@@ -19,10 +19,4 @@ with src_greenery_addresses as (
 )
 
 SELECT * FROM renamed_recast
--- SELECT
---   address_id,
---   address,
---   zipcode,
---   state,
---   country
--- FROM {{ source('staging_greenery', 'addresses') }}
+
