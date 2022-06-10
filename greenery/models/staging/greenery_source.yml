@@ -17,7 +17,66 @@ sources:
           - name: order_id
             tests:
               - unique
-
           - name: order_id
             tests:
               - not_null        
+
+      - name: addresses
+        identifier: addresses
+        columns:
+          - name: address_id
+            tests:
+              - unique
+          - name: address_id
+            tests:
+              - not_null        
+
+      - name: users
+        identifier: users
+        columns:
+          - name: user_id
+            tests:
+              - unique
+          - name: user_id
+            tests:
+              - not_null    
+
+      - name: promos
+        identifier: promos
+        columns:
+          - name: promo_id
+            tests:
+              - unique
+          - name: promo_id
+            tests:
+              - not_null        
+
+      - name: events
+        identifier: events
+        columns:
+          - name: event_id
+            tests:
+              - unique
+          - name: event_id
+            tests:
+              - not_null   
+
+      - name: products
+        identifier: products
+        columns:
+          - name: product_id
+            tests:
+              - unique
+          - name: product_id
+            tests:
+              - not_null     
+
+      - name: order_items
+        identifier: order_items
+        columns:
+          - name: order_id
+            tests:
+              - not_null        
+          - name: product_id
+            tests:
+              - not_null
