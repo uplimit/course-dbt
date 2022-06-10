@@ -1,0 +1,66 @@
+version: 2
+
+
+models:
+  - name: stg_greenery__addresses
+    description: 'Shipping addresses and their GUIDs'
+    columns:
+      - name: address_guid
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_greenery__events
+    description: 'Shopping cart workflow events'
+    columns:
+      - name: event_id_guid
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_greenery__order_items
+    description: 'Order item details - 1 order to many products'
+    columns:
+      - name: order_id_guid
+        tests:
+          - not_null
+
+  - name: stg_greenery__orders
+    description: 'Order details - 1 complete order shipped'
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_greenery__products
+    description: 'Products and their cost'
+    columns:
+      - name: product_id_guid
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_greenery__promos
+    description: 'Promotions and their status'
+    columns:
+      - name: promo_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_greenery__superheroes
+    description: 'Superheroes'
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_greenery__users
+    description: 'Greenery account users'
+    columns:
+      - name: user_guid
+        tests:
+          - not_null
+          - unique
