@@ -48,7 +48,30 @@ FROM delivery_times;
 ```
 
 4. How many users have only made one purchase? Two purchases? Three+ purchases?
+- Use the orders table
+- Number of purchases per user
+Method: Count the number of times a user_id appears in orders. 
+```
+WITH number_of_user_orders AS( 
+SELECT 
+  CASE 
+    WHEN COUNT(user_id) = 1 THEN '1 order'
+    WHEN COUNT(user_id) = 2 THEN '2 orders'
+    WHEN COUNT(user_id) >= 3 THEN '3 or more orders' END AS num_orders
+  FROM dbt_jimmy_l.stg_orders
+  GROUP BY user_id
+)
+SELECT num_orders, COUNT(num_orders) AS orders_per_category
+FROM number_of_user_orders
+GROUP BY num_orders
+ORDER BY num_orders;
+```
+
 
 5. On average, how many unique sessions do we have per hour?
 - Use the events table
 
+**Useful things I learned in this project
+UTC Time Format
+Staging setup - In our staging environment we want to set up our data thinking about how we want to receive it.
+Pro-tip: Look at the columns, data type, and ordinal_position of a table
