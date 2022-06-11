@@ -46,7 +46,7 @@ WITH delivery_times AS (
 SELECT AVG(order_delivery_time)
 FROM delivery_times;
 ```
-
+- On average, it takes 3 days 21:24:11.803279
 4. How many users have only made one purchase? Two purchases? Three+ purchases?
 - Use the orders table
 - Number of purchases per user
@@ -66,9 +66,15 @@ FROM number_of_user_orders
 GROUP BY num_orders
 ORDER BY num_orders;
 ```
+- 1 purchase: 25 users
+- 2 purchase: 28 users
+- 3 purchase: 71 users
+
 
 5. On average, how many unique sessions do we have per hour?
 - Use the events table
+
+
 
 **Useful things I learned in this project
 UTC Time Format
