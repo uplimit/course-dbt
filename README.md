@@ -1,10 +1,12 @@
 # Analytics engineering with dbt
 
 --Q1 How many users do we have?
+
         select COUNT(DISTINCT user_id) as users from dbt.dbt_sofia.stg_greenery_users;
 --R:130
 ===================================
 -- Q2 On average, how many orders do we receive per hour?
+
         with hours as (select 
         date_trunc('hour',created_at) as hour_order, 
         count(distinct order_id) as orders
@@ -17,6 +19,7 @@
  --R2:15.0416666666666667
  ===================================
  --Q3 On average, how long does an order take from being placed to being delivered?
+ 
          with delivertime as ( 
          select 
          order_id,
@@ -30,6 +33,7 @@
  --R3:3 days 06:54:50.858726
  ===================================
  --Q4 How many users have only made one purchase? Two purchases? Three+ purchases?
+ 
         with orderperuser as( 
         select 
          user_id,count(distinct order_id) as orders 
