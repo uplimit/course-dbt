@@ -50,7 +50,7 @@ FROM delivery_times;
 4. How many users have only made one purchase? Two purchases? Three+ purchases?
 - Use the orders table
 - Number of purchases per user
-Method: Count the number of times a user_id appears in orders. 
+Method: Count the number of times a user_id appears in orders, then count the number of users who ordered 1, 2, or 3+ times.
 ```
 WITH number_of_user_orders AS( 
 SELECT 
@@ -66,7 +66,6 @@ FROM number_of_user_orders
 GROUP BY num_orders
 ORDER BY num_orders;
 ```
-
 
 5. On average, how many unique sessions do we have per hour?
 - Use the events table
