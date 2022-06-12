@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: stg_public__addresses.sql  
+  - name: stg_public__order_items.sql
+  - name: stg_public__products.sql
+  - name: stg_public__users.sql
+  - name: stg_public__events.sql
+  - name: stg_public__orders.sql
+  - name: stg_public__promos.sql

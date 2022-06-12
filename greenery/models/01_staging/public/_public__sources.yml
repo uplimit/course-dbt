@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+
+  - name: public # name of the source. public is the schema for our greenery projet so leaving it as 'public' to be explicit (me)
+    database: dbt # this is the name of our database
+    schema: public # this is the schema our raw data lives in
+
+    tables:
+      - name: addresses 
+      - name: events
+      - name: order_items
+      - name: orders
+      - name: products
+      - name: promos
+      - name: users
