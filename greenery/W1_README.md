@@ -1,7 +1,7 @@
 
 ---
-*Week 1 Project
-1. How many users do we have?
+**Week 1 Project**
+1. **How many users do we have?**
 - We have 130 users.
 - Method: Use tables stg_users
 1. Calculate the distinct number of users on the platform.
@@ -11,7 +11,7 @@ SELECT
   COUNT(DISTINCT(user_id)) 
 FROM dbt_jimmy_l.stg_users;
 ```
-2. On average, how many orders do we receive per hour?
+2. **On average, how many orders do we receive per hour?**
 - On average, we receive about 7.52 orders per hour.
 - Method: Use table stg_orders
 1. Calculate the total orders per hour. 
@@ -29,7 +29,7 @@ SELECT
 FROM hourly_orders;
 ```
 
-3. On average, how long does an order take from being placed to being delivered?
+3. **On average, how long does an order take from being placed to being delivered?**
 
 - Method: Use tables stg_orders
 1. Calcuate the time it takes between order placed and order delivered. This is the delivery time.
@@ -47,7 +47,7 @@ SELECT
 FROM delivery_times;
 ```
 - On average, it takes 3 days 21:24:11.803279
-4. How many users have only made one purchase? Two purchases? Three+ purchases?
+4. **How many users have only made one purchase? Two purchases? Three+ purchases?**
 - 1 purchase: 25 users
 - 2 purchase: 28 users
 - 3 purchase: 71 users
@@ -72,7 +72,7 @@ GROUP BY num_orders
 ORDER BY num_orders;
 ```
 
-5. On average, how many unique sessions do we have per hour?
+5. **On average, how many unique sessions do we have per hour?**
 - There are about 16.3 unique sessions per hour, on average.
 - Method: Use table stg_events
 1. Calculate how many sessions there are per hour. 
