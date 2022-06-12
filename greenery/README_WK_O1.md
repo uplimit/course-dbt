@@ -5,6 +5,7 @@
 select count(distinct user_id) from dbt_jason_d.stg_public__users;
 ```
 
+
 2. On average, how many orders do we receive per hour? **Average of 7.5 Orders per Hour**
 
 ```
@@ -30,13 +31,30 @@ aggregated_totals as (
 
 -- calculate summary statistics
 select 
-  round((total_orders / total_hours),1) as avg_orders_per_hour 
+    round((total_orders / total_hours),1) as avg_orders_per_hour 
 from aggregated_totals;
 ```
 
 
+3. On average, how long does an order take from being placed to being delivered? **Average Delivery time of 3 Days, 21 Hours, 24 Minutes.**
 
-On average, how long does an order take from being placed to being delivered?
+```
+with time_to_delivery_per_order as (
+
+    -- get time to delivery for orders delivered
+    select 
+        delivered_at, created_at, 
+        delivered_at - created_at as time_to_delivery
+
+    from dbt_jason_d.stg_public__orders
+    where status = 'delivered'
+)
+
+-- calculate summary statistics
+select 
+    avg(time_to_delivery) as avg_delivery_time 
+from time_to_delivery_per_order
+```
 
 How many users have only made one purchase? Two purchases? Three+ purchases?
 
