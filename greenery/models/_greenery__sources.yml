@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+
+  - name: greenery # name of the source 
+    schema: public # this is the schema our raw data lives in
+    database: dbt # this is the name of our database
+
+    tables:
+      - name: addresses
+      - name: users
+      - name: superheroes
+      - name: orders
+      - name: promos
+      - name: order_items
+      - name: products
+      - name: events
