@@ -1,6 +1,6 @@
--- WEEK 01 HOMEWORK QUESTIONS
+**WEEK 01 HOMEWORK QUESTIONS**
 
-How many users do we have?
+1. How many users do we have?
 ```
 select count(distinct user_id) from dbt_jason_d.stg_public__users;
 ```
