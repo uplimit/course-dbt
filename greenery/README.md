@@ -6,22 +6,27 @@ Try running the following commands:
 - dbt run
 - dbt test
 
-
 ### Resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
 - Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
 - Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
 - Find [dbt events](https://events.getdbt.com) near you
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
-
+---
+*Week 1 Project
 1. How many users do we have?
+- We have 130 users.
+- Method: Use tables stg_users
+1. Calculate the distinct number of users on the platform.
+
 ```
 SELECT COUNT(DISTINCT(user_id)) FROM dbt_jimmy_l.stg_users;
 ```
-- We have 130 users.
-- Method: We calculatae the distinct number of users on the platform.
-
 2. On average, how many orders do we receive per hour?
+- On average, we receive about 7.52 orders per hour.
+- Method: Use table stg_orders
+1. Calculate the total orders per hour. 
+2. Then, take the average of the total orders per hour.
 ```
 WITH hourly_orders AS (
   SELECT COUNT(order_id) as order_per_hour, date_trunc('hour', created_at) as utc_trunc
@@ -31,12 +36,12 @@ WITH hourly_orders AS (
 SELECT AVG(order_per_hour)
 FROM hourly_orders;
 ```
-- On average, we receive about 7.52 orders per hour.
-- Method: Calculate the total orders per hour. Then, take the average of the total orders per hour.
 
 3. On average, how long does an order take from being placed to being delivered?
-- Use tables stg_orders
-- Method: Calcuate the time it takes between order placed and order delivered, and take the average of the sum of the total difference.
+
+- Method: Use tables stg_orders
+1. Calcuate the time it takes between order placed and order delivered. This is the delivery time.
+2. Calculate the average of the delivery times.
 ```
 WITH delivery_times AS (
   SELECT (delivered_at - created_at) AS order_delivery_time FROM dbt_jimmy_l.stg_orders
@@ -48,9 +53,12 @@ FROM delivery_times;
 ```
 - On average, it takes 3 days 21:24:11.803279
 4. How many users have only made one purchase? Two purchases? Three+ purchases?
-- Use the orders table
-- Number of purchases per user
-Method: Count the number of times a user_id appears in orders, then count the number of users who ordered 1, 2, or 3+ times.
+- 1 purchase: 25 users
+- 2 purchase: 28 users
+- 3 purchase: 71 users
+- Method: Use table stg_orders
+1. Count the number of times a user_id appears in orders
+2. Then count the number of users who ordered 1, 2, or 3+ times.
 ```
 WITH number_of_user_orders AS( 
 SELECT 
@@ -66,17 +74,15 @@ FROM number_of_user_orders
 GROUP BY num_orders
 ORDER BY num_orders;
 ```
-- 1 purchase: 25 users
-- 2 purchase: 28 users
-- 3 purchase: 71 users
-
 
 5. On average, how many unique sessions do we have per hour?
-- Use the events table
+- Method: Use table stg_events
+1. Calculate how many sessions there are per hour. 
+2. Determine how many of those are unique. 
+3. Get the average of those unique sessions
 
-
-
-**Useful things I learned in this project
+**Useful things I learned in this project**
 UTC Time Format
 Staging setup - In our staging environment we want to set up our data thinking about how we want to receive it.
 Pro-tip: Look at the columns, data type, and ordinal_position of a table
+---
