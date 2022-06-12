@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: events
+    description: Greenery shopping events
+  - name: addresses
+    description: User addresses
+  - name: order_items
+    description: Items in an online order 
+  - name: orders
+    description: Individual orders
+  - name: products
+    description: Products available in the online store
+  - name: promos
+    description: Store promotions
+  - name: users
+    description: Online store users
+  - name: superheroes
+    description: Superhero testing data
+  
