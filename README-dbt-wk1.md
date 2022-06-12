@@ -109,6 +109,8 @@ FROM
     dbt_heidi_s.stg_greenery__users
 ;
 ```
+-- Answer - 130 
+
 - Q2:    On average, how many orders do we receive per hour?
 ```
 -- Determine that there are no duplicate guids 
@@ -149,6 +151,9 @@ WITH avg_orders_by_hour AS (
   FROM 
     avg_orders_by_hour 
 ; 
+
+-- Answer: 15.04 
+
 ```
 - Q3:    On average, how long does an order take from being placed to being delivered?
 ```
@@ -167,6 +172,8 @@ WITH order_delivery_time AS (
     FROM 
         order_delivery_time
 ;
+
+-- Answer: 3 days 21:24:11.803279
 
 ```
 - Q4:    How many users have only made one purchase? Two purchases? Three+ purchases? Note: you should consider a purchase to be a single order. In other words, if a user places one order for 3 products, they are considered to have made 1 purchase.
@@ -208,6 +215,8 @@ SELECT
 
 ; 
 
+-- Answer: 25 orders placed with 1 purchase 
+
 -- Find orders 2, 3 or more simple way 
 SELECT 
       user_guid,
@@ -219,6 +228,8 @@ SELECT
     HAVING count(distinct(order_guid)) > 2
 
 ; 
+
+-- Answer: 71 orders placed with 2 or more purchases
 
 WITH user_orders AS ( 
     SELECT 
@@ -238,6 +249,17 @@ WITH user_orders AS (
   GROUP BY orders_placed
   ORDER by orders_placed
 ;
+
+-- Answer: rolled up for all orders placed with 1 or more purchases
+1       25
+2       28
+3       34
+4       20
+5       10
+6        2
+7        4
+8        1
+
 ```
 - Q5:    On average, how many unique sessions do we have per hour?
 ```
@@ -267,5 +289,5 @@ WITH  sessions_per_hour AS (
         sessions_per_hour
 ;
 ```
-
+-- Answer: 39.46
 
