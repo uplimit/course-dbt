@@ -6,7 +6,7 @@
 - Method: Use tables stg_users
 1. Calculate the distinct number of users on the platform.
 
-```
+```sql
 SELECT 
   COUNT(DISTINCT(user_id)) 
 FROM dbt_jimmy_l.stg_users;
@@ -16,7 +16,7 @@ FROM dbt_jimmy_l.stg_users;
 - Method: Use table stg_orders
 1. Calculate the total orders per hour. 
 2. Then, take the average of the total orders per hour.
-```
+```sql
 WITH hourly_orders AS (
   SELECT 
     COUNT(order_id) as order_per_hour, 
@@ -34,7 +34,7 @@ FROM hourly_orders;
 - Method: Use tables stg_orders
 1. Calcuate the time it takes between order placed and order delivered. This is the delivery time.
 2. Calculate the average of the delivery times.
-```
+```sql
 WITH delivery_times AS (
   SELECT (
     delivered_at - created_at) AS order_delivery_time 
@@ -54,7 +54,7 @@ FROM delivery_times;
 - Method: Use table stg_orders
 1. Count the number of times a user_id appears in orders
 2. Then count the number of users who ordered 1, 2, or 3+ times.
-```
+```sql
 WITH number_of_user_orders AS( 
 SELECT 
   CASE 
@@ -78,7 +78,7 @@ ORDER BY num_orders;
 1. Calculate how many sessions there are per hour. 
 2. Determine how many of those are unique. 
 3. Get the average of those unique sessions
-```
+```sql
 WITH hourly_sessions AS (
   SELECT 
     COUNT(DISTINCT(session_id)) AS sessions_per_hour, 
@@ -96,7 +96,7 @@ FROM hourly_sessions;
 - Staging setup - In our staging environment we want to set up our data thinking about how we want to receive it.
   - This includes formatting, descriptive field names, and considering splitting out fields into subject groups.
 - Pro-tip: Look at the columns, data type, and ordinal_position of a table
-```
+```sql
 SELECT
   column_name
   , data_type
@@ -107,7 +107,7 @@ ORDER BY 3;
 ```
 
 - You can `GROUP BY` column position instead of column name
-```
+```sql
   SELECT 
     COUNT(order_id), 
     date_trunc('hour', created_at) as utc_trunc
@@ -115,7 +115,7 @@ ORDER BY 3;
   GROUP BY utc_trunc
 ```
 Is the same as:
-```
+```sql
   SELECT 
     COUNT(order_id), 
     date_trunc('hour', created_at) as utc_trunc
