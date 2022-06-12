@@ -1,0 +1,1 @@
+**Week 1:** [Week 1 Submission](https://github.com/jimmyvluong/course-dbt/blob/main/greenery/W1_README.md)
