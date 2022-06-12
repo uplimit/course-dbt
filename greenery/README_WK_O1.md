@@ -5,7 +5,32 @@
 select count(distinct user_id) from dbt_jason_d.stg_public__users;
 ```
 
-On average, how many orders do we receive per hour?
+2. On average, how many orders do we receive per hour? **Average of 7.5 Orders per Hour**
+
+```
+with order_count_by_hour as (
+
+    select 
+        concat(date_part('day', created_at), '-', date_part('hour', created_at)) as day_hour,
+        count(distinct order_id) as order_count
+    from dbt_jason_d.stg_public__orders
+    group by day_hour
+
+),
+
+aggregated_totals as (
+    select 
+        sum(order_count) as total_orders, 
+        count(day_hour) as total_hours 
+    from order_count_by_hour
+)
+
+select 
+  round((total_orders / total_hours),1) as avg_orders_per_hour 
+from aggregated_totals;
+```
+
+
 
 On average, how long does an order take from being placed to being delivered?
 
