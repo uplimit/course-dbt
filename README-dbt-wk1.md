@@ -108,8 +108,11 @@ SELECT
 FROM 
     dbt_heidi_s.stg_greenery__users
 ;
-```
+
 -- Answer - 130 
+
+```
+
 
 - Q2:    On average, how many orders do we receive per hour?
 ```
@@ -288,6 +291,9 @@ WITH  sessions_per_hour AS (
     FROM 
         sessions_per_hour
 ;
-```
+
 -- Answer: 39.46
+
+```
+
 
