@@ -10,6 +10,7 @@ select count(distinct user_id) from dbt_jason_d.stg_public__users;
 ```
 with order_count_by_hour as (
 
+    -- create grouping variable 'day_hour' and get order count by hour
     select 
         concat(date_part('day', created_at), '-', date_part('hour', created_at)) as day_hour,
         count(distinct order_id) as order_count
@@ -19,12 +20,15 @@ with order_count_by_hour as (
 ),
 
 aggregated_totals as (
+
+    -- summarize to get aggregated totals
     select 
         sum(order_count) as total_orders, 
         count(day_hour) as total_hours 
     from order_count_by_hour
 )
 
+-- calculate summary statistics
 select 
   round((total_orders / total_hours),1) as avg_orders_per_hour 
 from aggregated_totals;
