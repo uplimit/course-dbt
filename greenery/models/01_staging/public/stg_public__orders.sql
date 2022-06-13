@@ -1,4 +1,4 @@
--- stg_orders.sql
+-- stg_public__orders.sql
 
 with
 

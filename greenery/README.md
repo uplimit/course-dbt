@@ -15,7 +15,7 @@ Try running the following commands:
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
 
 
-### [How to Structure a dbt Project, by Gwen Windflower (https://docs.getdbt.com/guides/best-practices/how-we-structure/1-guide-overview)
+### [How to Structure a dbt Project, by Gwen Windflower](https://docs.getdbt.com/guides/best-practices/how-we-structure/1-guide-overview)
 
 **Staging: Files and Folders**
 - ✅ Subdirectories based on the source system (allows us to operate on those similar sets easily.)

@@ -1,4 +1,4 @@
--- stg_users.sql
+-- stg_public__users.sql
 
 with
 
