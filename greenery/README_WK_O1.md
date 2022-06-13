@@ -109,6 +109,8 @@ distinct_session_count_by_hour as (
 ),
 
 aggregated_totals as (
+
+    -- summarize to get aggregated totals
     select
         sum(session_count) as total_sessions,
         count(session_hour) as total_hours
