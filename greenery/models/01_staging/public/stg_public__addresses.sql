@@ -11,11 +11,11 @@ source as (
 standardized as (
 
 select
-    address_id,
-    address,
-    zipcode,
-    state,
-    country
+    address_id as user_address_id,
+    address    as user_address,
+    zipcode    as user_zipcode,
+    state      as user_state,
+    country    as user_country
 
 from source
 

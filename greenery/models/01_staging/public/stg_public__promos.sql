@@ -12,11 +12,11 @@ standardized as (
 
     select
         promo_id,
-        discount,
-        status
+        discount  as promo_discount,
+        status    as promo_status
 
     from source
 
 )
 
-select * from source
+select * from standardized
