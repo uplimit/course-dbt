@@ -93,7 +93,7 @@ with distinct_sessions as (
     -- get first session_id for each session
     select 
         session_id, 
-        min(date_trunc('hour', created_at)) as session_hour 
+        min(date_trunc('hour', created_at_utc)) as session_hour 
     from dbt_jason_d.stg_public__events 
     group by 1
   
@@ -106,19 +106,9 @@ distinct_session_count_by_hour as (
         session_hour, 
         count(distinct session_id) as session_count 
     from distinct_sessions group by 1
-),
-
-aggregated_totals as (
-
-    -- summarize to get aggregated totals
-    select
-        sum(session_count) as total_sessions,
-        count(session_hour) as total_hours
-    from distinct_session_count_by_hour
-) 
+)
 
 -- calculate summary statistic(s)
-select 
-    round(total_sessions / total_hours,1) as avg_sessions_per_hour 
-from aggregated_totals;
+select round(avg(session_count),1) as avg_sessions_per_hour
+from distinct_session_count_by_hour
 ```
