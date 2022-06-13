@@ -36,12 +36,12 @@ from aggregated_totals;
 ```
 
 
-3. On average, how long does an order take from being placed to being delivered? **Average Delivery time of 3 Days, 21 Hours, 24 Minutes.**
+3. On average, how long does an order take from being placed to being delivered? **Avg. Delivery time of 3 Days, 21 Hrs, 24 Mins.**
 
 ```
 with time_to_delivery_per_order as (
 
-    -- get time to delivery for orders delivered
+    -- get time (days) to delivery for orders delivered
     select 
         delivered_at, created_at, 
         delivered_at - created_at as time_to_delivery
@@ -85,7 +85,7 @@ group by 1
 ```
 
 
-5. On average, how many unique sessions do we have per hour? **Average of 11.8 Unique Sessions per Hour**
+5. On average, how many unique sessions do we have per hour? **Avg. of 11.8 Unique Sessions per Hour**
 
 ```
 with distinct_sessions as (
