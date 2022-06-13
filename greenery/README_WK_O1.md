@@ -58,6 +58,9 @@ from time_to_delivery_per_order
 
 4. How many users have only made one purchase? Two purchases? Three+ purchases?
     - **Note:** you should consider a purchase to be a single order. In other words, if a user places one order for 3 products, they are considered to have made 1 purchase.
+        - One Purchase: **25**
+        - Two Purchases: **28**
+        - Three+ Purchases: **71**
 
 ```
 with user_purchase_frequency as (
