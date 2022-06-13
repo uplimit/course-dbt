@@ -5,4 +5,5 @@ sources:
     schema: public
     tables:
       - name: addresses
+      
     
