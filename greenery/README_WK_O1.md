@@ -90,7 +90,7 @@ group by 1
 ```sql
 with distinct_sessions as (
 
-    -- get first session_id for each session
+    -- get first session_id for each session (AVOIDS DOUBLE COUNTING SESSIONS THAT CROSS-OVER HOURS)
     select 
         session_id, 
         min(date_trunc('hour', created_at_utc)) as session_hour 
