@@ -60,7 +60,24 @@ from time_to_delivery_per_order
     - **Note:** you should consider a purchase to be a single order. In other words, if a user places one order for 3 products, they are considered to have made 1 purchase.
 
 ```
-select 
+with user_purchase_frequency as (
+
+    -- classify user purchase frequency
+    select user_id, 
+    case when count(distinct order_id) = 1 then 'One'
+         when count(distinct order_id) = 2 then 'Two'
+         else 'Three+'
+    end as purchases
+    from dbt_jason_d.stg_public__orders
+    group by 1
+  )
+  
+-- calculate summary statistic(s)
+select
+    purchases,
+    count(purchases) as user_count
+from user_purchase_frequency
+group by 1
 ```
 
 
