@@ -66,11 +66,12 @@ from time_to_delivery_per_order
 with user_purchase_frequency as (
 
     -- classify user purchase frequency
-    select user_id, 
-    case when count(distinct order_id) = 1 then 'One'
-         when count(distinct order_id) = 2 then 'Two'
-         else 'Three+'
-    end as purchases
+    select 
+        user_id, 
+        case when count(distinct order_id) = 1 then 'One'
+             when count(distinct order_id) = 2 then 'Two'
+             else 'Three+'
+        end as purchases
     from dbt_jason_d.stg_public__orders
     group by 1
   )
@@ -84,8 +85,38 @@ group by 1
 ```
 
 
-5. On average, how many unique sessions do we have per hour?
+5. On average, how many unique sessions do we have per hour? **Average of 11.8 Unique Sessions per Hour**
 
 ```
-select
+with distinct_sessions as (
+
+    -- get first session_id for each session
+    select 
+        session_id, 
+        min(date_trunc('hour', created_at)) as session_hour 
+    from dbt_jason_d.stg_public__events 
+    group by 1
+  
+),
+
+distinct_session_count_by_hour as (
+
+    -- count hourly sessions
+    select 
+        session_hour, 
+        count(distinct session_id) as session_count 
+    from distinct_sessions group by 1
+),
+
+aggregated_totals as (
+    select
+        sum(session_count) as total_sessions,
+        count(session_hour) as total_hours
+    from distinct_session_count_by_hour
+) 
+
+-- calculate summary statistic(s)
+select 
+    round(total_sessions / total_hours,1) as avg_sessions_per_hour 
+from aggregated_totals;
 ```
