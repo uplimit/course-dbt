@@ -29,7 +29,7 @@ aggregated_totals as (
     from order_count_by_hour
 )
 
--- calculate summary statistics
+-- calculate summary statistic(s)
 select 
     round((total_orders / total_hours),1) as avg_orders_per_hour 
 from aggregated_totals;
@@ -50,14 +50,22 @@ with time_to_delivery_per_order as (
     where status = 'delivered'
 )
 
--- calculate summary statistics
+-- calculate summary statistic(s)
 select 
     avg(time_to_delivery) as avg_delivery_time 
 from time_to_delivery_per_order
 ```
 
-How many users have only made one purchase? Two purchases? Three+ purchases?
+4. How many users have only made one purchase? Two purchases? Three+ purchases?
+    - **Note:** you should consider a purchase to be a single order. In other words, if a user places one order for 3 products, they are considered to have made 1 purchase.
 
-Note: you should consider a purchase to be a single order. In other words, if a user places one order for 3 products, they are considered to have made 1 purchase.
+```
+select 
+```
 
-On average, how many unique sessions do we have per hour?
+
+5. On average, how many unique sessions do we have per hour?
+
+```
+select
+```
