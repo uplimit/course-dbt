@@ -7,6 +7,33 @@
 1. What is our user repeat rate?
 - Repeat Rate = Users who purchased 2 or more times / users who purchased
 
+```sql
+WITH 
+-- First CTE 
+number_of_user_orders AS( 
+SELECT 
+  CASE 
+    WHEN COUNT(user_id) = 1 THEN '1 order'
+    WHEN COUNT(user_id) = 2 THEN '2 orders'
+    WHEN COUNT(user_id) >= 3 THEN '3 or more orders' END AS num_orders
+FROM dbt_jimmy_l.stg_orders
+GROUP BY user_id
+)
+,
+-- Second CTE
+orders_per_cat AS(
+SELECT 
+  num_orders, 
+  COUNT(num_orders) AS orders_per_category
+FROM number_of_user_orders
+GROUP BY num_orders
+ORDER BY num_orders
+)
+SELECT 
+SUM(orders_per_category) AS total_orders
+FROM orders_per_cat;
+```
+
 2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? 
 - If you had more data, what features would you want to look into to answer this question?
 - NOTE: This is a hypothetical question vs. something we can analyze in our Greenery data set. 
