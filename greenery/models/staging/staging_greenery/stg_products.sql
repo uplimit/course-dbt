@@ -11,7 +11,7 @@ WITH src_greenery_products AS (
 , renamed_recast AS (
   SELECT
     product_id,
-    name,
+    name AS product_name,
     price,
     inventory
   FROM src_greenery_products

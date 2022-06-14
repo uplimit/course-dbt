@@ -11,8 +11,8 @@ WITH src_greenery_promos AS (
 , renamed_recast AS (
   SELECT
     promo_id,
-    discount,
-    status
+    discount AS discount_amount,
+    status AS promo_active_status
   FROM src_greenery_promos
 )
 
