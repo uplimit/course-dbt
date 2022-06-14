@@ -15,7 +15,8 @@ SELECT
   CASE 
     WHEN COUNT(user_id) = 1 THEN '1 order'
     WHEN COUNT(user_id) = 2 THEN '2 orders'
-    WHEN COUNT(user_id) >= 3 THEN '3 or more orders' END AS num_orders
+    WHEN COUNT(user_id) >= 3 THEN '3 or more orders' 
+  END AS num_orders
 FROM dbt_jimmy_l.stg_orders
 GROUP BY user_id
 )
@@ -46,7 +47,14 @@ FROM orders_per_cat;
 
 ***(Part 2) Tests ***
 
+1. Add dbt tests into your dbt project on your existing models from Week 1, and new models from the section above
+- What assumptions are you making about each model? (i.e. why are you adding each test?)
+- Did you find any “bad” data as you added and ran tests on your models? 
+- How did you go about either cleaning the data in the dbt model or adjusting your assumptions/tests?
+- Apply these changes to your github repo
 
+2. Your stakeholders at Greenery want to understand the state of the data each day. 
+- Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
 
 ---
 **Useful things I learned in this project**
@@ -56,11 +64,4 @@ FROM orders_per_cat;
 dbt docs generate
 dbt docs serve --no-browser
 ```
-1. Add dbt tests into your dbt project on your existing models from Week 1, and new models from the section above
-- What assumptions are you making about each model? (i.e. why are you adding each test?)
-- Did you find any “bad” data as you added and ran tests on your models? 
-- How did you go about either cleaning the data in the dbt model or adjusting your assumptions/tests?
-- Apply these changes to your github repo
-
-2. Your stakeholders at Greenery want to understand the state of the data each day. 
-- Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
+- [Using multiple CTEs](https://www.databasejournal.com/ms-sql/tips-for-using-common-table-expressions/#:~:text=The%20second%20CTE%20is%20defined,SELECT%20statement%20references%20each%20CTE.)
