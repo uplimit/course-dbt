@@ -1,5 +1,5 @@
 with promos as (
-    select * from {{ source('src_promos', 'promos') }}
+    select * from {{ source('greenery', 'promos') }}
 ),
 
 final as (

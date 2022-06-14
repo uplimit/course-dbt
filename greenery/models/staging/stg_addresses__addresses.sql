@@ -1,5 +1,5 @@
 with addresses as (
-    select * from {{ source('src_addresses', 'addresses')}}
+    select * from {{ source('greenery', 'addresses')}}
     ),
 
     final as (

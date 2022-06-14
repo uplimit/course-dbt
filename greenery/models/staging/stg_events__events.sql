@@ -1,5 +1,5 @@
 with events as (
-    select * from {{ source('src_events', 'events') }}
+    select * from {{ source('greenery', 'events') }}
 ),
 
 final as (
