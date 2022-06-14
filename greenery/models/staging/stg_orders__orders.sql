@@ -1,5 +1,5 @@
 with orders as (
-    select * from {{ source('src_orders', 'orders')}}
+    select * from {{ source('greenery', 'orders')}}
     ),
 
     final as (

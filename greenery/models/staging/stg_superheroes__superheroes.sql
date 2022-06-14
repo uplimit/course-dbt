@@ -1,5 +1,5 @@
 with superheroes as (
-    select * from {{ source('src_superheroes', 'superheroes') }}
+    select * from {{ source('greenery', 'superheroes') }}
 ),
 
 final as (

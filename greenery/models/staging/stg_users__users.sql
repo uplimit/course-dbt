@@ -1,5 +1,5 @@
 with users as (
-    select * from {{ source('src_users', 'users') }}
+    select * from {{ source('greenery', 'users') }}
 ),
 
 final as (
