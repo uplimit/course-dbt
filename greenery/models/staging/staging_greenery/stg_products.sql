@@ -18,10 +18,3 @@ WITH src_greenery_products AS (
 )
 
 SELECT * FROM renamed_recast
-
--- SELECT
---   product_id,
---   name,
---   price,
---   inventory
--- FROM {{ source('staging_greenery', 'products') }}
