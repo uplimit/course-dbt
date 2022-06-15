@@ -74,3 +74,12 @@ dbt docs generate
 dbt docs serve --no-browser
 ```
 - [Using multiple CTEs](https://www.databasejournal.com/ms-sql/tips-for-using-common-table-expressions/#:~:text=The%20second%20CTE%20is%20defined,SELECT%20statement%20references%20each%20CTE.)
+- The difference between `date_trunc` and `date_part`. From Sourabh
+```sql
+SELECT
+  date_trunc('day', timestamp '2002-09-17 19:27:45') AS a,
+  date_trunc('day', timestamp '2002-09-17 09:57:45') AS a,
+  date_part('day', timestamp '2002-09-17 19:27:45') AS c,
+  date_part('day', timestamp '2002-09-17 09:57:45') AS d
+;
+```
