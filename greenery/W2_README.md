@@ -30,9 +30,18 @@ FROM number_of_user_orders
 GROUP BY num_orders
 ORDER BY num_orders
 )
+,
+-- Third CTE
+proportion AS(
 SELECT 
-SUM(orders_per_category) AS total_orders
-FROM orders_per_cat;
+  num_orders,
+  orders_per_category,
+  orders_per_category/(SELECT SUM(orders_per_category) FROM orders_per_cat) AS proportion
+FROM orders_per_cat
+)
+SELECT ROUND(SUM(proportion),3)*100 AS repeat_customers_pct
+FROM proportion
+WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 ```
 
 2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? 
