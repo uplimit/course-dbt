@@ -24,8 +24,6 @@ models:
     columns:
       - name: addresses_id
         description: Unique identifier for an address.
-        tests:
-          - unique
       - name: address
       - name: zipcode
       - name: state
@@ -49,8 +47,6 @@ models:
     columns:
       - name: order_id
         description: Unique identifier for an event.
-        tests:
-          - unique
       - name: product_id
       - name: qunantity
   - name: stg_products__products
