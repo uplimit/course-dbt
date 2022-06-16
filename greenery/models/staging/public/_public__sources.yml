@@ -6,6 +6,11 @@ sources:
     database: dbt # this is the name of our database
     schema: public # this is the schema our raw data lives in
 
+    quoting:
+      database: false
+      schema: false
+      identifier: false  
+
     tables:
       - name: addresses 
       - name: events

@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_public__addresses 
+    description: "Addresses Table"
+    columns:
+      - name: user_address_guid
+        description: GUID for each unique address on platform
+        tests:
+          - unique
+          - not_null
+      - name: user_address
+        description: The first few lines of the address
+      - name: user_zip_code
+        description: The zipcode of the address
+      - name: user_state
+        description: state this delivery address is based in
+      - name: user_country
+        description: country this delivery address is based in
+
+  - name: stg_public__order_items
+    description: "products associated with unique order"
+
+  - name: stg_public__products
+    description: "all products offered on the platform"
+
+  - name: stg_public__users
+    description: "all users on the platform"
+
+  - name: stg_public__events
+    description: "unique events on the platform"
+
+  - name: stg_public__orders
+    description: "all orders on the platform"
+
+  - name: stg_public__promos
+    description: "promo codes that can be applied to orders"
