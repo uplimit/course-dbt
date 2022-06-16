@@ -8,15 +8,15 @@ source as (
 
 ),
 
-standardized as (
+source_standardized as (
 
     select
-        order_id,
-        product_id,
-        quantity as product_quantity
+          order_id   as order_guid
+        , product_id as product_guid
+        , quantity   as product_quantity
 
     from source
 
 )
 
-select * from standardized
+select * from source_standardized

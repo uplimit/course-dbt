@@ -8,16 +8,16 @@ source as (
 
 ),
 
-standardized as (
+source_standardized as (
 
     select
-        product_id,
-        name        as product_name,
-        price       as product_price,
-        inventory   as product_inventory
+          product_id
+        , name        as product_name
+        , price       as product_price
+        , inventory   as product_inventory
 
     from source
 
 )
 
-select * from standardized
+select * from source_standardized

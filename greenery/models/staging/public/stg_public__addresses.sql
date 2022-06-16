@@ -8,7 +8,7 @@ source as (
 
 ),
 
-standardized as (
+source_standardized as (
 
 select
       address_id as user_address_guid
@@ -21,4 +21,4 @@ from source
 
 )
 
-select * from standardized
+select * from source_standardized

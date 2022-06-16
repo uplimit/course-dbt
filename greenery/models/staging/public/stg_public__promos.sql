@@ -8,15 +8,15 @@ source as (
 
 ),
 
-standardized as (
+source_standardized as (
 
     select
-        promo_id,
-        discount  as promo_discount,
-        status    as promo_status
+          promo_id
+        , discount  as promo_discount
+        , status    as promo_status
 
     from source
 
 )
 
-select * from standardized
+select * from source_standardized
