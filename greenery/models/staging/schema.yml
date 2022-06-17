@@ -1,0 +1,207 @@
+version: 2
+
+models:
+  - name: stg_greenery__addresses
+    description: Addresses including zipcode, state and country
+    columns:
+      - name: address_guid
+        description: "UUID for each unique address on platform"
+        tests:
+          - unique
+          - not_null
+      - name: address
+        description: "The first few lines of the address"
+        tests:
+          - not_null
+      - name: zipcode
+        description: "The zipcode of the address"
+      - name: state
+        description: "state this delivery address is based in"
+      - name: country
+        description: "country this delivery address is based in"
+        tests:
+          - not_null
+
+  - name: stg_greenery__events
+    description: Events including the session_id, user_id, event type, url of the page, date of creation, order_id and product_id
+    columns:
+      - name: event_guid
+        description: "UUID of each unique event on the platform"
+        tests:
+          - unique
+          - not_null
+      - name: session_guid
+        description: "UUID of each browsing session on the platform which can contain many events"
+        tests:
+          - not_null
+      - name: user_guid
+        description: "UUID of the user that this event is associated with"
+        tests:
+          - not_null
+      - name: event_type
+        description: "Type of the event"
+        tests:
+          - not_null
+      - name: page_url
+        description: "URL that the event happened on"
+        tests:
+          - not_null
+      - name: event_created_at_utc
+        description: "Timestamp of the event"
+        tests:
+          - not_null
+      - name: order_guid
+        description: "If the event is specific to an order (mostly used for checkout)"
+        tests:
+          - not_null
+      - name: product_guid
+        description: "If the event is specific to a product"
+        tests:
+          - not_null
+
+  - name: stg_greenery__order_item
+    description: Items ordered including order_id, product_id and quantity
+    columns:
+      - name: order_guid
+        description: "OrderId of this order"
+        tests:
+          - unique
+          - not_null
+      - name: product_guid
+        description: "ProductId of a single item in this order"
+        tests:
+          - not_null
+      - name: quantity
+        description: "Number of units of the product in this order"
+        tests:
+          - not_null
+
+  - name: stg_greenery__promos
+    description: Promos for users promo_id, discount and status of the promo
+    columns:
+      - name: promo_guid
+        description: "Each unique promocode on platform"
+        tests:
+          - unique
+          - not_null
+      - name: discount
+        description: "Absolute dollar amount that is given off with the code"
+        tests:
+          - not_null
+      - name: promo_status
+        description: "Is the promo code active or disabled"
+        tests:
+          - not_null
+
+  - name: stg_greenery__orders
+    description: Orders of the users including order_id, promo_id, user_id, address_id, the date the order was created, order cost, shipping cost, total amount of the order, tracking id, shipping service, estimated date of delivery, date of delivery and order status
+    columns:
+      - name: order_guid
+        description: "UUID for each unique order on platform"
+        tests:
+          - unique
+          - not_null
+      - name: promo_guid
+        description: "PromoId if any was used in the order"
+      - name: user_guid
+        description: "UserId of the user that placed this order"
+        tests:
+          - not_null
+      - name: address_guid
+        description: "Delivery address for this order"
+        tests:
+          - not_null
+      - name: order_created_at_utc
+        description: "Timestamp when the order was created"
+        tests:
+          - not_null
+      - name: order_cost
+        description: "Dollar about of the items in the order"
+        tests:
+          - not_null
+      - name: shipping_cost
+        description: "Cost of the shipping of the order"
+        tests:
+          - not_null
+      - name: order_total
+        description: "Cost of the order including the shipping"
+        tests:
+          - not_null
+      - name: tracking_guid
+        description: "Tracking number for the order/package"
+        tests:
+          - unique
+          - not_null
+      - name: shipping_service
+        description: "Company that was used for shipping"
+        tests:
+          - not_null
+      - name: estimated_delivery_at_utc
+        description: "Estimated date of delivery"
+        tests:
+          - not_null
+      - name: delivered_at_utc
+        description: "Actual timestamp of delivery"
+      - name: order_status
+        description: "The status of the order"
+        tests:
+          - not_null
+
+  - name: stg_greenery__products
+    description: Products including product_id, product_name, price and inventory
+    columns:
+      - name: product_guid
+        description: "UUID for each unique product on platform"
+        tests:
+          - unique
+          - not_null
+      - name: product_name
+        description: "Name of the product"
+        tests:
+          - not_null
+      - name: price
+        description: "Price of the product"
+        tests:
+          - not_null
+      - name: inventory
+        description: "Amount of the inventory we have for this product"
+        tests:
+          - not_null
+
+  - name: stg_greenery__users
+    description: Information about the users including user_id, first name, last name, email, phone number, date the user was created at,date the user was updated at and address_id
+    columns:
+      - name: user_guid
+        description: "UUID for each unique user on platform"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "First Name of the user"
+        tests:
+          - not_null
+      - name: last_name
+        description: "Last Name of the user"
+        tests:
+          - not_null
+      - name: email
+        description: "Email address of the user"
+        tests:
+          - unique
+          - not_null
+      - name: phone_number
+        description: "phone number of the user"
+        tests:
+          - unique
+          - not_null
+      - name: user_created_as_utc
+        description: "date the user was created"
+        tests:
+          - not_null
+      - name: user_updated_as_utc
+        description: "date the user was last updated"
+      - name: address_guid
+        description: "default delivery address for the user"
+        tests:
+          - not_null
+
