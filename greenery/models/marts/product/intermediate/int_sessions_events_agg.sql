@@ -8,6 +8,7 @@
 Checked event type with select distinct(event_type) from dbt_eike_r.stg_greenery__events
 */
 
+
 SELECT
     session_guid
     , event_created_at_utc

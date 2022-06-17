@@ -29,6 +29,7 @@ SELECT
     , session_length.first_event - session_length.first_event as session_length
 from {{ ref('int_sessions_events_agg') }}
 
+
 left join  {{ ref('stg_greenery__users') }}
     on int_sessions_events_agg.user_guid = stg_greenery__users.user_guid
 left join session_length
