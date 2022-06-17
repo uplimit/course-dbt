@@ -6,7 +6,7 @@
 
 
 with order_source as (
-    select * from {{ source('src_greenery__orders', 'orders') }}
+    select * from {{ source('src_greenery', 'orders') }}
 )
 
 , renamed_recast as (

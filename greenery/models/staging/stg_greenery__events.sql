@@ -5,7 +5,7 @@
 }}
 
 with event_source as (
-    select * from {{ source('src_greenery__events', 'events') }}
+    select * from {{ source('src_greenery', 'events') }}
 )
 
 , renamed_recast as (

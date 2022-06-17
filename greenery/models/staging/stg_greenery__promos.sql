@@ -5,7 +5,7 @@
 }}
 
 with promo_source as (
-    select * from {{ source('src_greenery__promos', 'promos') }}
+    select * from {{ source('src_greenery', 'promos') }}
 )
 
 , renamed_recast as (

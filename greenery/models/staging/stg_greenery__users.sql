@@ -5,7 +5,7 @@
 }}
 
 with user_source as (
-    select * from {{ source('src_greenery__users', 'users') }}
+    select * from {{ source('src_greenery', 'users') }}
 )
 
 , renamed_recast as (
