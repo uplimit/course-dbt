@@ -33,8 +33,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   greenery:
+    example:
+      +materialized: view
     staging:
-      example:
-        +materialized: view
-      public:
-        +materialized: view
+      +materialized: view

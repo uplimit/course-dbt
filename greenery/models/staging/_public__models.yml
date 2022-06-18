@@ -7,7 +7,9 @@ models:
       - name: user_address_guid
         description: GUID for each unique address on platform
         tests:
-          - unique
+          - unique:
+              config:
+                store_failures: true
           - not_null
       - name: user_address
         description: The first few lines of the address
