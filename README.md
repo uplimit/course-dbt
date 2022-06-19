@@ -9,13 +9,13 @@ Template repository for the projects and environment of the course: Analytics en
 Apache 2.0
 ---
 Improvements to add:
-[X] Include correct table names in schema.yml
-[X] Remove folder "http:"
-[X] Remove "mushrooms.csv"
-[X] Add W2_README.md
-[X] Rename field names to be more descriptive in the .sql models
-[] Recast field names to appropriate data types in .sql models
-[] Install and use a SQL linter
-[X] Make Core, Marketing, and Product Marts
-[] Within each marts folder, create intermediate models and dimension/fact models.
+- [X] Include correct table names in schema.yml
+- [X] Remove folder "http:"
+- [X] Remove "mushrooms.csv"
+- [X] Add W2_README.md
+- [X] Rename field names to be more descriptive in the .sql models
+- [] Recast field names to appropriate data types in .sql models
+- [] Install and use a SQL linter
+- [X] Make Core, Marketing, and Product Marts
+- [] Within each marts folder, create intermediate models and dimension/fact models.
 
