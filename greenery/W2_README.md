@@ -87,3 +87,22 @@ SELECT
 ;
 ```
 - [Difference between ID's and GUID's](https://blog.codinghorror.com/primary-keys-ids-versus-guids/)
+
+- Way to create a boolean for different conditions
+```
+WITH orders_cohort AS (
+  SELECT
+    user_id
+    , COUNT(DISTINCT order_id) AS user_orders
+    FROM dbt.dbt_jimmy_l.stg_greenery__orders
+    GROUP BY 1
+)
+-- Put the users into buckets with a 0 and 1 flag
+-- ::int casts the column as type int
+  SELECT
+    user_id
+    , (user_orders = 1)::int AS has_one_purchases
+    , (user_orders >= 2)::int AS has_two_purchases
+    , (user_orders >= 3)::int AS has_three_plus_purchases
+  FROM orders_cohort
+```
