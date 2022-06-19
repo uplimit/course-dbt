@@ -10,6 +10,7 @@ with orders as (
             address_id,
             created_at as created_at_utc,
             order_cost,
+            shipping_cost,
             order_total,
             tracking_id,
             shipping_service,
