@@ -49,6 +49,28 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 - NOTE: This is a hypothetical question vs. something we can analyze in our Greenery data set. 
 - Think about what exploratory analysis you would do to approach this question.
 
+**Good indicators of likely to purchase again?**
+- Maybe this person is on the edge of buying something.
+- Maybe this person is checking if there is a sale for something.
+
+**Core**
+- fact_orders table
+- dim_products table
+- dim_users
+- How can I build off of the core?
+- Naming... __core_product_views???
+
+**Marketing**
+- The marketing mart could contain a model like user_order_facts which contains order information at the user level.
+- For marketing mart we might want to dig into users — when was their first order? Last order? 
+- How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. 
+- As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders.
+
+**Product**
+- The product mart could contain a model like fact_page_views which contains all page view events from greenery’s events data
+- We might we want to know how different products perform. 
+- What are daily page views by product? Daily orders by product? What’s getting a lot of traffic, but maybe not converting into purchases?
+
 3. Explain the marts models you added. Why did you organize the models in the way you did?
 
 4. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
