@@ -3,13 +3,13 @@
 **Week 1 Project**
 1. **How many users do we have?**
 - We have 130 users.
-- Method: Use tables stg_users
+- Method: Use tables stg_greenery__users
 1. Calculate the distinct number of users on the platform.
 
 ```sql
 SELECT 
   COUNT(DISTINCT(user_id)) 
-FROM dbt_jimmy_l.stg_users;
+FROM dbt_jimmy_l.stg_greenery__users;
 ```
 2. **On average, how many orders do we receive per hour?**
 - On average, we receive about 7.52 orders per hour.
@@ -20,8 +20,8 @@ FROM dbt_jimmy_l.stg_users;
 WITH hourly_orders AS (
   SELECT 
     COUNT(order_id) as order_per_hour, 
-    date_trunc('hour', created_at) as utc_trunc
-  FROM dbt_jimmy_l.stg_orders
+    date_trunc('hour', created_at_utc) as utc_trunc
+  FROM dbt_jimmy_l.stg_greenery__orders
   GROUP BY utc_trunc)
 
 SELECT 
@@ -37,8 +37,8 @@ FROM hourly_orders;
 ```sql
 WITH delivery_times AS (
   SELECT (
-    delivered_at - created_at) AS order_delivery_time 
-  FROM dbt_jimmy_l.stg_orders
+    delivered_at_utc - created_at_utc) AS order_delivery_time 
+  FROM dbt_jimmy_l.stg_greenery__orders
   WHERE status = 'delivered'
 )
 
@@ -61,7 +61,7 @@ SELECT
     WHEN COUNT(user_id) = 1 THEN '1 order'
     WHEN COUNT(user_id) = 2 THEN '2 orders'
     WHEN COUNT(user_id) >= 3 THEN '3 or more orders' END AS num_orders
-FROM dbt_jimmy_l.stg_orders
+FROM dbt_jimmy_l.stg_greenery__orders
 GROUP BY user_id
 )
 SELECT 
@@ -82,8 +82,8 @@ ORDER BY num_orders;
 WITH hourly_sessions AS (
   SELECT 
     COUNT(DISTINCT(session_id)) AS sessions_per_hour, 
-    date_trunc('hour', created_at) as utc_trunc
-  FROM dbt_jimmy_l.stg_events
+    date_trunc('hour', created_at_utc) as utc_trunc
+  FROM dbt_jimmy_l.stg_greenery__events
   GROUP BY utc_trunc)
   
 SELECT 
@@ -110,16 +110,16 @@ ORDER BY 3;
 ```sql
   SELECT 
     COUNT(order_id), 
-    date_trunc('hour', created_at) as utc_trunc
-  FROM dbt_jimmy_l.stg_orders
+    date_trunc('hour', created_at_utc) as utc_trunc
+  FROM dbt_jimmy_l.stg_greenery__orders
   GROUP BY utc_trunc
 ```
 Is the same as:
 ```sql
   SELECT 
     COUNT(order_id), 
-    date_trunc('hour', created_at) as utc_trunc
-  FROM dbt_jimmy_l.stg_orders
+    date_trunc('hour', created_at_utc) as utc_trunc
+  FROM dbt_jimmy_l.stg_greenery__orders
   GROUP BY 2
 ```
 ---

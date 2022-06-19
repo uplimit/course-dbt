@@ -4,7 +4,7 @@
   )
 }}
 
-WITH src_greenery_promos AS (
+WITH src_greenery__promos AS (
   SELECT * FROM {{source('staging_greenery', 'promos')}}
 )
 
@@ -13,7 +13,7 @@ WITH src_greenery_promos AS (
     promo_id,
     discount AS discount_amount,
     status AS promo_active_status
-  FROM src_greenery_promos
+  FROM src_greenery__promos
 )
 
 SELECT * FROM renamed_recast

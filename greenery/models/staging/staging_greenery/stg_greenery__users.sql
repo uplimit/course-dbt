@@ -4,7 +4,7 @@
   )
 }}
 
-WITH src_greenery_users AS (
+WITH src_greenery__users AS (
   SELECT * FROM {{source('staging_greenery', 'users')}}
 )
 
@@ -18,7 +18,7 @@ WITH src_greenery_users AS (
     created_at AS created_at_utc,
     updated_at AS updated_at_utc,
     address_id
-  FROM src_greenery_users
+  FROM src_greenery__users
 )
 
 SELECT * FROM renamed_recast

@@ -4,7 +4,7 @@
   )
 }}
 
-WITH src_greenery_orders AS (
+WITH src_greenery__orders AS (
   SELECT * FROM {{source('staging_greenery', 'orders')}}
 )
 
@@ -23,7 +23,7 @@ WITH src_greenery_orders AS (
     estimated_delivery_at AS estimated_delivery_at_utc,
     delivered_at AS delivered_at_utc,
     status AS order_status
-  FROM src_greenery_orders
+  FROM src_greenery__orders
 )
 
 SELECT * FROM renamed_recast

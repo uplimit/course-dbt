@@ -4,7 +4,7 @@
   )
 }}
 
-with src_greenery_addresses as (
+with src_greenery__addresses as (
   select * from {{ source('staging_greenery', 'addresses') }}
 )
 
@@ -15,7 +15,7 @@ with src_greenery_addresses as (
     zipcode,
     state,
     country
-  from src_greenery_addresses
+  from src_greenery__addresses
 )
 
 SELECT * FROM renamed_recast

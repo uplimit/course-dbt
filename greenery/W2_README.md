@@ -17,7 +17,7 @@ SELECT
     WHEN COUNT(user_id) = 2 THEN '2 orders'
     WHEN COUNT(user_id) >= 3 THEN '3 or more orders' 
   END AS num_orders
-FROM dbt_jimmy_l.stg_orders
+FROM dbt_jimmy_l.stg_greenery__orders
 GROUP BY user_id
 )
 ,

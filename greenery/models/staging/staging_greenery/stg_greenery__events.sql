@@ -4,7 +4,7 @@
   )
 }}
 
-WITH src_greenery_events AS (
+WITH src_greenery__events AS (
   SELECT * FROM {{source('staging_greenery', 'events')}}
 )
 
@@ -18,7 +18,7 @@ WITH src_greenery_events AS (
     event_type,
     order_id,
     product_id
-  FROM src_greenery_events
+  FROM src_greenery__events
 )
 
 SELECT * FROM renamed_recast
