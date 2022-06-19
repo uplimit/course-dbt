@@ -67,12 +67,15 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 
 ---
 **Useful things I learned in this project**
-
+- Why might we want **different** descriptions for tables in **source** and the **schema**?
+  - The description in **source** should describe the source data
+  - The description in the **schema** should describe the data you model, i.e. what transformations you did
 - To generate a full DAG in dbt
 ```
 dbt docs generate
 dbt docs serve --no-browser
 ```
+
 - [Using multiple CTEs](https://www.databasejournal.com/ms-sql/tips-for-using-common-table-expressions/#:~:text=The%20second%20CTE%20is%20defined,SELECT%20statement%20references%20each%20CTE.)
 - The difference between `date_trunc` and `date_part`. From Sourabh
 ```sql
@@ -83,3 +86,4 @@ SELECT
   date_part('day', timestamp '2002-09-17 09:57:45') AS d
 ;
 ```
+- [Difference between ID's and GUID's](https://blog.codinghorror.com/primary-keys-ids-versus-guids/)
