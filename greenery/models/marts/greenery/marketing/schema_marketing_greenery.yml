@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: int_user_order_promotions_by_locations_aggregate
+    description: "Intermediate table organizing orders by order, promo, and location"
+    columns:
+      - name: order_guid
+        description: "UUID for each unique users order"
+        tests:
+        - not_null
+        - unique
+        
+  - name: int_session_events_status_basic_aggregate
+    description: "Intermediate table organizing web session events by status"
+    columns:
+      - name: session_guid
+        description: "UUID for each user session"
+        tests:
+        - not_null
+

@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "Dimension, for look up of greenery's products"
+    columns:
+      - name: product_guid
+        description: "UUID of the product"
+        tests:
+        - not_null
+        - unique
+      - name: product_name
+        description: "Name of the product"
+        tests:
+        - not_null
+        - unique
+      - name: price_usd
+        description: "Name of the product"
+        tests:
+        - not_null
+      - name: inventory_qty
+        description: "How many products are in stock"
+        tests:
+          - positive_values
+
+  - name: dim_users_addresses
+    columns:
+      - name: user_guid
+        description: "UUID of the user" 
+        tests:
+          - not_null 
+
+  - name: fact_orders
+  - name: intermediate_order_facts_aggregate

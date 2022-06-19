@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: int_session_events_aggregate
+    description: "Intermediate table organizing orders by session, events, and event details"
+    columns:
+      - name: session_guid
+        description: "UUID for each unique users session"
+        tests:
+        - not_null
+        - unique
+        
+  - name: fact_page_views
+    description: "Fact page views"
