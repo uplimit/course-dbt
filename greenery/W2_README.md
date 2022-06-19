@@ -128,3 +128,12 @@ WITH orders_cohort AS (
     , (user_orders >= 3)::int AS has_three_plus_purchases
   FROM orders_cohort
 ```
+
+- When running a single dbt model you don't need to include the .sql file extension
+```
+-- This is correct
+dbt run -m int_session_events_agg
+
+-- This is incorrect
+dbt run -m int_session_events_agg.sql
+```
