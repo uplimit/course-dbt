@@ -5,7 +5,7 @@
 }}
 
 WITH src_greenery__order_items AS (
-  SELECT * FROM {{source('staging_greenery', 'order_items')}}
+  SELECT * FROM {{source('src_greenery', 'order_items')}}
 )
 
 , renamed_recast AS (

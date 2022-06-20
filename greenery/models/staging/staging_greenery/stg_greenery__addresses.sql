@@ -5,7 +5,7 @@
 }}
 
 with src_greenery__addresses as (
-  select * from {{ source('staging_greenery', 'addresses') }}
+  select * from {{ source('src_greenery', 'addresses') }}
 )
 
 , renamed_recast as (

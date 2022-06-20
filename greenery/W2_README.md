@@ -54,7 +54,7 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 - Maybe this person is checking if there is a sale for something.
 
 **Core**
-- fact_orders table
+- fact_orders table + promos
 - dim_products table
 - dim_users
 - How can I build off of the core?
@@ -69,7 +69,9 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 **Product**
 - The product mart could contain a model like fact_page_views which contains all page view events from greenery’s events data
 - We might we want to know how different products perform. 
-- What are daily page views by product? Daily orders by product? What’s getting a lot of traffic, but maybe not converting into purchases?
+  - What are daily page views by product? 
+  - Daily orders by product? 
+  - What’s getting a lot of traffic, but maybe not converting into purchases?
 
 3. Explain the marts models you added. Why did you organize the models in the way you did?
 
