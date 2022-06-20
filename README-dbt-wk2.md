@@ -83,11 +83,11 @@ Some areas I'd like to explore:
 
 Explain the marts models you added. Why did you organize the models in the way you did?
 
-I tried to mimic the general hierarchial naming I had going with models/staging/greenery with stg_greenery__${table_name} for the marts so that the schema YAML file followed the schema_${business_area}_${project_name} 
+I tried to mimic the general hierarchial naming I had going with models/staging/greenery with `stg_greenery__${table_name}.sql` for the marts so that the schema YAML file followed the `schema_${business_area}_${project_name}.yml`
 
-For the files under each marts/${project_name}/${business_area} I labelled each type of file by prefix dim, fact, or int for intermediate. 
-If there were one or more tables for a dimension then I put the root of the table_name in the dimension SQL file name. 
-For the intermediate files I aggregated data and used intermediate_${what the table did}_aggregate.sql 
+For the files under each `marts/${project_name}/${business_area}/` I labelled each type of file by prefix `dim`, `fact`, or `int` for intermediate. 
+If there were one or more tables for a dimension then I put the root of the `${table_name}` in the dimension SQL file name. 
+For the intermediate files I aggregated data and used `intermediate_${what the table did}_aggregate.sql` 
 
 ## Part 2 - Tests
 
