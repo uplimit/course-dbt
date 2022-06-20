@@ -37,34 +37,28 @@ Go back and work to display these 2 for facts
 What is our user repeat rate?
 Repeat Rate = Users who purchased 2 or more times / users who purchased
 
-WITH user_orders AS ( 
-    SELECT 
-      user_guid,
-      count(distinct(order_guid)) as orders_placed -- 3 statuses. Break out if need to see patterns 
-    FROM 
-        dbt_heidi_s.stg_greenery__orders
-    GROUP BY 
-        user_guid
-  )
-
+WITH orders_cohort AS (
   SELECT 
-    orders_placed
-    ,count(orders_placed)
+    user_guid
+    , count(distinct(order_guid)) AS user_orders
   FROM 
-    user_orders
-  GROUP BY orders_placed
-  ORDER by orders_placed
-;
+    dbt.dbt_heidi_s.stg_greenery__orders
+  GROUP BY user_guid
+)
 
--- Answer: rolled up for all orders placed with 1 or more purchases
-1       25
-2       28
-3       34
-4       20
-5       10
-6        2
-7        4
-8        1
+, users_bucket AS (
+  SELECT 
+    user_guid
+    , (user_orders = 1)::int AS has_one_purchases
+    , (user_orders >= 2)::int AS has_two_purchases
+  FROM 
+      orders_cohort
+)
+
+SELECT 
+  (sum(has_two_purchases)::float / count(distinct(user_guid))::float) * 100 AS repeat_rate 
+FROM 
+    users_bucket
 
 ```
 
