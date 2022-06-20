@@ -2,11 +2,11 @@
 ---
 **Week 2 Project**
 
-***(Part 1) Models ***
+**(Part 1) Models**
 
 1. What is our user repeat rate?
 - Repeat Rate = Users who purchased 2 or more times / users who purchased
-- Note this SQL below is not pretty but it works!
+- Note this SQL below is not pretty but it works! See cleaner way to create this query in "Lessons learned" below.
 ```sql
 WITH 
 -- First CTE 
@@ -73,9 +73,9 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 - I did not anything different from Jake's example with the `fct_sessions` model here but I'm stoked about how easy it was to create this.
 
 4. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
-- Paste an image of your DAG from the docs.
 
-***(Part 2) Tests ***
+---
+**(Part 2) Tests**
 
 1. Add dbt tests into your dbt project on your existing models from Week 1, and new models from the section above
 - What assumptions are you making about each model? (i.e. why are you adding each test?)
@@ -114,7 +114,7 @@ SELECT
 - [Difference between ID's and GUID's](https://blog.codinghorror.com/primary-keys-ids-versus-guids/)
 
 - Way to create a boolean for different conditions
-```
+```sql
 WITH orders_cohort AS (
   SELECT
     user_id
@@ -145,7 +145,7 @@ dbt run -m int_session_events_agg.sql
 ```
 dbt test --store-failures
 ```
-- (dbt tests web page)[https://docs.getdbt.com/docs/building-a-dbt-project/tests]
+- [dbt tests web page](https://docs.getdbt.com/docs/building-a-dbt-project/tests)
 
 Reflection
 - I'm starting to see how end business users can request special "asks" for information from you, and how you can plan ahead and hopefully anticipate these "asks".
