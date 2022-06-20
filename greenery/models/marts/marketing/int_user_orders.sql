@@ -25,6 +25,7 @@ select
     , int_orders_promos.delivered_at_utc
     , int_orders_promos.order_status
     , int_orders_promos.has_promo_applied
+    , int_orders_promos.promo_active_status
     , stg_greenery__addresses.address
     , stg_greenery__addresses.zipcode
     , stg_greenery__addresses.state

@@ -6,7 +6,7 @@
 
 1. What is our user repeat rate?
 - Repeat Rate = Users who purchased 2 or more times / users who purchased
-
+- Note this SQL below is not pretty but it works!
 ```sql
 WITH 
 -- First CTE 
@@ -49,34 +49,28 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 - NOTE: This is a hypothetical question vs. something we can analyze in our Greenery data set. 
 - Think about what exploratory analysis you would do to approach this question.
 
-**Good indicators of likely to purchase again?**
-- Maybe this person is on the edge of buying something.
-- Maybe this person is checking if there is a sale for something.
+- There's a lot that could be explored here, but indicators for purchasing again could be:
+  - repeat rate (higher chance of buying again and again)
+  - number of times visiting a particular product or group of related products
+  - usage of promo codes and how that may affect buying patterns
+- Indicators to NOT purchase again
+  - session time: i.e. short session times (the user bounces quickly off the page)
+  - abandoned carts, abandoned funnel journeys
 
-**Core**
-- fact_orders table + promos
-- dim_products table
-- dim_users
-- How can I build off of the core?
-- Naming... __core_product_views???
-
-**Marketing**
-- The marketing mart could contain a model like user_order_facts which contains order information at the user level.
-- For marketing mart we might want to dig into users — when was their first order? Last order? 
-- How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. 
-- As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders.
-- Give me all order information associated with a user
-- PROMO_PERFORMANCE TABLE can be built off of int_orders_promos.sql
-
-**Product**
-- The product mart could contain a model like fact_page_views which contains all page view events from greenery’s events data
-- We might we want to know how different products perform. 
-  - What are daily page views by product? 
-  - Daily orders by product? 
-  - What’s getting a lot of traffic, but maybe not converting into purchases?
-  - Tell me what products account for 80% of our revenue 
 
 3. Explain the marts models you added. Why did you organize the models in the way you did?
+
+**Core**
+- I only created one table here but my philosophy here is to make simple models that will enrich models for the individual business units.
+- `int_orders_promos` simply combines the `orders` model with the `promos` model
+
+**Marketing**
+- I tried to think of what a marketing department would want out of a data warehouse.
+- As an example I created `fct_orders_promos_usage` model that allows easy querying of promo code usage at an order level
+- The `int_user_orders` model has a lot of potential for use in 
+
+**Product**
+- I did not anything different from Jake's example with the `fct_sessions` model here but I'm stoked about how easy it was to create this.
 
 4. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense
 - Paste an image of your DAG from the docs.
@@ -89,11 +83,15 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 - How did you go about either cleaning the data in the dbt model or adjusting your assumptions/tests?
 - Apply these changes to your github repo
 
+I did not deep dive into tests this week but I did notice that there were a handful of users who were in the `users` source model but never ordered anything. So I created a test on the `int_user_orders` model to see where `order_id` is `not null`. I think these users could be removed from the users table.
+
 2. Your stakeholders at Greenery want to understand the state of the data each day. 
 - Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
-- Alert the source owner somehow via Slack or my company's messaging platform
+
+- If one of the tests fails, I could alert the source owner somehow via Slack or my company's messaging platform.
+- I want to try using the `--store-failures` flag more extensively next week when running tests.
 ---
-**Useful things I learned in this project**
+**Useful things I learned this week**
 - Why might we want **different** descriptions for tables in **source** and the **schema**?
   - The description in **source** should describe the source data
   - The description in the **schema** should describe the data you model, i.e. what transformations you did
@@ -143,7 +141,13 @@ dbt run -m int_session_events_agg
 dbt run -m int_session_events_agg.sql
 ```
 
+- Run tests and store the failures using
+```
+dbt test --store-failures
+```
+- (dbt tests web page)[https://docs.getdbt.com/docs/building-a-dbt-project/tests]
+
 Reflection
 - I'm starting to see how end business users can request special "asks" for information from you, and how you can plan ahead and hopefully anticipate these "asks".
-- For core models I tried to make simple models that will enrich models for the individual business units.
-- I found myself renaming conflicting aliases in the intermediate models which made me question my earlier naming decisions i.e. "order_created_at_utc and user_created_at_utc"
+- I found myself renaming conflicting aliases in the intermediate models which made me question my earlier naming decisions i.e. "I had a 'created_at_utc' for both users and orders so I renamed them to 'order_created_at_utc' and 'user_created_at_utc'"
+- I discovered that some users are in the user model even if they have never completed an order. I'll investigate this later.

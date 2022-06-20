@@ -4,42 +4,48 @@ models:
   - name: stg_greenery__addresses
     description: Addresses of customers 
     columns:
-      - name: col_name
+      - name: address_id
         tests:
           - not_null
   - name: stg_greenery__users
     description: Name and contact information of customers   
     columns:
-      - name: col_name
+      - name: user_id
         tests:
           - not_null
   - name: stg_greenery__orders
     description: Order information such as the order's ID, total cost, and estimated shipping date   
     columns:
-      - name: col_name
+      - name: order_id
         tests:
           - not_null
   - name: stg_greenery__order_items
     description: order information such as the products and quantity of products sold   
     columns:
-      - name: col_name
+      - name: product_id
         tests:
           - not_null
   - name: stg_greenery__promos
     description: ID of promos, the discount, and the active flag for a promo  
     columns:
-      - name: col_name
+      - name: promo_id
         tests:
           - not_null
   - name: stg_greenery__products
     description: product information such as ID, name, price, and inventory
     columns:
-      - name: col_name
+      - name: product_id
         tests:
           - not_null
   - name: stg_greenery__events
     description: Event information such as when a user goes to checkout for an order  
     columns:
-      - name: col_name
+      - name: event_id
+        tests:
+          - not_null
+  - name: int_user_orders
+    description: int table with user granularity, joined to orders_promos and addresses
+    columns:
+      - name: order_id
         tests:
           - not_null
