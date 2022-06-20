@@ -34,6 +34,14 @@ models:
 
   - name: stg_public__orders
     description: "all orders on the platform"
+    columns:
+      - name: order_guid
+        description: GUID for each unique order on platform
+        tests:
+          - unique:
+              config:
+                store_failures: true
+          - not_null
 
   - name: stg_public__promos
     description: "promo codes that can be applied to orders"

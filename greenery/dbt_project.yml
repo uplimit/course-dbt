@@ -35,5 +35,8 @@ models:
   greenery:
     example:
       +materialized: view
+      +enabled: false
     staging:
       +materialized: view
+    marts:
+      +materialized: table
