@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: int_orders_promos_joined
+    description: order table with product quantity per basket and with promo details
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+          - unique
+      - name: order_total_spend
+        tests:
+          - positive_values
+
+          

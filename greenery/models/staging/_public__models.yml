@@ -11,6 +11,7 @@ models:
               config:
                 store_failures: true
           - not_null
+          
       - name: user_address
         description: The first few lines of the address
       - name: user_zip_code
@@ -22,6 +23,11 @@ models:
 
   - name: stg_public__order_items
     description: "products associated with unique order"
+    columns:
+      - name: product_quantity
+        tests:
+          - not_null
+          - positive_values
 
   - name: stg_public__products
     description: "all products offered on the platform"

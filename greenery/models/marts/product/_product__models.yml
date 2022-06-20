@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: int_order_items_agg
+    description: Total item count per user order/basket.
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+          - unique
+          
+      - name: total_items
+        tests:
+          - not_null
+          - positive_values

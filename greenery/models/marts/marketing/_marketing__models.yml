@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: fct_user_orders
+    description: Total item count per user order/basket.
+    columns:
+      - name: user_guid
+        tests:
+          - not_null
+          - unique
+      - name: total_items
+        tests:
+          #- not_null
+          - positive_values
+      - name: last_order
+        tests:
+          - future_dates
