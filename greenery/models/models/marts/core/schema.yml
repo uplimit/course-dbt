@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: int_order_products
+    description: Detailed product descriptions for order lines
+    columns:
+      - name: order_items_surrogate_key
+        tests:
+          - unique
+          - not_null

@@ -9,6 +9,7 @@ with sources as (
 , rename_recast as (
     SELECT
         order_id,
+        {{ dbt_utils.surrogate_key(['order_id', 'product_id']) }} as order_items_surrogate_key,
         product_id,
         quantity
     FROM sources

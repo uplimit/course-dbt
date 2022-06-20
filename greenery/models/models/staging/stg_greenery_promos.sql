@@ -8,7 +8,7 @@ with sources as (
 
 , rename_recast as (
     SELECT
-        promo_id,
+        promo_id as promo_code,
         discount,
         status
     FROM sources
