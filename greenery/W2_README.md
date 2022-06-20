@@ -67,7 +67,7 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 **Marketing**
 - I tried to think of what a marketing department would want out of a data warehouse.
 - As an example I created `fct_orders_promos_usage` model that allows easy querying of promo code usage at an order level
-- The `int_user_orders` model has a lot of potential for use in 
+- The `int_user_orders` model has a lot of potential for use in other downstream tables
 
 **Product**
 - I did not anything different from Jake's example with the `fct_sessions` model here but I'm stoked about how easy it was to create this.
