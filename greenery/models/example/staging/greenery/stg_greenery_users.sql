@@ -11,7 +11,8 @@ with users_source as (
 
 , renamed_recast as (
     select
-     user_id as user_guid
+     user_id 
+
      ,first_name
      ,last_name
      ,email

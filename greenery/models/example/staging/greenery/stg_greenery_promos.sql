@@ -19,3 +19,4 @@ with promo_source as (
 
 
 select * from renamed_recast 
+
