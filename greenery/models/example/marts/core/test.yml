@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_greenery_users
+    columns:
+    - name: name
+    tests:
+      - not_null
+      - unique 
+
+
+
+git add . 
+git commit -m "your commit message"
+git push
