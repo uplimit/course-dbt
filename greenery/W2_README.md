@@ -88,8 +88,8 @@ I did not deep dive into tests this week but I did notice that there were a hand
 2. Your stakeholders at Greenery want to understand the state of the data each day. 
 - Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
 
-- If one of the tests fails, I could alert the source owner somehow via Slack or my company's messaging platform.
-- I want to try using the `--store-failures` flag more extensively next week when running tests.
+  - If one of the tests fails, I could alert the source owner somehow via Slack or my company's messaging platform.
+  - I want to try using the `--store-failures` flag more extensively next week when running tests.
 ---
 **Useful things I learned this week**
 - Why might we want **different** descriptions for tables in **source** and the **schema**?
