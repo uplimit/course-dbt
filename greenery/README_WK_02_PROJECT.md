@@ -2,8 +2,21 @@
 
 **(Part 1) Models**
 
-1. What is our user repeat rate?
+1. What is our user repeat rate? **0.76** 
     - *Repeat Rate = Users who purchased 2 or more times / users who purchased*
+
+```
+with repeat_users as (
+  select
+    user_guid
+    , (total_orders >= 2)::int as has_two_plus_purchases
+  from dbt_jason_d.fct_user_orders
+)
+
+select sum(has_two_plus_purchases)::float / 
+       count(user_guid)::float as repeat_rate
+from repeat_users
+```
 
 2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
     - *NOTE: This is a hypothetical question vs. something we can analyze in our Greenery data set. Think about what exploratory analysis you would do to approach this question.*
