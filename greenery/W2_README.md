@@ -65,6 +65,8 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 - For marketing mart we might want to dig into users — when was their first order? Last order? 
 - How many orders have they made? Total spend? We might want to dig into our biggest customers and look at trends. 
 - As a simple but important model, we can connect user and order data to make querying data about a user easier for stakeholders.
+- Give me all order information associated with a user
+- PROMO_PERFORMANCE TABLE can be built off of int_orders_promos.sql
 
 **Product**
 - The product mart could contain a model like fact_page_views which contains all page view events from greenery’s events data
@@ -72,6 +74,7 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
   - What are daily page views by product? 
   - Daily orders by product? 
   - What’s getting a lot of traffic, but maybe not converting into purchases?
+  - Tell me what products account for 80% of our revenue 
 
 3. Explain the marts models you added. Why did you organize the models in the way you did?
 
@@ -88,7 +91,7 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 
 2. Your stakeholders at Greenery want to understand the state of the data each day. 
 - Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
-
+- Alert the source owner somehow via Slack or my company's messaging platform
 ---
 **Useful things I learned in this project**
 - Why might we want **different** descriptions for tables in **source** and the **schema**?
@@ -139,3 +142,8 @@ dbt run -m int_session_events_agg
 -- This is incorrect
 dbt run -m int_session_events_agg.sql
 ```
+
+Reflection
+- I'm starting to see how end business users can request special "asks" for information from you, and how you can plan ahead and hopefully anticipate these "asks".
+- For core models I tried to make simple models that will enrich models for the individual business units.
+- I found myself renaming conflicting aliases in the intermediate models which made me question my earlier naming decisions i.e. "order_created_at_utc and user_created_at_utc"
