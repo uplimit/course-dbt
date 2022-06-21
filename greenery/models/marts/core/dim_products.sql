@@ -1,3 +1,4 @@
+-- dim_products.sql
 with
 
 staged_products as (
