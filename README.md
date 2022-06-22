@@ -18,4 +18,5 @@ Improvements to add:
 - [] Install and use a SQL linter
 - [X] Make Core, Marketing, and Product Marts
 - [] Within each marts folder, create intermediate models and dimension/fact models.
+- Investigate performance of VIEWS versus TABLES
 

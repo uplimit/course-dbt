@@ -7,6 +7,8 @@
 1. What is our user repeat rate?
 - Repeat Rate = Users who purchased 2 or more times / users who purchased
 - Note this SQL below is not pretty but it works! See cleaner way to create this query in "Lessons learned" below.
+
+Our repeat user rate is 79.8%, approximately 80%.
 ```sql
 WITH 
 -- First CTE 
@@ -44,10 +46,7 @@ FROM proportion
 WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 ```
 
-2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? 
-- If you had more data, what features would you want to look into to answer this question?
-- NOTE: This is a hypothetical question vs. something we can analyze in our Greenery data set. 
-- Think about what exploratory analysis you would do to approach this question.
+2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
 
 - There's a lot that could be explored here, but indicators for purchasing again could be:
   - repeat rate (higher chance of buying again and again)
@@ -77,11 +76,7 @@ WHERE num_orders = '2 orders' OR num_orders ='3 or more orders';
 ---
 **(Part 2) Tests**
 
-1. Add dbt tests into your dbt project on your existing models from Week 1, and new models from the section above
-- What assumptions are you making about each model? (i.e. why are you adding each test?)
-- Did you find any “bad” data as you added and ran tests on your models? 
-- How did you go about either cleaning the data in the dbt model or adjusting your assumptions/tests?
-- Apply these changes to your github repo
+1. Add dbt tests into your dbt project on your existing models from Week 1, and new models from the section above. What assumptions are you making about each model? (i.e. why are you adding each test?). Did you find any “bad” data as you added and ran tests on your models? How did you go about either cleaning the data in the dbt model or adjusting your assumptions/tests?
 
 I did not deep dive into tests this week but I did notice that there were a handful of users who were in the `users` source model but never ordered anything. So I created a test on the `int_user_orders` model to see where `order_id` is `not null`. I think these users could be removed from the users table.
 
