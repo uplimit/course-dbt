@@ -10,9 +10,9 @@ select
     , has_promo_applied
     , promo_active_status
     , promo_id
-    , created_at_utc
-    , delivered_at_utc
-    , estimated_delivery_at_utc
+    , order_created_at_utc
+    , order_delivered_at_utc
+    , order_estimated_delivery_at_utc
     , order_status
     , order_cost
     , shipping_cost

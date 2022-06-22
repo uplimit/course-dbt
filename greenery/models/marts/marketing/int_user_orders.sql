@@ -11,18 +11,18 @@ select
     , stg_greenery__users.last_name
     , stg_greenery__users.email
     , stg_greenery__users.phone_number
-    , stg_greenery__users.created_at_utc AS user_created_at_utc
-    , stg_greenery__users.updated_at_utc AS user_updated_at_utc
+    , stg_greenery__users.user_created_at_utc
+    , stg_greenery__users.user_updated_at_utc
     , stg_greenery__users.address_id
     , int_orders_promos.order_id
-    , int_orders_promos.created_at_utc AS order_created_at_utc 
+    , int_orders_promos.order_created_at_utc
     , int_orders_promos.order_cost
     , int_orders_promos.shipping_cost
     , int_orders_promos.order_total
     , int_orders_promos.tracking_id
     , int_orders_promos.shipping_service
-    , int_orders_promos.estimated_delivery_at_utc
-    , int_orders_promos.delivered_at_utc
+    , int_orders_promos.order_estimated_delivery_at_utc
+    , int_orders_promos.order_delivered_at_utc
     , int_orders_promos.order_status
     , int_orders_promos.has_promo_applied
     , int_orders_promos.promo_active_status
