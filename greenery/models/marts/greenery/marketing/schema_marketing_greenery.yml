@@ -10,11 +10,3 @@ models:
         - not_null
         - unique
         
-  - name: int_session_events_status_basic_aggregate
-    description: "Intermediate table organizing web session events by status"
-    columns:
-      - name: session_guid
-        description: "UUID for each user session"
-        tests:
-        - not_null
-

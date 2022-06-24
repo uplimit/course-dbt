@@ -107,7 +107,7 @@ models:
   - name: stg_greenery__promos
     description: 'Promotions and their status'
     columns:
-      - name: promo_id
+      - name: promo_description
         description: Each unique name (string) on platform
         tests:
           - not_null

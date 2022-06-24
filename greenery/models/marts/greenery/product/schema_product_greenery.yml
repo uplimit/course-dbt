@@ -12,3 +12,4 @@ models:
         
   - name: fact_page_views
     description: "Fact page views"
+

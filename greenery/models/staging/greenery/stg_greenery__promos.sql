@@ -6,7 +6,9 @@
 
 WITH promos_source AS (
     SELECT
-        promo_id
+        LOWER(
+            regexp_replace(promo_id, '[- ]', '','g')
+            )  AS promo_id    -- mostly nulls 
         , discount
         , status
     FROM
@@ -17,7 +19,7 @@ WITH promos_source AS (
 
 , renamed_casted as (
     SELECT
-        promo_id
+        (promo_id::varchar) AS promo_description
         , discount
         , status
     FROM 
@@ -25,7 +27,7 @@ WITH promos_source AS (
 )
 
 SELECT 
-    promo_id
+    promo_description
     , discount
     , status
 FROM 
