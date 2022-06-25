@@ -33,4 +33,4 @@ models:
   - name: fact_orders
   - name: int_order_facts_aggregate
   - name: int_product_order_events_aggregate 
-  - name: int_session_event_types
+  - name: int_session_event_type_totals
