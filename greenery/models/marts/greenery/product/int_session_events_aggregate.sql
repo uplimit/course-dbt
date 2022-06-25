@@ -1,4 +1,28 @@
+{{ 
+    config(
+        materialized = 'table'
+    )  
+}}
 
+-- Referencing https://medium.com/@oluwabukunmige/templating-your-sql-queries-using-jinga-on-dbt-ce3d1e14a7fc 
+-- Next goal is to have it use dbt_utils to run the query 
+{%- set event_types -%}
+SELECT
+	distinct(event_type)
+FROM
+	{{ ref('stg_greenery__events') }}
+ORDER BY event_type
+{%- endset -%}
+
+
+{%- set event_type_results = run_query(event_types) -%}
+
+{% if execute %}
+{# Return the event type values #}
+{% set event_type_results_list = event_type_results.columns[0].values() %}
+{% else %}
+{% set event_type_results_list =[] %}
+{% endif %}
 
 WITH session_events_aggregate AS (
   SELECT
@@ -9,10 +33,13 @@ WITH session_events_aggregate AS (
       , COUNT(event_guid) AS events_per_session
       , COUNT(DISTINCT order_guid) AS orders_placed
       , COUNT(DISTINCT product_guid) AS products_purchased
-      , SUM(CASE WHEN event_type = 'package_shipped' THEN 1 ELSE 0 END) AS package_shipped
-      , SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) AS page_view
-      , SUM(CASE WHEN event_type = 'checkout' THEN 1 ELSE 0 END) AS checkout
-      , SUM(CASE WHEN event_type = 'add_to_cart' THEN 1 ELSE 0 END) AS add_to_cart
+      {% for event_type in event_type_results_list %}
+	    {# Using a for loop to iterate through ea event type #}
+	    , SUM(CASE 
+            WHEN event_type = '{{event_type}}' 
+            THEN 1 ELSE 0 END) 
+            AS {{event_type}}
+	    {% endfor %} 
   FROM 
     {{ 
         ref('stg_greenery__events')
