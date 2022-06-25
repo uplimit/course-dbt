@@ -14,7 +14,7 @@ WITH order_facts AS (
     , total_order_amount_usd 
   FROM 
     {{
-      ref('intermediate_order_facts_aggregate') 
+      ref('int_order_facts_aggregate') 
     }}
 )
 

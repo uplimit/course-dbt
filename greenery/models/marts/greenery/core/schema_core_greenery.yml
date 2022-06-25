@@ -31,4 +31,4 @@ models:
           - not_null 
 
   - name: fact_orders
-  - name: intermediate_order_facts_aggregate
+  - name: int_order_facts_aggregate
