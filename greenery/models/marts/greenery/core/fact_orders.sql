@@ -3,6 +3,7 @@
     materialized = 'table'
   ) 
 }}
+
 WITH order_facts AS (
   SELECT 
     user_guid
