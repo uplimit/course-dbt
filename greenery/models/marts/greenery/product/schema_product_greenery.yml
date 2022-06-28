@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: int_session_events_aggregate
+    description: "Intermediate table organizing orders by session, events, and event details"
+    columns:
+      - name: session_guid
+        description: "UUID for each unique users session"
+        tests:
+        - not_null
+        - unique
+        
+  - name: fact_page_views
+    description: "Fact page views"
+
+  - name: fact_product_conversion_rates
+    description: "How many customers purchased plants at Greenery after viewing -- product conversion rate"
+    columns: 
+      - name: product_guid
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        tests:
+          - not_null
+          - unique
+      - name: product_conversion_rate
+        description: "Calculated as the number of unique sessions, with a purchase event of that product divided by the total number of unique sessions that viewed that product"
+        tests: 
+          - positive_values

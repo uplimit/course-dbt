@@ -17,16 +17,16 @@ WITH order_items_source AS (
 
 , renamed_casted AS (
     SELECT
-        order_id AS order_id_guid
-        , product_id AS product_id_guid
+        order_id AS order_guid
+        , product_id AS product_guid
         , quantity
     FROM 
         order_items_source  
 )
 
 SELECT 
-    order_id_guid
-    , product_id_guid
+    order_guid
+    , product_guid
     , quantity
 FROM 
     renamed_casted

@@ -17,8 +17,10 @@ WITH superheroes_source AS (
         , skin_color
         , alignment
         , weight
+        , {{ lbs_to_kgs('weight') }} AS weight_kg 
         , created_at
         , updated_at
+
     FROM
         {{
             source('greenery', 'superheroes')
@@ -37,7 +39,7 @@ WITH superheroes_source AS (
 		    WHEN hair_color = '-' THEN 'empty'
 		    ELSE hair_color
             END AS hair_color_hues
-        , height
+        , NULLIF(height, -99) AS height -- assume a default number if there is a NULL 
         , publisher
         , skin_color -- nulls are dashes and annoying for parsing 
         , CASE
@@ -45,9 +47,10 @@ WITH superheroes_source AS (
 		    ELSE skin_color
             END AS skin_color_hues
         , alignment
-        , weight
-        , created_at
-        , updated_at
+        , NULLIF(weight, -99) AS weight_lb -- assume a default number if there is a NULL 
+        , NULLIF(weight_kg, -99) AS weight_kg -- assume that the conversion to kg also needs a default number if there is a NULL
+        , created_at AS created_at_utc
+        , updated_at AS updated_at_utc
     FROM 
         superheroes_source  
 )
@@ -63,8 +66,9 @@ SELECT
         , publisher
         , skin_color_hues
         , alignment
-        , weight
-        , created_at
-        , updated_at
+        , weight_lb
+        , weight_kg
+        , created_at_utc
+        , updated_at_utc
 FROM 
     renamed_casted

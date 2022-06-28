@@ -6,48 +6,117 @@ models:
     description: 'Shipping addresses and their GUIDs'
     columns:
       - name: address_guid
+        description: UUID representation of the address
         tests:
           - not_null
           - unique
+      - name: street_address
+        description: The address on file for delivery 
+      - name: zipcode
+        description: The zipcode of the address
+      - name: state
+        description: state this delivery address is based in
+      - name: country
+        description: country this delivery address is based in
 
   - name: stg_greenery__events
     description: 'Shopping cart workflow events'
     columns:
-      - name: event_id_guid
+      - name: event_guid
+        description: UUID of each unique event on the platform
         tests:
           - not_null
           - unique
+      - name: session_guid
+        description: UUID of each browsing session on the platform which can contain many events
+      - name: user_guid
+        description: UUID of the user that this event is associated with
+      - name: page_url
+        description: URL that the event happened on
+      - name: created_at_utc
+        description: Timestamp of the event
+      - name: event_type
+        description: Type of event
+      - name: order_guid
+        description: UUID or the order. If the event is specific to an order (mostly used for checkout)
+      - name: product_guid
+        description: UUID of the product. If the event is specific to a product
 
   - name: stg_greenery__order_items
     description: 'Order item details - 1 order to many products'
     columns:
-      - name: order_id_guid
+      - name: order_guid
+        description: UUID of this order
         tests:
           - not_null
+      - name: product_id_guid
+        description: UUID of a single product in this order
+      - name: quantity
+        description: Number of units of the product in this order
+
 
   - name: stg_greenery__orders
     description: 'Order details - 1 complete order shipped'
     columns:
       - name: order_guid
+        description: UUID for each unique order on platform
         tests:
           - not_null
           - unique
+      - name: user_guid
+        description: UUID of the user that placed this order
+      - name: promo_guid
+        description: UUID of promotion - if any was used in the order
+      - name: address_guid
+        description: UUID of Delivery address for this order
+      - name: created_at_utc
+        description: Timestamp when the order was created
+      - name: order_cost
+        description: Dollar about of the items in the order
+      - name: shipping_cost
+        description: Cost of shipping for the order
+      - name: order_total
+        description: Total cost of the order including shipping
+      - name: tracking_guid
+        description: UUID for Tracking number for the order/package
+      - name: shipping_service
+        description: Company that was used for shipping
+      - name: estimated_delivery_at
+        description: Estimated date of delivery
+      - name: delivered_at_utc
+        description: Actual timestamp of delivery
+      - name: order_status
+        description: Status of the order
 
   - name: stg_greenery__products
     description: 'Products and their cost'
     columns:
-      - name: product_id_guid
+      - name: product_guid
+        description: UUID of the product
         tests:
           - not_null
           - unique
+      - name: name
+        description: Name of the product
+      - name: price
+        description: Price of the product
+      - name: inventory
+        description: Amount of the inventory we have for this product
+
 
   - name: stg_greenery__promos
     description: 'Promotions and their status'
     columns:
-      - name: promo_id
+      - name: promo_description
+        description: Each unique name (string) on platform
         tests:
           - not_null
           - unique
+      - name: discount
+        description: Absolute dollar amount that is given off with the code
+      - name: status
+        description: Is the promo code active or disabled
+
 
   - name: stg_greenery__superheroes
     description: 'Superheroes'
@@ -56,11 +125,57 @@ models:
         tests:
           - not_null
           - unique
+      - name: name
+        description: The superhero name
+      - name: gender
+        description: The gender of the superhero
+      - name: eye_color
+        description: Eye color of the superhero 
+      - name: race
+        description: The race of the superhero 
+      - name: hair_color
+        description: The hair color of the superhero 
+      - name: hair_color_hues
+        description: The hair color of the superhero -- adjusted for NULLS
+      - name: height
+        description: The height of the superhero 
+      - name: publisher
+        description: The author of the comic or media of the superhero
+      - name: skin_color
+        description: The skin color of the superhero
+      - name: skin_color_hues
+        description: The skin color of the superhero -- adjusted for NULLS
+      - name: alignment
+        description: The ranking of the superhero from neutral to lawful to evil 
+      - name: weight_lb
+        description: Weight of the superhero in pounds -- adjusted for negative values 
+      - name: weight_kg
+        description: Weight of the superhero in kilograms -- adjusted for negative values 
+      - name: created_at
+        description: When the record was created for the superhero 
+      - name: updated_at
+        description: When the data was updated for the superhero 
+
 
   - name: stg_greenery__users
     description: 'Greenery account users'
     columns:
       - name: user_guid
+        description: UUID for each unique user on platform
         tests:
           - not_null
           - unique
+      - name: first_name
+        description: first name of the user
+      - name: last_name
+        description: last name of the user
+      - name: email
+        description: email address of the user
+      - name: phone_number
+        description: phone number of the user
+      - name: created_at_utc
+        description: timestamp the user was created
+      - name: updated_at_utc
+        description: timestamp the user was last updated
+      - name: address_guid
+        description: UUID for default delivery address for the user

@@ -18,7 +18,7 @@ WITH products_source AS (
 
 , renamed_casted AS (
     SELECT
-        product_id AS product_id_guid
+        product_id AS product_guid
         , name
         , price
         , inventory
@@ -27,7 +27,7 @@ WITH products_source AS (
 )
 
 SELECT 
-        product_id_guid
+        product_guid
         , name
         , price
         , inventory
