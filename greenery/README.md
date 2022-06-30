@@ -103,7 +103,7 @@ group by 1
 ````
 # WEEK 4
 
-##PART1
+## PART1
 ````sql
 {% snapshot orders_snapshot%}
 {{
@@ -119,7 +119,7 @@ select * from {{ source ('src_greenery','orders')}}
 
 {% endsnapshot %}
 ````
-##PART 2
+## PART 2
 Usng greeneery/models/mart/product/intermidiate/init_funnel.sql
 and greeneery/models/mart/product/intermidiate/fct_funnel.sql
 
