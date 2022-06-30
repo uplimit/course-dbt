@@ -1,5 +1,8 @@
+# WEEK 3 
 
-*** PART 1 
+
+
+## PART 1 
 ** What is ur overall cnversion rate?
 
 ````sql
@@ -98,6 +101,38 @@ from {{ ref('stg_greenery_events') }}
 group by 1
 
 ````
+# WEEK 4
+
+##PART1
+````sql
+{% snapshot orders_snapshot%}
+{{
+    config(
+        target_schema='snapshots'
+        , strategy= 'check'
+        ,unique_key= 'order_id'
+        , check_cols=['status']
+    )
+}}
+
+select * from {{ source ('src_greenery','orders')}}
+
+{% endsnapshot %}
+````
+##PART 2
+Usng greeneery/models/mart/product/intermidiate/init_funnel.sql
+and greeneery/models/mart/product/intermidiate/fct_funnel.sql
+
+How are our users moving through the product funnel?
+
+<img width="787" alt="image" src="https://user-images.githubusercontent.com/106842349/176567182-231af317-e7cc-44b3-a288-b216e57ab895.png">
+
+Which steps in the funnel have largest drop off points?
+
+- from first to second
+## Part3 
+
+- My company is already implementing dbt , but is not ready yet. I think the combination of jinja and macros can automate a lot of things and give us a lot of independance.
 
 ### Resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
