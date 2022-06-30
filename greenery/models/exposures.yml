@@ -1,0 +1,13 @@
+version: 2
+
+exposures:  
+  - name: Product_Funnel_Dashboard
+    description: >
+      Models that are critical to our product funnel dashboard
+    type: dashboard
+    maturity: high
+    owner:
+      name: Heidi Schmidt
+      email: bb00p04@gmail.com
+    depends_on:
+      - ref('product_funnel')

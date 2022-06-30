@@ -28,3 +28,6 @@ models:
         description: "Calculated as the number of unique sessions, with a purchase event of that product divided by the total number of unique sessions that viewed that product"
         tests: 
           - positive_values
+      
+      - name: product_funnel
+        description: "Product funnel based on fact_page_views"

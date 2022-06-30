@@ -29,6 +29,13 @@ models:
         description: "UUID of the user" 
         tests:
           - not_null 
+    
+  - name: dim_calendar_dates
+    columns:
+      - name: date_dim_id
+        description: "The concatentation of the YYYYMMDD " 
+        tests:
+          - not_null
 
   - name: fact_orders
   - name: int_order_facts_aggregate
