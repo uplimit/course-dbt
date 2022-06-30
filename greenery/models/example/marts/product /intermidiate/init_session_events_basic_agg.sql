@@ -14,3 +14,5 @@ session_id
 ,sum(case when event_type='add_to_cart' then 1 else 0 end) as add_to_cart
 from {{ref('stg_greenery_events')}}
 group by 1,2,3
+
+

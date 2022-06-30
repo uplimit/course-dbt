@@ -6,9 +6,10 @@
 
 select
  session_id,
+ created_at,
 {%- for event_type in event_types %}
 sum(case when event_type = '{{event_type}}' then 1 end) as {{event_type}}_count
 {%- if not loop.last %},{% endif -%}
 {% endfor %}
 from {{ ref('stg_greenery_events') }}
-group by 1
+group by 1,2
