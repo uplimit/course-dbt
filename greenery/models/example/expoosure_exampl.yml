@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+
+  - name: tableu_dash
+    type: dashboard
+    maturity: medium
+    url: https://tableau.io
+    description: >
+      all of the data
+    depends_on:
+      - ref('fct_funnel')
+
+    owner:
+      name: sofi
+      email: sofi.svs.96@gmail.com
