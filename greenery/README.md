@@ -130,6 +130,28 @@ How are our users moving through the product funnel?
 Which steps in the funnel have largest drop off points?
 
 - from first to second
+
+### exposures:
+````sql
+version: 2
+
+exposures:
+
+  - name: tableu_dash
+    type: dashboard
+    maturity: medium
+    url: https://tableau.io
+    description: >
+      all of the data
+    depends_on:
+      - ref('fct_funnel')
+
+    owner:
+      name: sofi
+      email: sofi.svs.96@gmail.com
+      
+````
+
 ## Part3 
 
 - My company is already implementing dbt , but is not ready yet. I think the combination of jinja and macros can automate a lot of things and give us a lot of independance.
