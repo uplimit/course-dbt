@@ -15,4 +15,4 @@ final as (
     from events
 )
 
-select * from events
+select * from final

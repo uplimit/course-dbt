@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: int_order_shipping
+    description: shipping info related to order 
+    columns:
+      - name: address_id
+        description: UUID for each unique address on platform
+        tests:
+          - not_null
+      - name: zipcode
+      - name: is_usa
+
+  - name: int_users
+    description: User information
+    columns:
+      - name: user_id
+
+  - name: int_orders
+    description: promo code with order info 
