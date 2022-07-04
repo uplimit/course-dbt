@@ -1,0 +1,11 @@
+version: 2
+
+exposures:  
+- name: Product Funnel Dashboard
+  type: dashboard
+  maturity: high
+  owner:
+    name: Javier G
+    email: gismerojavi@gmail.com
+  depends_on:
+    - ref('fact_orders')
