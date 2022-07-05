@@ -5,3 +5,5 @@ models:
     description: events for related session and User information
   - name: fct_page_views
     description: Page view events
+  - name: fct_events
+    description: events
