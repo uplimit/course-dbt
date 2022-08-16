@@ -13,5 +13,4 @@ ports:
     onOpen: ignore
 vscode:
   extensions:
-    - github.vscode-pull-request-github
     - cweijan.vscode-database-client2
