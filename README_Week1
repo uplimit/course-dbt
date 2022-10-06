@@ -1,0 +1,78 @@
+#Week 1 Project - Part 4
+
+#including SQL b/c I'm not sure the answers are correct 😅 I'm still learning advanced SQL so please send me all the pro tips! 
+
+4.1 How many users do we have?
+  A: 130
+  
+  SQL:
+    SELECT COUNT(DISTINCT user_id)
+    FROM dev_db.dbt_laurahufnagle.stg_users
+
+4.2 On average, how many orders do we receive per hour?
+  A: 7.52
+  
+  SQL:
+    SELECT SUM(total_orders_per_hour)/COUNT(hour) AS avg_order_per_hour #avg = total orders divided by count of hours
+    FROM (
+    SELECT 
+        date_part(day,created_at) AS day, #need to differentiate the hours by day
+        date_part(hour,created_at) AS hour,
+        Count(*) AS total_orders_per_hour
+    FROM dev_db.dbt_laurahufnagle.stg_orders
+    GROUP BY 1,2
+    )
+  
+4.3 On average, how long does an order take from being placed to being delivered?
+  A: about 4 days, avg=3.89 days
+  
+  SQL:
+    SELECT
+      SUM(time_to_delivered)/count(order_id)AS avg_delivery_time_in_days
+    FROM(
+      SELECT 
+        order_id, created_at AS order_placed, 
+        delivered_at AS order_delivered, 
+        timestampdiff(day, order_placed, order_delivered) AS time_to_delivered
+      FROM dev_db.dbt_laurahufnagle.stg_orders
+      WHERE order_delivered IS NOT NULL
+)
+    
+
+4.4 How many users have only made one purchase? Two purchases? Three+ purchases?
+  A: 1 purchase = 25
+     2 purchases = 28
+     3+ purchases = 71
+     
+     screenshot of results: https://share.getcloudapp.com/wbuQQ1lm
+  
+  SQL:
+    SELECT
+        SUM(iff(orders_purchased = 1, 1, 0)) AS total_single_purchases,
+        SUM(iff(orders_purchased = 2, 1, 0)) AS total_two_purchases,
+        SUM(iff(orders_purchased > 2, 1, 0)) AS total_3plus_purchases
+    FROM (
+        SELECT 
+            user_id,
+            COUNT(DISTINCT order_id) AS orders_purchased
+        FROM dev_db.dbt_laurahufnagle.stg_orders
+        GROUP BY 1
+    )
+    
+
+4.5 On average, how many unique sessions do we have per hour?
+  A: AVG of 16.33 sessions per hour
+  
+  SQL: 
+    SELECT
+      SUM(total_unique_session_ids_per_hour)/COUNT(hour) AS avg_unique_sessions_per_hour
+    FROM(
+        SELECT 
+            date_part(day, created_at) AS day,
+            date_part(hour,created_at) AS hour,
+            COUNT(DISTINCT session_id) AS total_unique_session_ids_per_hour
+        FROM dev_db.dbt_laurahufnagle.stg_events
+        GROUP BY 1,2
+        ORDER BY 1,2
+        )
+
