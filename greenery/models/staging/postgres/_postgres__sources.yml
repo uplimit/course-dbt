@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-    - name: 'src_postgres' # where the data is coming from
+    - name: 'postgres' # where the data is coming from
       schema: public
       database: raw
       description: "All of the data in this dbt project taken from Postgres"
@@ -162,16 +162,15 @@ sources:
               tests:
                 - not_null
                 - relationships:
-                    to: source('src_postgres', 'orders')
+                    to: source('postgres', 'orders')
                     field: order_id
-                # TODO: unique with product ID
 
             - name: product_id
               description: "Foreign key to the products table.  Part of this table's primary key"
               tests:
                 - not_null
                 - relationships:
-                    to: source('src_postgres', 'products')
+                    to: source('postgres', 'products')
                     field: product_id
 
             - name: quantity
