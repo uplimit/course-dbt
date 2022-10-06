@@ -9,7 +9,7 @@ SELECT
     , order_total AS total_order_cost
     , tracking_id
     , shipping_service
-    , estimated_delivery_at
+    , estimated_delivery_at AS estimated_delivered_at
     , delivered_at AS actual_delivered_at
     , status AS order_status
 FROM {{ source('postgres', 'orders') }} 

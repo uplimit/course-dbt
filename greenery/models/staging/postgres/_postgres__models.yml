@@ -147,7 +147,7 @@ models:
       description: "A descriptive string related to an order and also NULL when tracking_id is"
       # TODO: multi-column test to ensure continuation of co-NULL
     
-    - name: estimated_delivery_at
+    - name: estimated_delivered_at
       description: "A timestamp related to an order, always NULL when tracking_id is, and sometimes when it isn't"
 
     - name: actual_delivered_at
