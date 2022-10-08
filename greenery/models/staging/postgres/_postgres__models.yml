@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_postgres_users 
+    description: >
+          Contains information about users who place orders
+  - name: stg_postgres_events 
+    description: >
+          Contains information about event type and when it took place
+  - name: stg_postgres_addresses 
+    description: >
+          Contains information about where the order palced will be delivered to 
+  - name: stg_postgres_orders
+    description: >
+          Contains information about the orders placed 
+  - name: stg_postgres_products
+    description: >
+          Contains information about the products been ordered 
+  - name: stg_postgres_order_items
+    description: > 
+            Contains information about the items ordered 
+  - name: stg_postgres_promos
+    description: >
+          Contains information about promotional offers in greenery 
