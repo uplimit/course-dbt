@@ -1,0 +1,118 @@
+version: 2
+
+models:
+  - name: stg_addresses
+    description: Contains the address of any particular order
+    columns:
+      - name: address_id
+        description: Unique identifier for each address
+      - name: address
+        description: Street address portion of the address
+      - name: zipcode
+        description: Address zipcode
+      - name: state
+        description: Address state
+      - name: country
+        description: Address country
+
+  - name: stg_events
+    description: Website user event data
+    columns:
+      - name: event_id
+        description: Unique identifier for each event on the website
+      - name: session_id
+        description: identifier for a complete session by a website user
+      - name: user_id
+        description: ID of a user
+      - name: page_url
+        description: Page the user was on when the event fired
+      - name: created_at
+        description: Time of the event firing
+      - name: event_type
+        description: Type of event that fired
+      - name: order_id
+        description: Order that the user was placing
+      - name: product_id
+        description: Product that the user was viewing when the event fired
+
+  - name: stg_orders
+    description: Greenery order information
+    columns:
+      - name: order_id
+        description: Unique identifier of the order
+      - name: user_id
+        description: ID of a user
+      - name: promo_id
+        description: ID of the promo applied to an order
+      - name: address_id
+        description: ID of the address that the order is being shipped to
+      - name: created_at
+        description: When the order was placed
+      - name: order_cost
+        description: The amount the customer will pay for the products they ordered
+      - name: shipping_cost
+        description: The amount that will be paid to ship the order to the customer
+      - name: order_total
+        description: The total cost of the order (order_cost + shipping_cost)
+      - name: tracking_id
+        description: The tracking ID of the order placed by the customer
+      - name: shipping_service
+        description: The service being used to ship the order
+      - name: estimated_delivery_at
+        description: The estimated time the order will arrive 
+      - name: delivered_at
+        description: The time the order actually arrived
+      - name: status
+        description: The current status of the order
+
+  - name: stg_order_items
+    description: Items and quantities for each order placed
+    columns:
+      - name: order_id
+        description: Unique identifier of the order
+      - name: product_id
+        description: ID of the product that was ordered
+      - name: quantity
+        description: The number of that particular product ordered
+
+  - name: stg_products
+    description: List of products sold by Greenery and the amount of inventory that is avaiable
+    columns:
+      - name: product_id
+        description: Unique identifier of a particular product that is available to be sold 
+      - name: name
+        description: The name of the product
+      - name: price
+        description: The price of the product
+      - name: inventory
+        description: The amount of a particular product that can be sold
+
+  - name: stg_promos
+    description: List of all promos that Greenery has offered
+    columns:
+      - name: promo_id
+        description: Unique identifier of a particular promo that is being offered or was offered in the past
+      - name: discount
+        description: The discount amount of the promo
+      - name: status
+        description: Whether the promo is active or inactive
+
+  - name: stg_users
+    description: Contains information about Greenery users
+    columns:
+      - name: user_id
+        description: Unique identifier of a particular user 
+      - name: first_name
+        description: The first name of a user
+      - name: last_name
+        description: The last name of a user
+      - name: email
+        description: The email address of a user
+      - name: phone_number
+        description: The phone number of a user
+      - name: created_at
+        description: When the user account was created
+      - name: updated_at
+        description: The last time the user account was updated
+      - name: address_id
+        description: The address ID of a user
