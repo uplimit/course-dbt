@@ -1,0 +1,40 @@
+version: 2
+
+sources:
+
+  - name: postgres_models 
+    schema: DEV_DB 
+    database: DBT_BAVERY 
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    tables:
+      - name: src_addresses
+        description: >
+          Addresses of our users     
+      - name: src_events
+        loaded_at_field: created_at_tstamp_est
+        description: >
+          Website event data         
+      - name: src_orders
+        loaded_at_field: created_at_tstamp_est
+        description: >
+          Orders Placed
+      - name: src_order_items
+        description: >
+          Product ids for the products of each order that was made
+      - name: src_products
+        description: >
+          Products sold 
+      - name: src_promos
+        description: >
+          Promos run
+      - name: src_users
+        loaded_at_field: created_at_tstamp_est
+        description: >
+          Users at Greenery
+        
+

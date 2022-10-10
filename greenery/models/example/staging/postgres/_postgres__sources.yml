@@ -1,0 +1,40 @@
+version: 2
+
+sources:
+
+  - name: postgres 
+    schema: public 
+    database: raw 
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    tables:
+      - name: addresses
+        description: >
+          Addresses of our users     
+      - name: events
+        loaded_at_field: created_at
+        description: >
+          Website event data         
+      - name: orders
+        loaded_at_field: created_at
+        description: >
+          Orders Placed
+      - name: order_items
+        description: >
+          Product ids for the products of each order that was made
+      - name: products
+        description: >
+          Products sold 
+      - name: promos
+        description: >
+          Promos run
+      - name: users
+        loaded_at_field: created_at
+        description: >
+          Users at Greenery
+        
+
