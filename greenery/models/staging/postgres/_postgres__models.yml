@@ -199,7 +199,9 @@ models:
 
       - name: discount_percentage
         description: "Percentage discount associated with the promo, ranging from zero to one"
-        # TODO: test to ensure no greater than 1
+        tests:
+          - no_greater_than_one
+          - positive_values
 
       - name: promo_status
         description: "A string related to a promo"

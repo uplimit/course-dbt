@@ -1,0 +1,27 @@
+version: 2
+
+# models: # EXAMPLE
+#   - name: int_order_discount
+#     description: >
+#       "Summed total discount percentage for an order"
+#       "Using this allows one order to be related to many promos"
+#       "Note that this cannot happen with current database set up where postgres.promos doesn't have order ID"
+#       "All order_id values in stg_order have exactly one row"
+#       "Assumes the promo was active at the time of the order"
+
+#     meta:
+#       owner: "Jansen Manahan"
+
+#     columns:
+#       - name: order_id
+#         description: "Primary key of stg_order"
+#         tests: # Used as primary key
+#           - relationships:
+#             to: ref('stg_order')
+#             field: order_id
+
+#       - name: total_promo_discount_percentage
+#         description: "Sum of all promo discounts related to an order"
+#         tests:
+#           - no_greater_than_one
+#           - positive_values

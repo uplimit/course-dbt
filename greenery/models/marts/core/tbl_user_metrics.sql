@@ -1,0 +1,6 @@
+-- Sales per user
+-- Revenue per user
+-- Profit per user
+-- Views per user
+-- First order
+-- Most recent order

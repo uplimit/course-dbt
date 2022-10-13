@@ -1,0 +1,121 @@
+version: 2
+
+models:
+  - name: int_order_discount
+    description: >
+      "Summed total discount percentage for an order"
+      "Using this allows one order to be related to many promos"
+      "Note that this cannot happen with current database set up where postgres.promos doesn't have order ID"
+      "All order_id values in stg_order have exactly one row"
+      "Assumes the promo was active at the time of the order"
+
+    meta:
+      owner: "Jansen Manahan"
+
+    columns:
+      - name: order_id
+        description: "Primary key of stg_order"
+        tests: # Used as primary key
+          - relationships:
+              to: ref('stg_order')
+              field: order_id
+
+      - name: total_promo_discount_percentage
+        description: "Sum of all promo discounts related to an order"
+        tests:
+          - no_greater_than_one
+          - positive_values
+
+        
+  - name: tbl_order_ledger
+    description: "Order-granular profitability information"
+    meta:
+      owner: Jansen Manahan
+    
+    columns:
+      - name: order_id
+        description: The table's primary key, inherited from stg_order
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_order')
+              field: order_id
+
+      - name: order_created_at
+        description: Inherited from stg_order
+
+      - name: order_status
+        description: Inherited from stg_order
+
+      - name: total_promo_discount_percentage
+        description: Inherited from int_order_discount
+
+      - name: order_cost
+        description: Inherited from stg_order
+
+      - name: shipping_cost
+        description: Inherited from stg_order
+
+      - name: total_order_cost
+        description: Inherited from stg_order
+
+      - name: total_order_revenue
+        description: >
+          Current product price * quantity * (1 - total promo discount)
+          For every order ever
+          Allowed to be negative
+        # TODO: change to product price at time of order with a snapshot of stg_product
+
+      - name: total_order_profit
+        description: total_order_revenue minus total_order_cost
+
+      - name: order_margin_pct
+        description: total order profit / total order revenue.  Often negative.
+        tests:
+          - no_greater_than_one
+
+
+  - name: tbl_session_metrics
+    description: >
+      Information about a session, a transformation of stg_event
+      Requires postgres.events.event_type accepted_values test to pass
+    meta:
+      owner: Jansen Manahan
+
+    columns:
+      - name: session_id
+        description: Primary key, inherited from stg_event
+        tests:
+          - unique
+          - not_null
+
+      - name: user_id
+        description: Inherited from stg_event
+
+      - name: session_start_tstamp
+        description: The first event_created_at in a session
+
+      - name: session_end_tstamp
+        description: The most recent event_created_at in a session.  Changes over time, but only gets later
+
+      - name: session_length_minutes
+        description: The difference in minutes between session_end_tstamp and session_start_tstamp.  Can go up over time
+
+      - name: session_url_count
+        description: The number of unique URLs visited in the session.  Can go up over time
+
+      - name: page_view_count
+        descritpion: The number of events with event_type = 'page_view' in the session.  Number can go up over time
+
+      - name: checkout_count
+        description: The number of events with event_type = 'checkout' in the session.  Number can go up over time
+
+      - name: add_to_cart_count
+        description: The number of events with event_type = 'add_to_cart' in the session.  Number can go up over time
+
+      - name: package_shipped_event_count
+        description: >
+          The number of events with event_type = 'package_shipped' in the session
+          Number can go up over time
+          A package shipped event is not guaranteed to be one shipping package

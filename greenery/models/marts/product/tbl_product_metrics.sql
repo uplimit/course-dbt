@@ -1,0 +1,5 @@
+-- Views
+-- Orders
+-- Revenue
+-- Profit
+-- Days with inventory
