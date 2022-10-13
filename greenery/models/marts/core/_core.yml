@@ -108,14 +108,87 @@ models:
       - name: page_view_count
         descritpion: The number of events with event_type = 'page_view' in the session.  Number can go up over time
 
-      - name: checkout_count
-        description: The number of events with event_type = 'checkout' in the session.  Number can go up over time
-
       - name: add_to_cart_count
         description: The number of events with event_type = 'add_to_cart' in the session.  Number can go up over time
+
+      - name: checkout_count
+        description: The number of events with event_type = 'checkout' in the session.  Number can go up over time
 
       - name: package_shipped_event_count
         description: >
           The number of events with event_type = 'package_shipped' in the session
           Number can go up over time
           A package shipped event is not guaranteed to be one shipping package
+
+
+  - name: tbl_shipping_metrics
+    description: Information about order shipping
+    meta:
+      owner: Jansen Manahan
+
+    columns:
+      - name: order_id
+        description: Primary key inherited from stg_order
+        tests:
+          - unique
+          - not_null
+
+      - name: order_checkout_at
+        description: >
+          Event with type 'checkout' from stg_event
+          Will only show up here if stg_event.order_id is not null, so this table may miss checkout events
+
+      - name: order_created_at
+        description: Inherited from stg_order.  Normally 1 to 10 seconds after order_checkout_at
+
+      - name: package_shipped_at
+        description: >
+          Event with type 'package_shipped' from stg_event
+          If there are package_shipped events without an order_id in stg_event, they will not show up here
+          NULLs are expected
+
+      - name: estimated_delivered_at
+        description: Inherited from stg_order
+
+      - name: actual_delivered_at
+        description: >
+          Inherited from stg_order
+          Compared to estimated_delivered_at, can be NULL, at, before, or after
+
+      - name: hours_to_arrive
+        description: >
+          The difference in full hours between delivered_at and package_shipped_at
+          Uses actual_delivered_at when available, otherwise estimated_delivered_at
+          NULL if package_shipped_at or both [actual_|estimated_]delivered_at are NULL
+        tests:
+          - positive_values
+
+      - name: tracking_id
+        description: Inherited from stg_order
+
+      - name: shipping_service
+        description: Inherited from stg_order
+
+      - name: order_status
+        description: Inherited from stg_order
+
+      - name: shipping_cost
+        description: Inherited from stg_order
+
+      - name: street_address
+        description: Inherited from stg_address
+
+      - name: zip_code
+        description: Inherited from stg_address
+
+      - name: state_name
+        description: Inherited from stg_address
+
+      - name: country_name
+        description: Inherited from stg_address
+
+      - name: first_name
+        description: Inherited from stg_user
+
+      - name: last_name
+        description: Inherited from stg_user
