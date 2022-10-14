@@ -77,7 +77,7 @@ SELECT
     , uol.user_delivered_order_count
     
     -- Finanancial metrics
-    , uof.user_order_count
+    , NVL(uof.user_order_count, 0) user_order_count
     , uof.user_order_with_promo_count
     , uof.user_average_order_promo_discount_percentage
     , uof.user_order_cost

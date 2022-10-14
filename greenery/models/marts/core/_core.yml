@@ -290,7 +290,9 @@ models:
         # TODO: test that this is no greater than user_shipped_order_count
 
       - name: user_order_count
-        description: Count of orders related to the user
+        description: Count of orders related to the user.  Zero if none exist
+        tests:
+          - positive_values
 
       - name: user_order_with_promo_count
         description: Count of orders in tbl_order_ledger related to the user with total_promo_discount_percentage > 0

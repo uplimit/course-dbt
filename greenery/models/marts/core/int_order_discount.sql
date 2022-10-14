@@ -1,6 +1,6 @@
 {{ config(
-    materialized = "ephemeral"
-) }}
+    materialized = "view"
+) }} -- Fails tests if materialized as ephemeral
 
 SELECT
     o.order_id
