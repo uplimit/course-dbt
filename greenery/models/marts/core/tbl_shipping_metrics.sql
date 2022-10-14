@@ -11,7 +11,12 @@ SELECT
     , o.actual_delivered_at
     , DATEDIFF(
         HOUR
+        , order_checkout_at
         , package_shipped_at
+      ) AS hours_to_ship
+    , DATEDIFF(
+        HOUR
+        , order_checkout_at
         , NVL(o.actual_delivered_at, o.estimated_delivered_at)
       ) AS hours_to_arrive
     , o.tracking_id

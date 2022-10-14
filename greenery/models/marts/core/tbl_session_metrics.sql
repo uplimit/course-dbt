@@ -25,7 +25,7 @@ WITH cte_event_type_count AS (
         , user_id
         , MIN(event_created_at) session_start_tstamp
         , MAX(event_created_at) session_end_tstamp
-        , TIMEDIFF(MINUTE, session_end_tstamp, session_start_tstamp)
+        , TIMEDIFF(MINUTE, session_start_tstamp, session_end_tstamp)
             AS session_length_minutes
         , COUNT(DISTINCT page_url) session_url_count
     FROM {{ ref ('stg_event') }}

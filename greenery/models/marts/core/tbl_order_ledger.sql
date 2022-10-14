@@ -11,7 +11,7 @@ SELECT
     , o.shipping_cost
     , o.total_order_cost
     , SUM(
-        pr.price
+        pr.price -- TODO: Price at time of order
         * oi.quantity
         * (1 - od.total_promo_discount_percentage)
       ) total_order_revenue

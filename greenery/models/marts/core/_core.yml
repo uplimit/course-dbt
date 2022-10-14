@@ -101,6 +101,8 @@ models:
 
       - name: session_length_minutes
         description: The difference in minutes between session_end_tstamp and session_start_tstamp.  Can go up over time
+        tests:
+          - positive_values
 
       - name: session_url_count
         description: The number of unique URLs visited in the session.  Can go up over time
@@ -155,11 +157,19 @@ models:
           Inherited from stg_order
           Compared to estimated_delivered_at, can be NULL, at, before, or after
 
+      - name: hours_to_ship
+        description: >
+          The difference in full hours between package_shipped_at and order_placed_at
+          Uses actual_delivered_at when available, otherwise estimated_delivered_at
+          NULL if package_shipped_at is NULL
+        tests:
+          - positive_values
+
       - name: hours_to_arrive
         description: >
-          The difference in full hours between delivered_at and package_shipped_at
+          The difference in full hours between delivered_at and order_placed_at
           Uses actual_delivered_at when available, otherwise estimated_delivered_at
-          NULL if package_shipped_at or both [actual_|estimated_]delivered_at are NULL
+          NULL if both [actual_|estimated_]delivered_at are NULL
         tests:
           - positive_values
 
@@ -192,3 +202,135 @@ models:
 
       - name: last_name
         description: Inherited from stg_user
+
+    
+  # TODO: tbl_shipping_service_metrics
+
+
+  - name: tbl_user_metrics
+    description: All user-granular aggregations
+    meta:
+      owner: Jansen Manahan
+    
+    columns:
+      # TODO: NVL many metrics to zero
+      - name: user_id
+        description: Primary key inherited from stg_user
+        tests:
+          - not_null
+          - unique
+
+      - name: first_name
+        description: Inherited from stg_user
+
+      - name: last_name
+        description: Inherited from stg_user
+        
+      - name: email
+        description: Inherited from stg_user
+        
+      - name: phone_number
+        description: Inherited from stg_user
+
+      - name: street_address
+        description: Inherited from stg_address
+
+      - name: zip_code
+        description: Inherited from stg_address
+
+      - name: state_name
+        description: Inherited from stg_address
+
+      - name: country_name
+        description: Inherited from stg_address
+
+      - name: user_session_count
+        description: Number of session_ids related to the user, from tbl_session_metrics
+
+      - name: first_user_order_at
+        description: Earliest order_created_at tstamp from stg_order related to the user
+
+      - name: last_user_order_at
+        description: Most recent order_created_at tstamp from stg_order related to the user
+
+      - name: user_first_activity
+        description: Earlist event_created_at tstamp from tbl_session_metrics related to the user
+
+      - name: user_last_activity
+        description: Most recent event_created_at tstamp from tbl_session_metrics related to the user
+
+      - name: user_minutes_active
+        description: Sum of tbl_session_metrics.session_length_minutes for the user.  May be NULL or 0
+
+      - name: user_page_view_count
+        description: Sum of tbl_session_metrics.page_view_count for the user.  May be NULL or 0
+
+      - name: user_add_to_cart_count
+        description: Sum of tbl_session_metrics.add_to_cart_count for the user.  May be NULL or 0
+
+      - name: user_checkout_count
+        description: Sum of tbl_session_metrics.checkout_count for the user.  May be NULL or 0
+
+      - name: user_package_shipped_event_count
+        description: >
+          Sum of tbl_session_metrics.package_shipped_event_count for the user
+          May be NULL or 0
+          Occasionally lower than user_shipped_order_count
+
+      - name: user_shipped_order_count
+        description: >
+          Count of rows in tbl_shipping_metrics related to the user
+          With order status of either 'delivered' or 'shipped'
+          Occasionally higher than user_package_shipped_event_count
+
+      - name: user_delivered_order_count
+        description: >
+          Count of rows in tbl_shipping_metrics related to the user
+          With order status of 'delivered'
+        # TODO: test that this is no greater than user_shipped_order_count
+
+      - name: user_order_count
+        description: Count of orders related to the user
+
+      - name: user_order_with_promo_count
+        description: Count of orders in tbl_order_ledger related to the user with total_promo_discount_percentage > 0
+
+      - name: user_average_order_promo_discount_percentage
+        description: >
+          Average of tbl_order_ledger.total_promo_discount_percentage for orders by the user
+          Orders that don't have related promos count as zero
+          Average is straight-weighted across orders
+
+      - name: user_order_cost
+        description: sum of tbl_oder_ledger.order_cost for orders by the user
+
+      - name: user_shipping_cost
+        description: sum of tbl_oder_ledger.shipping_cost for orders by the user
+
+      - name: user_total_order_cost
+        description: sum of tbl_oder_ledger.total_order_cost for orders by the user
+
+      - name: user_total_order_revenue
+        description: sum of tbl_oder_ledger.total_order_revenue for orders by the user
+
+      - name: user_total_order_profit
+        description: sum of tbl_oder_ledger.total_order_profit for orders by the user
+
+      - name: user_order_margin_pct
+        description: user_total_order_profit divided by user_total_order_revenue, rounded to 4 places
+
+      - name: user_avg_hours_to_ship
+        description: Average of tbl_shipping_metrics.hours_to_ship.  Unshipped orders are excluded
+
+      - name: user_avg_hours_to_arrive
+        description: Average of tbl_shipping_metrics.hours_to_arrive.  Unarrived orders are excluded
+
+      - name: user_created_at
+        description: Inherited from stg_user
+
+      - name: user_updated_at
+        description: Inherited from stg_user
+
+
+
+        
