@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: fact_user_sessions
+    description: "fact table that contains user session informaion"
+    columns:
+      - name: session_id
+        description: "id of the session"
+        tests:
+          - unique
+          - not_null
+
+      - name: user_id
+        description: "id of the user"
+        tests:
+          - unique
+          - not_null
+
+      - name: first_name
+        description: "user first name"
+
+      - name: last_name
+        description: "user last name"
+
+      - name: email
+        description: "user email"
+
+      - name: phone_number
+        description: "user phone number"
+
+      - name: first_session_event
+        description: "user's first session timestamp"
+
+      - name: last_session_event
+        description: "user's last session timestamp"
+
+      - name: page_views
+        description: "user's number of page views"
+
+      - name: add_to_carts
+        description: "user's number of add to carts"
+
+      - name: checkouts
+        description: "user's checkouts"
+
+      - name: packages_shipped
+        description: "user's packages shipped"

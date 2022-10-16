@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: int_session_events
+    description: "intermediate table that contains the mapping of user sessions"
+    columns:
+      - name: user_id
+        description: "id of the user"
+        tests:
+          - unique
+          - not_null
+
+      - name: session_id
+        description: "id of the session"
+        tests:
+          - unique
+          - not_null
+
+      - name: checkouts
+        description: "number of checkouts"
+
+      - name: packages_shipped
+        description: "number of packages shipped"
+
+      - name: add_to_carts
+        description: "number of add to carts"
+
+      - name: page_views
+        description: "number of page views"

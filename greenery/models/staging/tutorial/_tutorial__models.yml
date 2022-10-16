@@ -1,17 +1,17 @@
 version: 2
 
 models:
-  - name: stg_addresses
+  - name: stg_addresses_tut
     description: Contains address information of the users.
-  - name: stg_events
+  - name: stg_events_tut
     description: Contains event information, such as the type of the event, the page url and the product.
-  - name: stg_order_items
+  - name: stg_order_items_tut
     description: Contains order information made on the platform.
-  - name: stg_orders
+  - name: stg_orders_tut
     description: Contains information about the items ordered.
-  - name: stg_products
+  - name: stg_products_tut
     description: Contains information about the platform's products.
-  - name: stg_promos
+  - name: stg_promos_tut
     description: Contains infortmation about the platform's promotions.
-  - name: stg_users
+  - name: stg_users_tut
     description: Contains information about the users on the platform. 
