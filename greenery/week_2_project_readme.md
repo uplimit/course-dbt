@@ -25,7 +25,6 @@ select
 from user_bucket
 ```
 
-
 ### 2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
 
 Some good indicators of a user who will likely purchase again would be the number of purchase they have historically (2+ purchases), how fast the orders get delivered (difference of created at time and delivered at time), user who often checks the website, high order value/quantity 
@@ -48,9 +47,9 @@ Not really. I did add the unique test to the address id but it failed. I realize
 
 ### 5. Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
 
-I plan to run these tests whenever we add new data to the model or do a weekly test 
+I plan to run these tests every week to ensure we are not getting bad data.
 
 ### 6. dbt snapshots - which orders changed from week 1 to week 2
 
-There are 3 orders that changed from week 1 to week 2 and those orders are now shipped with the estimated delivery on 2/19/2021
+There are 3 orders that changed from week 1 to week 2 and those orders are now shipped with the estimated delivery on 2/19/2021.
 
