@@ -1,0 +1,115 @@
+version: 2
+
+models:
+  - name: int_user_address
+    description: "All user information"
+    columns:
+      - name: user_id
+        description: "unqiue user id"
+        tests: 
+          - unique
+          - not_null
+
+      - name: first_name
+        description: "user first name"
+
+      - name: last_name
+        description: "user last name"
+
+      - name: email
+        description: "user email"
+
+      - name: phone_number
+        description: "user phone number"
+
+      - name: created_at
+        description: "user created at date and time"
+        tests: 
+         - not_null
+
+      - name: updated_at
+        description: "user information update date and time"
+        tests: 
+         - not_null
+
+      - name: address_id
+        description: "user address id"
+        tests: 
+         - not_null
+
+      - name: address
+        description: "user address"
+
+      - name: zipcode
+        description: "user zipcode"
+
+      - name: state
+        description: "user state"
+
+      - name: country
+        description: "user country"
+    
+  - name: int_user_events
+    description: "user events data"
+    columns:
+      - name: user_id
+        description: "unique user id per event session on the site"
+        tests: 
+         - unique
+         - not_null
+
+      - name: num_sessions
+        description: "total number of sessions per user id"
+
+      - name: first_session_date
+        description: "user first session"
+        tests: 
+          - not_null
+
+      - name: last_session_date
+        description: "user last session"
+        tests: 
+          - not_null
+
+      - name: total_session_duration
+        description: "total hours user spent on the site"
+
+      - name: checkout
+        description: "user checked out during session"
+
+      - name: package_shipped
+        description: "user's package was shipped during session"
+
+      - name: page_view
+        description: "user viewed a page during session"
+
+      - name: add_to_cart
+        description: "user added to cart during session"
+
+      - name: total_orders
+        description: "total orders related to the session"
+
+      - name: total_products
+        description: "total products related to the session"
+
+  - name: int_user_orders
+    description: "total order information by user"
+    columns:
+      - name: user_id
+        description: "unique user_id"
+
+      - name: total_orders
+        description: "total orders each user purchased"
+        tests: 
+         - positive_values
+
+      - name: total_promos_used
+        description: "total promo code used for all orders"
+
+      - name: recent_order_date
+        description: "most recent order date"
+
+      - name: total_spent
+        description: "total spent on all orders by user"
+        test:
+         - positive_values

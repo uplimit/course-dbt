@@ -1,7 +1,7 @@
 {{ config(materialized='table') }}
 
-SELECT
+select
   order_id,
   product_id,
   quantity
-FROM {{ source('_postgres__sources', 'order_items')}} order_items
+from {{ source('_postgres__sources', 'order_items')}} order_items

@@ -1,6 +1,6 @@
 {{ config(materialized='table') }}
 
-SELECT
+select
   event_id,
   session_id,
   user_id,
@@ -9,4 +9,4 @@ SELECT
   event_type,
   order_id,
   product_id
-FROM {{ source('_postgres__sources', 'events')}} events
+from {{ source('_postgres__sources', 'events')}} events

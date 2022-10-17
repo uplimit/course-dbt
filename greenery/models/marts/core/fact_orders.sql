@@ -1,4 +1,9 @@
-{{ config(materialized='table') }}
+
+{{
+  config(
+    materialized='table'
+  )
+}}
 
 select
   order_id,
@@ -14,4 +19,4 @@ select
   estimated_delivery_at,
   delivered_at,
   status
-from {{ source('_postgres__sources', 'orders')}} orders
+from {{ ref('stg_orders')}} orders

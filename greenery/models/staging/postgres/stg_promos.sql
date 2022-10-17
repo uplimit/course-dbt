@@ -1,7 +1,7 @@
 {{ config(materialized='table') }}
 
-SELECT
+select
  promo_id,
-discount,
-status
-FROM {{ source('_postgres__sources', 'promos')}} promos
+ discount,
+ status
+from {{ source('_postgres__sources', 'promos')}} promos

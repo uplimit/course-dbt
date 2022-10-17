@@ -1,6 +1,6 @@
 {{ config(materialized='table') }}
 
-SELECT
+select
   user_id,
   first_name,
   last_name,
@@ -9,4 +9,4 @@ SELECT
   created_at,
   updated_at,
   address_id 
-FROM {{ source('_postgres__sources', 'users')}} users
+from {{ source('_postgres__sources', 'users')}} users
