@@ -1,10 +1,11 @@
 1: What is our user repeat rate?
 Answer: 79.8%
-        select
-            count(distinct case when order_count >= 2 then user_guid end) as two_or_more,
-            count(distinct case when order_count >= 1 then user_guid end) as has_ordered,
-            two_or_more/has_ordered
-        from dev_db.dbt_bavery.user_order_fact
+
+            select
+                count(distinct case when order_count >= 2 then user_guid end) as two_or_more,
+                count(distinct case when order_count >= 1 then user_guid end) as has_ordered,
+                two_or_more/has_ordered
+            from dev_db.dbt_bavery.user_order_fact
 
 2:What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
 
