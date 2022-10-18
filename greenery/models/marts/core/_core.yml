@@ -1,0 +1,338 @@
+version: 2
+
+models:
+  - name: int_order_discount
+    description: >
+      "Summed total discount percentage for an order"
+      "Using this allows one order to be related to many promos"
+      "Note that this cannot happen with current database set up where postgres.promos doesn't have order ID"
+      "All order_id values in stg_order have exactly one row"
+      "Assumes the promo was active at the time of the order"
+
+    meta:
+      owner: "Jansen Manahan"
+
+    columns:
+      - name: order_id
+        description: "Primary key of stg_order"
+        tests: # Used as primary key
+          - relationships:
+              to: ref('stg_order')
+              field: order_id
+
+      - name: total_promo_discount_percentage
+        description: "Sum of all promo discounts related to an order"
+        tests:
+          - no_greater_than_one
+          - positive_values
+
+        
+  - name: tbl_order_ledger
+    description: "Order-granular profitability information"
+    meta:
+      owner: Jansen Manahan
+    
+    columns:
+      - name: order_id
+        description: The table's primary key, inherited from stg_order
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_order')
+              field: order_id
+
+      - name: order_created_at
+        description: Inherited from stg_order
+
+      - name: order_status
+        description: Inherited from stg_order
+
+      - name: total_promo_discount_percentage
+        description: Inherited from int_order_discount
+
+      - name: order_cost
+        description: Inherited from stg_order
+
+      - name: shipping_cost
+        description: Inherited from stg_order
+
+      - name: total_order_cost
+        description: Inherited from stg_order
+
+      - name: total_order_revenue
+        description: >
+          Current product price * quantity * (1 - total promo discount)
+          For every order ever
+          Allowed to be negative
+        # TODO: change to product price at time of order with a snapshot of stg_product
+
+      - name: total_order_profit
+        description: total_order_revenue minus total_order_cost
+
+      - name: order_margin_pct
+        description: total order profit / total order revenue.  Often negative.
+        tests:
+          - no_greater_than_one
+
+
+  - name: tbl_session_metrics
+    description: >
+      Information about a session, a transformation of stg_event
+      Requires postgres.events.event_type accepted_values test to pass
+    meta:
+      owner: Jansen Manahan
+
+    columns:
+      - name: session_id
+        description: Primary key, inherited from stg_event
+        tests:
+          - unique
+          - not_null
+
+      - name: user_id
+        description: Inherited from stg_event
+
+      - name: session_start_tstamp
+        description: The first event_created_at in a session
+
+      - name: session_end_tstamp
+        description: The most recent event_created_at in a session.  Changes over time, but only gets later
+
+      - name: session_length_minutes
+        description: The difference in minutes between session_end_tstamp and session_start_tstamp.  Can go up over time
+        tests:
+          - positive_values
+
+      - name: session_url_count
+        description: The number of unique URLs visited in the session.  Can go up over time
+
+      - name: page_view_count
+        descritpion: The number of events with event_type = 'page_view' in the session.  Number can go up over time
+
+      - name: add_to_cart_count
+        description: The number of events with event_type = 'add_to_cart' in the session.  Number can go up over time
+
+      - name: checkout_count
+        description: The number of events with event_type = 'checkout' in the session.  Number can go up over time
+
+      - name: package_shipped_event_count
+        description: >
+          The number of events with event_type = 'package_shipped' in the session
+          Number can go up over time
+          A package shipped event is not guaranteed to be one shipping package
+
+
+  - name: tbl_shipping_metrics
+    description: Information about order shipping
+    meta:
+      owner: Jansen Manahan
+
+    columns:
+      - name: order_id
+        description: Primary key inherited from stg_order
+        tests:
+          - unique
+          - not_null
+
+      - name: order_checkout_at
+        description: >
+          Event with type 'checkout' from stg_event
+          Will only show up here if stg_event.order_id is not null, so this table may miss checkout events
+
+      - name: order_created_at
+        description: Inherited from stg_order.  Normally 1 to 10 seconds after order_checkout_at
+
+      - name: package_shipped_at
+        description: >
+          Event with type 'package_shipped' from stg_event
+          If there are package_shipped events without an order_id in stg_event, they will not show up here
+          NULLs are expected
+
+      - name: estimated_delivered_at
+        description: Inherited from stg_order
+
+      - name: actual_delivered_at
+        description: >
+          Inherited from stg_order
+          Compared to estimated_delivered_at, can be NULL, at, before, or after
+
+      - name: hours_to_ship
+        description: >
+          The difference in full hours between package_shipped_at and order_placed_at
+          Uses actual_delivered_at when available, otherwise estimated_delivered_at
+          NULL if package_shipped_at is NULL
+        tests:
+          - positive_values
+
+      - name: hours_to_arrive
+        description: >
+          The difference in full hours between delivered_at and order_placed_at
+          Uses actual_delivered_at when available, otherwise estimated_delivered_at
+          NULL if both [actual_|estimated_]delivered_at are NULL
+        tests:
+          - positive_values
+
+      - name: tracking_id
+        description: Inherited from stg_order
+
+      - name: shipping_service
+        description: Inherited from stg_order
+
+      - name: order_status
+        description: Inherited from stg_order
+
+      - name: shipping_cost
+        description: Inherited from stg_order
+
+      - name: street_address
+        description: Inherited from stg_address
+
+      - name: zip_code
+        description: Inherited from stg_address
+
+      - name: state_name
+        description: Inherited from stg_address
+
+      - name: country_name
+        description: Inherited from stg_address
+
+      - name: first_name
+        description: Inherited from stg_user
+
+      - name: last_name
+        description: Inherited from stg_user
+
+    
+  # TODO: tbl_shipping_service_metrics
+
+
+  - name: tbl_user_metrics
+    description: All user-granular aggregations
+    meta:
+      owner: Jansen Manahan
+    
+    columns:
+      # TODO: NVL many metrics to zero
+      - name: user_id
+        description: Primary key inherited from stg_user
+        tests:
+          - not_null
+          - unique
+
+      - name: first_name
+        description: Inherited from stg_user
+
+      - name: last_name
+        description: Inherited from stg_user
+        
+      - name: email
+        description: Inherited from stg_user
+        
+      - name: phone_number
+        description: Inherited from stg_user
+
+      - name: street_address
+        description: Inherited from stg_address
+
+      - name: zip_code
+        description: Inherited from stg_address
+
+      - name: state_name
+        description: Inherited from stg_address
+
+      - name: country_name
+        description: Inherited from stg_address
+
+      - name: user_session_count
+        description: Number of session_ids related to the user, from tbl_session_metrics
+
+      - name: first_user_order_at
+        description: Earliest order_created_at tstamp from stg_order related to the user
+
+      - name: last_user_order_at
+        description: Most recent order_created_at tstamp from stg_order related to the user
+
+      - name: user_first_activity
+        description: Earlist event_created_at tstamp from tbl_session_metrics related to the user
+
+      - name: user_last_activity
+        description: Most recent event_created_at tstamp from tbl_session_metrics related to the user
+
+      - name: user_minutes_active
+        description: Sum of tbl_session_metrics.session_length_minutes for the user.  May be NULL or 0
+
+      - name: user_page_view_count
+        description: Sum of tbl_session_metrics.page_view_count for the user.  May be NULL or 0
+
+      - name: user_add_to_cart_count
+        description: Sum of tbl_session_metrics.add_to_cart_count for the user.  May be NULL or 0
+
+      - name: user_checkout_count
+        description: Sum of tbl_session_metrics.checkout_count for the user.  May be NULL or 0
+
+      - name: user_package_shipped_event_count
+        description: >
+          Sum of tbl_session_metrics.package_shipped_event_count for the user
+          May be NULL or 0
+          Occasionally lower than user_shipped_order_count
+
+      - name: user_shipped_order_count
+        description: >
+          Count of rows in tbl_shipping_metrics related to the user
+          With order status of either 'delivered' or 'shipped'
+          Occasionally higher than user_package_shipped_event_count
+
+      - name: user_delivered_order_count
+        description: >
+          Count of rows in tbl_shipping_metrics related to the user
+          With order status of 'delivered'
+        # TODO: test that this is no greater than user_shipped_order_count
+
+      - name: user_order_count
+        description: Count of orders related to the user.  Zero if none exist
+        tests:
+          - positive_values
+
+      - name: user_order_with_promo_count
+        description: Count of orders in tbl_order_ledger related to the user with total_promo_discount_percentage > 0
+
+      - name: user_average_order_promo_discount_percentage
+        description: >
+          Average of tbl_order_ledger.total_promo_discount_percentage for orders by the user
+          Orders that don't have related promos count as zero
+          Average is straight-weighted across orders
+
+      - name: user_order_cost
+        description: sum of tbl_oder_ledger.order_cost for orders by the user
+
+      - name: user_shipping_cost
+        description: sum of tbl_oder_ledger.shipping_cost for orders by the user
+
+      - name: user_total_order_cost
+        description: sum of tbl_oder_ledger.total_order_cost for orders by the user
+
+      - name: user_total_order_revenue
+        description: sum of tbl_oder_ledger.total_order_revenue for orders by the user
+
+      - name: user_total_order_profit
+        description: sum of tbl_oder_ledger.total_order_profit for orders by the user
+
+      - name: user_order_margin_pct
+        description: user_total_order_profit divided by user_total_order_revenue, rounded to 4 places
+
+      - name: user_avg_hours_to_ship
+        description: Average of tbl_shipping_metrics.hours_to_ship.  Unshipped orders are excluded
+
+      - name: user_avg_hours_to_arrive
+        description: Average of tbl_shipping_metrics.hours_to_arrive.  Unarrived orders are excluded
+
+      - name: user_created_at
+        description: Inherited from stg_user
+
+      - name: user_updated_at
+        description: Inherited from stg_user
+
+
+
+        

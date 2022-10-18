@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: tbl_product_metrics
+    description: Aggregated product-granular information
+    meta:
+      owner: "Jansen Manahan"
+
+    columns:
+      - name: product_id
+        description: Primary key inherited from stg_product
+        tests: # Used as primary key
+          - unique
+          - not_null
+
+      - name: product_name
+        description: Inherited from stg_product
+
+      - name: current_inventory
+        description: Inherited from stg_product.inventory
+
+      - name: current_price
+        description: Inherited from stg_product.price
+
+      - name: quantity_ordered
+        description: Total quantity of this product in any order, no matter the order status
+
+      - name: total_product_revenue
+        description: >
+          Total of this products quantity times price less promo discount to two decimal places
+          Uses current_price, rather than the price at the time of the sale
+          Not fit for financial reporting
+        tests:
+          - positive_values
+
+      - name: product_order_count
+        description: The number of orders that include at least one quantity of this product
+        tests:
+          - positive_values
+
+      - name: product_user_count
+        description: The number of users that have placed at least one order with at least one quantity of this product
+        tests:
+          - positive_values
+
+      - name: product_page_view_count
+        description: The number of times this product has been the subject of a page view event
+        tests:
+          - positive_values
+
+      - name: product_add_to_cart_count
+        description: The number of times this product has been the subject of an add to cart event
+        tests:
+          - positive_values
+
+      - name: product_click_through_rate
+        description: product_add_to_cart_count / product_page_view_count, rounded to 4 places
+        tests:
+          - no_greater_than_one
+          - positive_values
