@@ -43,18 +43,32 @@ models:
         tests:
           - positive_values
 
+      - name: product_session_count
+        description: >
+          The number of sessions that have at least one event related to the product
+          Shows as zero instead of NULL if there are no sessions yet
+        tests:
+          - positive_values
+
       - name: product_page_view_count
-        description: The number of times this product has been the subject of a page view event
+        description: >
+          The number of times this product has been the subject of a page view event
+          Shows as zero instead of NULL if there are no page views yet
         tests:
           - positive_values
 
       - name: product_add_to_cart_count
-        description: The number of times this product has been the subject of an add to cart event
+        description: >
+          The number of times this product has been the subject of an add to cart event
+          Shows as zero instead of NULL if there are no add to cart events yet
         tests:
           - positive_values
 
       - name: product_click_through_rate
-        description: product_add_to_cart_count / product_page_view_count, rounded to 4 places
+        description: >
+          product_add_to_cart_count / product_page_view_count, rounded to 4 places
+          If the product has zero page views, shows as NULL
+          If zero add to carts, but at least one page view, shows as zero
         tests:
           - no_greater_than_one
           - positive_values
