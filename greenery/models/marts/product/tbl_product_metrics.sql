@@ -24,8 +24,8 @@ SELECT
     -- Product cost is missing, but could be guessed from stg_order.order_cost
     , COUNT(1) product_order_count
     , COUNT(DISTINCT o.user_id) product_user_count
-    , SUM(pv.product_event_count) product_page_view_count -- SUM equivalent to unaggregated
-    , SUM(atc.product_event_count) product_add_to_cart_count
+    , pv.product_event_count product_page_view_count
+    , atc.product_event_count product_add_to_cart_count
     , ROUND(product_add_to_cart_count / product_page_view_count, 4) product_click_through_rate
 FROM {{ ref ('stg_product') }}  pr
 JOIN {{ ref ('stg_order_item') }}  oi
@@ -42,4 +42,4 @@ LEFT JOIN cte_product_event pv -- page_view
 LEFT JOIN cte_product_event atc -- add_to_cart
     ON pr.product_id = atc.product_id
     AND atc.event_type = 'add_to_cart'
-GROUP BY 1,2,3,4
+GROUP BY 1,2,3,4, product_page_view_count, product_add_to_cart_count
