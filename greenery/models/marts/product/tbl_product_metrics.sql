@@ -17,11 +17,16 @@ SELECT
     , pr.inventory AS current_inventory
     , pr.price AS current_price
     , SUM(oi.quantity) quantity_ordered
-    , ROUND(SUM(
-        current_price -- TODO: Price at time of order
-        * oi.quantity
-        * (1 - od.total_promo_discount_percentage)
-      ), 2) total_product_revenue
+    , ROUND(
+        SUM({{
+            order_revenue(
+                price_col = 'current_price'
+                , quantity_col = 'oi.quantity'
+                , discount_col = 'od.total_promo_discount_percentage'
+            )
+        }})
+        , 2
+      ) total_order_revenue
     -- Product cost is missing, but could be guessed from stg_order.order_cost
     , COUNT(1) product_order_count
     , COUNT(DISTINCT o.user_id) product_user_count

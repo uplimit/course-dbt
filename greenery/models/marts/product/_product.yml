@@ -27,7 +27,8 @@ models:
 
       - name: total_product_revenue
         description: >
-          Total of this products quantity times price less promo discount to two decimal places
+          Total of order_revenue macro output, then rounded to 2 decimal places
+          Uses product price, quantity, and total promo discount as inputs
           Uses current_price, rather than the price at the time of the sale
           Not fit for financial reporting
         tests:
