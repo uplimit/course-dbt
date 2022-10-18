@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fact_page_views
+    description: "Pages that have been viewed on the website"
+    columns:
+      - name: event_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null

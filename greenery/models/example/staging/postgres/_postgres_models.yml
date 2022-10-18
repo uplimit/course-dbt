@@ -2,17 +2,59 @@ version: 2
 
 models:
   - name: src_addresses
-    description: "Addresses of our users"     
+    description: "Addresses of our users"
+    columns:
+      - name: address_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null         
   - name: src_events
-    description: "Website event data"         
+    description: "Website event data" 
+    columns:
+      - name: event_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null        
   - name: src_orders
     description: "Orders Placed"
+    columns:
+      - name: order_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
   - name: src_order_items
     description: "Product ids for the products of each order that was made"
+    columns:
+      - name: order_item_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
   - name: src_products
     description: "Products sold"
+    columns:
+      - name: product_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
   - name: src_promos
     description: "Promos run"
+    columns:
+      - name: promo_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
   - name: src_users
     description: "Users at Greenery"
+    columns:
+      - name: user_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
     
