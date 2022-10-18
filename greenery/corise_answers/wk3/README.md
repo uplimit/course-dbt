@@ -36,3 +36,12 @@ SKIP.  I'm here to learn the tools and strategies of the trade, not pretend I'm 
 
 
 ### Make a macro
+Macro order_revenue is used in tbl_product_metrics and tbl_order_ledger
+The note in the course materials says "start here" for a specific formula
+    That specific formula doesn't make a lot of sense in this representation of the data
+    Because event types per session are aggregated once in the transformation
+I have chosen to follow the conflicting instructions to think about what would improve the
+    Usability/modularity of the code
+
+
+### Hooks
