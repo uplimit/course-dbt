@@ -54,3 +54,11 @@ When and how to use hooks was something I was hoping to get out of this class,
 
 
 ### Packages
+Added a package and usage one of the macros.
+Similarly felt like more direction would have created a better learning environment
+    (perhaps a goal that's hard to code, but solved by a certain package)
+Reading through package contents is a good skill
+    but in real life is more of a hunt for a specific functionality
+
+
+### 

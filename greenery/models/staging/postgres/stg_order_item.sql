@@ -1,5 +1,5 @@
 SELECT
-    order_id || ' - ' || product_id AS surrogate_key
+    {{ dbt_utils.surrogate_key(['order_id', 'product_id']) }} AS surrogate_key
     , order_id
     , product_id
     , quantity
