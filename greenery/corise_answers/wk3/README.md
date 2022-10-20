@@ -61,4 +61,25 @@ Reading through package contents is a good skill
     but in real life is more of a hunt for a specific functionality
 
 
-### 
+### DAG changes
+Skipped.  There were no DAG changes with the changes made here.
+This too seems like a place where more could be learned with greater structure.
+
+
+### Snapshots
+3 orders gained tracking IDs, shipping service, estimated delivery at, and status to shipped
+```SQL
+SELECT
+    *
+FROM snapshot_orders
+WHERE order_id IN (
+    SELECT order_id
+    FROM snapshot_orders
+    WHERE dbt_valid_to > '2022-10-17'
+)
+ORDER BY order_id, dbt_valid_to DESC
+```
+
+Heads up, this is saved in the course git repository as `delivery_update.sql` and  `delivery_update.sh`
+Would appreciate a little more professionalism
+
