@@ -45,3 +45,12 @@ I have chosen to follow the conflicting instructions to think about what would i
 
 
 ### Hooks
+See the practice hook added to `stg_address.sql`
+I couldn't think of a useful hook, although the GRANT SELECT idea originally in the
+    instructions could have been good (especially if the config option `grant` didn't exist)
+When and how to use hooks was something I was hoping to get out of this class,
+    and it's disappointing to still not have any practical examples of when it's
+    worthwhile to add something as a post hook
+
+
+### Packages

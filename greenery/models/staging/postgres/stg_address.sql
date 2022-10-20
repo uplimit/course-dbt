@@ -1,3 +1,12 @@
+{{
+  config(
+    post_hook={
+        "sql": "DESCRIBE TABLE {{this}};"
+        , "transaction": True
+    }
+  )
+}}
+
 SELECT
     address_id
     , address AS street_address
