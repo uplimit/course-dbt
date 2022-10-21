@@ -20,13 +20,13 @@ results as (
         tracking_id,
 
         -- Order Info
-        order_status,
+        status,
         products_purchased,
         total_items_purchased,
         order_cost,
         shipping_cost,
-        total_cost,
-        carrier,
+        order_total,
+        shipping_service,
         estimated_delivery_at,
         delivered_at,
 

@@ -8,7 +8,7 @@
 {% set event_types = ["checkout", "package_shipped", "add_to_cart", "page_view"] %}
 
 with events_source as (
-    select * from {{ ref('stg_pg__events') }}
+    select * from {{ ref('stg_postgres_events') }}
 ),
 
 results as (
@@ -27,8 +27,8 @@ results as (
 
         count(distinct product_id)                                as product_count,
 
-        min(event_at)                                             as session_start_at,
-        max(event_at)                                             as session_end_at,
+        min(created_at)                                           as session_start_at,
+        max(created_at)                                           as session_end_at,
 
         datediff('minutes', session_start_at, session_end_at)     as session_length_min
 

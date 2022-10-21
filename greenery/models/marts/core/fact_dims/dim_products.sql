@@ -5,11 +5,11 @@
 }}
 
 with product_source as (
-  select * from {{ ref('stg_pg__products') }}
+  select * from {{ ref('stg_postgres_products') }}
 ),
 
 product_events as (
-  select * from {{ ref('stg_pg__events') }}
+  select * from {{ ref('stg_postgres_events') }}
 ),
 
 product_orders as (

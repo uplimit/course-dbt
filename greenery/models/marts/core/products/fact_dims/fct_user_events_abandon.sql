@@ -33,7 +33,7 @@ results as (
         g.session_id,
         u.first_name,
         u.last_name,
-        u.full_name,
+        ---u.full_name,
         u.zipcode,
         u.state,
         u.country,
@@ -55,7 +55,7 @@ results as (
         on g.user_id = o.user_id
         and g.order_id = o.order_id
 
-    {{ dbt_utils.group_by(n=9) }}
+    {{ dbt_utils.group_by(n=8) }}
 
 )
 

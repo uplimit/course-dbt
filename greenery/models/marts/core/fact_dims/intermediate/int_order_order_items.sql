@@ -32,16 +32,16 @@ results as (
         o.promo_id,
         o.user_id,
         o.address_id,
-        o.tracking_id,
+        o.TRACKING_ID,
 
         -- Order Info
-        o.order_status,
+        o.status,
         od.products_purchased,
         od.total_items_purchased,
         o.order_cost,
         o.shipping_cost,
-        o.total_cost,
-        o.carrier,
+        o.ORDER_TOTAL,
+        o.shipping_service,
         o.created_at,
         o.estimated_delivery_at,
         o.delivered_at

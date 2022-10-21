@@ -20,7 +20,7 @@ results as (
       user_id,
 
       -- Event Info
-      event_at,
+      created_at as event_at,
       event_type,
       page_url
 

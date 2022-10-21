@@ -17,7 +17,7 @@ results as (
         u.user_id,
         u.first_name,
         u.last_name,
-        u.full_name,
+        ---u.full_name,
         u.zipcode,
         u.state,
         u.country,
@@ -30,7 +30,7 @@ results as (
         avg(o.total_items_purchased)    as avg_total_products_purchased,
         avg(o.order_cost)               as avg_order_cost,
         avg(o.shipping_cost)            as avg_shipping_cost,
-        avg(o.total_cost)               as avg_order_total,
+        avg(o.order_total)              as avg_order_total,
         avg(o.est_days_to_delivery)     as avg_est_delivery_days,
         avg(o.actual_days_to_delivery)  as avg_actual_delivery_days,
         avg(o.delivery_estimate_error)  as avg_est_delivery_error
@@ -38,7 +38,7 @@ results as (
     from users u
     left join orders o
         on u.user_id = o.user_id
-    {{ dbt_utils.group_by(n=7) }}
+    {{ dbt_utils.group_by(n=6) }}
 
 )
 

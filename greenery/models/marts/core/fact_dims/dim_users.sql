@@ -25,7 +25,7 @@ results as (
         u.user_id,
         u.first_name,
         u.last_name,
-        u.full_name,
+        ---u.full_name,
         u.email,
         u.phone_number,
         u.created_at,
@@ -37,7 +37,7 @@ results as (
 
         count(distinct o.order_id)      as order_count,
         count(distinct e.session_id)    as session_count,
-        sum(o.total_cost)               as total_revenue
+        sum(o.order_total)              as total_revenue
 
     from user_source u
     left join address_source a
@@ -47,7 +47,7 @@ results as (
     left join events_source e
         on u.user_id = e.user_id
 
-    {{ dbt_utils.group_by(n=12) }}
+    {{ dbt_utils.group_by(n=11) }}
 
 )
 
