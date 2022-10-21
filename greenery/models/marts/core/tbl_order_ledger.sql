@@ -10,11 +10,14 @@ SELECT
     , o.order_cost
     , o.shipping_cost
     , o.total_order_cost
-    , SUM(
-        pr.price -- TODO: Price at time of order
-        * oi.quantity
-        * (1 - od.total_promo_discount_percentage)
-      ) total_order_revenue
+    -- TODO: Price at time of order
+    , SUM({{
+        order_revenue(
+            price_col = 'pr.price'
+            , quantity_col = 'oi.quantity'
+            , discount_col = 'od.total_promo_discount_percentage'
+        )
+      }}) total_order_revenue
     , total_order_revenue - o.total_order_cost AS total_order_profit
     , total_order_profit / total_order_revenue AS order_margin_pct
 FROM {{ ref ('stg_order') }} o

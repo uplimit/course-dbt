@@ -62,7 +62,7 @@ models:
 
       - name: total_order_revenue
         description: >
-          Current product price * quantity * (1 - total promo discount)
+          Total of order_revenue macro output using product price, quantity, and total promo discount
           For every order ever
           Allowed to be negative
         # TODO: change to product price at time of order with a snapshot of stg_product

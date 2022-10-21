@@ -27,7 +27,8 @@ models:
 
       - name: total_product_revenue
         description: >
-          Total of this products quantity times price less promo discount to two decimal places
+          Total of order_revenue macro output, then rounded to 2 decimal places
+          Uses product price, quantity, and total promo discount as inputs
           Uses current_price, rather than the price at the time of the sale
           Not fit for financial reporting
         tests:
@@ -43,18 +44,32 @@ models:
         tests:
           - positive_values
 
+      - name: product_session_count
+        description: >
+          The number of sessions that have at least one event related to the product
+          Shows as zero instead of NULL if there are no sessions yet
+        tests:
+          - positive_values
+
       - name: product_page_view_count
-        description: The number of times this product has been the subject of a page view event
+        description: >
+          The number of times this product has been the subject of a page view event
+          Shows as zero instead of NULL if there are no page views yet
         tests:
           - positive_values
 
       - name: product_add_to_cart_count
-        description: The number of times this product has been the subject of an add to cart event
+        description: >
+          The number of times this product has been the subject of an add to cart event
+          Shows as zero instead of NULL if there are no add to cart events yet
         tests:
           - positive_values
 
       - name: product_click_through_rate
-        description: product_add_to_cart_count / product_page_view_count, rounded to 4 places
+        description: >
+          product_add_to_cart_count / product_page_view_count, rounded to 4 places
+          If the product has zero page views, shows as NULL
+          If zero add to carts, but at least one page view, shows as zero
         tests:
           - no_greater_than_one
           - positive_values
