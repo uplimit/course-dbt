@@ -10,6 +10,9 @@ models:
           - unique
           - not_null
 
+      - name: created_at
+        description: "order created timestamp"
+
       - name: product_name
         description: "name of the product"
 

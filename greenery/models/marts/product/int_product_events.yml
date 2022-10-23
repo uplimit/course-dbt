@@ -1,11 +1,11 @@
 version: 2
 
 models:
-  - name: int_session_events
-    description: "intermediate table that contains the mapping of user sessions"
+  - name: int_product_events
+    description: "intermediate table that contains the mapping of sessions by product"
     columns:
-      - name: user_id
-        description: "id of the user"
+      - name: product_id
+        description: "id of the product"
         tests:
           - unique
           - not_null
@@ -27,5 +27,3 @@ models:
 
       - name: page_view_total
         description: "number of page views"
-
-       

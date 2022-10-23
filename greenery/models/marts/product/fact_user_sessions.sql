@@ -9,11 +9,10 @@ WITH session_events AS (
   FROM {{ ref('int_session_events') }}
 ),
 
-session_duration AS (
+user_session_count AS (
     SELECT
-    session_id,
-    MIN(created_at) AS first_event,
-    MAX(created_at) AS last_event
+    user_id,
+    count(DISTINCT session_id) as total_session_count
 
     FROM {{ ref('stg_events') }} 
 
@@ -26,22 +25,21 @@ users AS (
 )
 
 SELECT
-DISTINCT
-se.session_id,
 se.user_id,
 u.first_name,
 u.last_name,
 u.email,
 u.phone_number,
-sd.first_event AS first_session_event,
-sd.last_event AS last_session_event,
-se.page_views,
-se.add_to_carts,
-se.checkouts,
-se.packages_shipped
+se.page_view_total,
+se.add_to_cart_total,
+se.checkout_total,
+se.package_shipped_total,
+usc.total_session_count
+
 
 FROM session_events se 
 LEFT JOIN users u 
 ON u.user_id = se.user_id
-LEFT JOIN session_duration sd
-ON sd.session_id = se.session_id
+LEFT JOIN user_session_count usc
+ON usc.user_id = u.user_id
+

@@ -17,9 +17,11 @@ products AS (
     FROM {{ref ('stg_products')}}
 )
 
-SELECT  
-DISTINCT 
+SELECT 
+DISTINCT  
 o.order_id,
+o.created_at,
+o.user_id,
 p.name AS product_name,
 p.product_id,
 COALESCE(oi.quantity, 0) AS order_quantity,

@@ -63,4 +63,8 @@ I would use an orchestration tool like Airflow to send alerts about freshness of
 
 ## Part 3. dbt Snapshots
 _Which orders changed from week 1 to week 2?_
-I am not sure why, but I don't see the orders snapshot in Snowflake, even though I see it in my repository and the dbt snapshot command runs successfully.
+
+The following order IDs changed:
+914b8929-e04a-40f8-86ee-357f2be3a2a2
+939767ac-357a-4bec-91f8-a7b25edd46c9
+05202733-0e17-4726-97c2-0520c024ab85
