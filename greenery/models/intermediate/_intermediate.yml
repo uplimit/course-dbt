@@ -113,3 +113,22 @@ models:
         description: "total spent on all orders by user"
         test:
          - positive_values
+
+  - name: int_product_conv_rate
+    description: "product conversion rate"
+    columns:
+      - name: product_id
+        description: "product id"
+
+      - name: total_orders
+        description: "total orders each user purchased by product"
+        tests: 
+         - positive_values
+
+      - name: total_sessions
+        description: "total sessions by product"
+
+      - name: conversion_rate
+        description: "total orders divide by total sessions by product"
+
+    

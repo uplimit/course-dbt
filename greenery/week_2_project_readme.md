@@ -1,4 +1,4 @@
-### Week 1 Project
+### Week 2 Project
 
 ### 1. What is our user repeat rate?
 

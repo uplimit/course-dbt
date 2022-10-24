@@ -36,6 +36,9 @@ models:
     # Config indicated by + and applies to all files under models/example/
     staging:
       +materialized: tables
+    marts: 
+      +post-hook: 
+        - "GRANT SELECT ON {{ this }} TO ROLE reporting;"
 
 snapshots:
   greenery: 
