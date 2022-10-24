@@ -2,11 +2,11 @@
 
 ****1: What is our overall conversion rate?**
 **answer:** 62.5%
-                select
-                    count(distinct session_guid) as total_sessions,
-                    count(distinct case when order_guid is not null then session_guid else null end) as conversions,
-                    conversions/total_sessions
-                from dev_db.dbt_bavery.src_events
+            select
+                count(distinct session_guid) as total_sessions,
+                count(distinct case when order_guid is not null then session_guid else null end) as conversions,
+                conversions/total_sessions
+            from dev_db.dbt_bavery.src_events
 
 
 ****2:What is our conversion rate by product?**
