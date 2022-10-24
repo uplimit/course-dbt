@@ -9,3 +9,12 @@ models:
         tests:
           - unique
           - not_null
+
+  - name: fact_site_sessions
+    description: "Site events grouped by session"
+    columns:
+      - name: session_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
