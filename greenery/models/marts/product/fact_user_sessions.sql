@@ -1,45 +1,32 @@
+
+
 {{
   config(
     materialized='table'
   )
-}}
+}} 
 
-WITH session_events AS (
-  SELECT * 
-  FROM {{ ref('int_session_events') }}
+WITH events AS (
+    SELECT * FROM {{ ref('stg_events') }}
 ),
 
-user_session_count AS (
-    SELECT
-    user_id,
-    count(DISTINCT session_id) as total_session_count
-
-    FROM {{ ref('stg_events') }} 
-
-    GROUP BY 1
-),
-
-users AS (
-  SELECT *
-  FROM {{ ref('stg_users') }} 
+sessions_int AS (
+    SELECT * FROM {{ ref('int_session_events') }}
 )
 
-SELECT
-se.user_id,
-u.first_name,
-u.last_name,
-u.email,
-u.phone_number,
-se.page_view_total,
-se.add_to_cart_total,
-se.checkout_total,
-se.package_shipped_total,
-usc.total_session_count
+SELECT 
+    e.session_id,
+    e.user_id,
+    MIN(e.created_at) as session_start,
+    MAX(e.created_at) as session_end,
+    DATEDIFF('minute', MIN(e.created_at), MAX(e.created_at)) as session_length_mins,
+    si.checkout_total,
+    si.package_shipped_total,
+    si.add_to_cart_total,
+    si.page_view_total,
+    si.has_converted
 
+FROM events e
+LEFT JOIN sessions_int si ON e.session_id = si.session_id
 
-FROM session_events se 
-LEFT JOIN users u 
-ON u.user_id = se.user_id
-LEFT JOIN user_session_count usc
-ON usc.user_id = u.user_id
-
+GROUP BY 1,2,6,7,8,9,10

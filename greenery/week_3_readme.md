@@ -1,10 +1,10 @@
 ## Part 1. Create new models to answer the first two questions 
 _What is our overall conversion rate?_ 
-0.007
-I think I am doing something wrong here, I am not sure if the aggregation I am looking at is correct.
+62%
 ```sql
-select count(has_converted), count(total_session_count),sum(has_converted)/ sum(total_session_count) 
-from DEV_DB.DBT_ANNBARD12.DIM_USERS
+SELECT 
+    SUM(has_converted)/COUNT(has_converted)*100 AS overall_conversation_rate
+FROM DEV_DB.DBT_ANNBARD12.FACT_SESSIONS
 ```
 
 _What is our conversion rate by product?_

@@ -23,10 +23,13 @@ session_product AS (
 )
 
 SELECT
-    product_id,
-    SUM(has_converted) AS converted_sessions,
-    COUNT(has_converted) AS total_sessions,
-    SUM(has_converted)/COUNT(has_converted)*100 AS conversion_rate
+  product_id,
+  SUM(has_converted) AS converted_sessions,
+  COUNT(has_converted) AS total_sessions,
+  SUM(has_converted)/COUNT(has_converted)*100 AS conversion_rate
+
 FROM session_product
+
 WHERE product_id IS NOT NULL
+
 GROUP BY 1
