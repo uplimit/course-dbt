@@ -47,3 +47,15 @@ models:
 
       - name: session_add_to_cart
         description: "total products add to cart during the session"
+
+  - name: fact_product_funnel
+    description: "product funnel table with conversion rates"
+    columns:
+      - name: page_view_rate
+        description: "page view sessions divided by total sessions multiply by 100"
+
+      - name: add_to_cart_rate
+        description: "add to cart sessions divided by total sessions multiply by 100"
+
+      - name: checkout_rate
+        description: "checkout sessions divided by total sessions multiply by 100"

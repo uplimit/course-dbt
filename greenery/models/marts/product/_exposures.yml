@@ -1,0 +1,14 @@
+version: 2
+
+exposures:
+
+  - name: product_funnel_dashboard
+    type: dashboard
+    description: stakeholders can reference this dashboard to understand the product funnel
+    
+    depends_on: 
+      - ref('fact_product_funnel')
+    
+    owner:
+      name: Phuong Le
+      email: ple@cargurus.com
