@@ -71,6 +71,7 @@ Users with 8 orders: 1 <br>
 Query:
 
 <code>
+
 WITH orders_users_tbl AS ( <br>
 SELECT  <br>
     USER_GUID, <br>
