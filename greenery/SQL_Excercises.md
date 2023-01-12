@@ -40,7 +40,7 @@ Query:
 
 WITH timestamp_diff_tbl as (
 
-SELECT
+SELECT <br>
     created_at_utc, <br>
     delivered_at_utc, <br>
     timestampdiff('day', created_at_utc, delivered_at_utc) as difference_days <br>
@@ -52,6 +52,7 @@ SELECT <br>
 FROM timestamp_diff_tbl
 
 </code>
+
 
 **Question 4: How many users have only made one purchase? Two Purchases? Three+ purchases?**
 
