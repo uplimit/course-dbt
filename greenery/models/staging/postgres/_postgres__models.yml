@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: Addresses  with their respective zipcode, country and state.
+  - name: stg_postgres__events
+    description: Tracked events in the greenery website.
+  - name: stg_postgres__order_items
+    description: Tracked orders for each product and their respective quantity.
+  - name: stg_postgres__orders
+    description: Tracked orders by user_id, promo, address_id and utc created time.
+  - name: stg_postgres__products
+    description: All relevant information related to products such as name, price and inventory.
+  - name: stg_postgres__promos
+    description: Table with all the current live promos.
+  - name: stg_postgres__users
+    description: Specific personal information about our users.
