@@ -1,10 +1,11 @@
 ### Project - Week 1  
 
-** How many users do we have? **
+**How many users do we have?**  
+
 We have 130 users  
 '''
 SELECT COUNT(DISTINCT user_guid) 
-FROM dev_db.dbt_danagrunberggmailcom.stg_postgres_users  
+FROM dev_db.dbt_danagrunberggmailcom.stg_postgres_users
 '''
 
 ** On average, how many orders do we receive per hour? **  
