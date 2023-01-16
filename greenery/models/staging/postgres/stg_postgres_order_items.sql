@@ -6,9 +6,9 @@ with src_order_items as (
 
 , renamed_recast AS (
     SELECT 
-      ORDER_ID AS order_guid
-      , PRODUCT_ID as product_id
-      , QUANTITY as quantity
+        ORDER_ID AS order_guid
+        , PRODUCT_ID as product_id
+        , QUANTITY as quantity
     FROM src_order_items
 )
 
