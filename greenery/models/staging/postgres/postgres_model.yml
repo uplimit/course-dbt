@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_addresses
+  - name: stg_events
+  - name: stg_order_items
+  - name: stg_orders
+  - name: stg_products
+  - name: stg_promos
+  - name: stg_users
+ 
