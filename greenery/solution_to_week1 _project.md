@@ -1,10 +1,14 @@
 Solutions to week 1 project 
 1. How many users do we have?
+
+
 select count(distinct user_id) from stg_postgres_users
 
 Solution: 130
 
 2. On average, how many orders do we receive per hour?
+
+
 with hourly_total as (
     select  
     trunc(created_at_utc,'hour'),
@@ -17,6 +21,8 @@ with hourly_total as (
 Solution: 7.520833
 
 3. On average, how long does an order take from being placed to being delivered?
+
+
 with delivered as 
 (
     select 
@@ -30,6 +36,8 @@ select round(avg(delivery_day),1) as avg_delivery_day from delivered
 Solution: 3.9
 
 4. How many users have only made one purchase? Two purchases? Three+ purchases?
+
+
 with user_orders as (
     select 
         user_id, 
@@ -51,6 +59,8 @@ group by 1
 solution: 1 Purchase, 25 2 Purchases, 28 3+ Purchases, 71 
 
 4. On average, how many unique sessions do we have per hour?
+
+
 with events_per_hour as (
     select
         date_trunc('hour', event_created_at_utc) as event_hour,
