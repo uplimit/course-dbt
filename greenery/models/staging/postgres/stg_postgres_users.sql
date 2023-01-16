@@ -6,7 +6,7 @@ with src_users as (
 
 , renamed_recast as (
     SELECT
-        USER_ID
+        USER_ID as user_guid
         , FIRST_NAME as first_name
         , LAST_NAME as last_name
         , EMAIL as email
