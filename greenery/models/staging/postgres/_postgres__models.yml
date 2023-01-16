@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: events
+    description: Event table for greenery postgres transactions
+    columns:
+      - name: event_id
+        tests:
+          - not_null
+          - unique
+      # - name: height
+      #   tests:
+      #   - positive_values
+      # - name: weight
+      #   tests:
+      #   - positive_values
+
+  - name: users
+    description: Users table for greenery postgres data source
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
+  
+  - name: addresses
+    description: Addresses table for greenery postgres transactions
+    columns:
+      - name: address_id
+        tests:
+          - not_null
+          - unique
+  
+  - name: orders
+    description: orders table for greenery postgres transactions
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+  
+  - name: products
+    description: Products table for greenery postgres data source
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+  
+  - name: order_items
+    description: Order quantity table for greenery postgres data source
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+  
+  - name: promos
+    description: Promos table for greenery postgres data source
+    columns:
+      - name: promo_id
+        tests:
+          - not_null
+          - unique
