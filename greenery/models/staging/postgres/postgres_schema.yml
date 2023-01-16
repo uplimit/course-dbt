@@ -1,0 +1,161 @@
+version: 2
+
+models:
+  - name: stg_postgres_addresses
+    description: Addresses of users. 
+    columns:
+      - name: addresse_guid
+        tests:
+          - not_null
+          - unique
+      - name: address
+        tests:
+          - not_null
+      - name: zipcode
+        tests:
+          - not_null
+      - name: state
+        tests:
+          - not_null
+      - name: country
+        tests:
+          - not_null
+
+  - name: stg_postgres_events
+    description: Tracked website events. 
+    columns:
+      - name: event_guid
+        tests:
+          - not_null
+          - unique
+      - name: session_guid
+        tests:
+          - not_null
+      - name: user_guid
+        tests:
+          - not_null
+      - name: page_url
+        tests:
+          - not_null
+      - name: created_at_utc
+        tests:
+          - not_null
+      - name: event_type
+        tests:
+          - not_null
+      - name: order_guid
+      - name: product_guid
+
+  - name: stg_postgres_order_items
+    description: Details of items ordered. 
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+      - name: product_guid
+        tests:
+          - not_null
+      - name: quantity
+        tests:
+          - not_null
+
+  - name: stg_postgres_orders
+    description: Order details. 
+    columns:
+      - name: order_guid
+        tests:
+          - not_null
+          - unique
+      - name: user_guid
+        tests:
+          - not_null
+      - name: promo_description
+      - name: address_guid
+        tests:
+          - not_null
+      - name: created_at_utc
+        tests:
+          - not_null
+      - name: order_cost
+        tests:
+          - not_null
+      - name: shipping_cost
+      - name: order_total
+        tests:
+          - not_null
+      - name: tracking_guid
+      - name: shipping_service
+      - name: estimated_delivery_at_utc
+      - name: delivered_at_utc
+      - name: status
+
+  - name: stg_postgres_products
+    description: Products details. 
+    columns:
+      - name: product_guid
+        tests:
+          - not_null
+          - unique
+      - name: name
+        tests:
+          - not_null
+      - name: price
+      - name: inventory
+
+
+  - name: stg_postgres_promos
+    description: Promos details. 
+    columns:
+      - name: promo_type
+        tests:
+          - not_null
+          - unique
+      - name: discount
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+
+  - name: stg_postgres_superheroes
+    description: Superheroes details. 
+    columns:
+      - name: superhero_id
+        tests:
+          - not_null
+          - unique
+      - name: gender
+      - name: eye_color
+      - name: race
+      - name: hair_color
+      - name: height
+      - name: publisher
+      - name: skin_color
+      - name: alignment
+      - name: weight
+      - name: created_at_utc
+      - name: updated_at_utc
+
+
+  - name: stg_postgres_users
+    description: Users details. 
+    columns:
+      - name: user_guid
+        tests:
+          - not_null
+          - unique
+      - name: first_name
+        tests:
+          - not_null
+      - name: last_name
+        tests:
+          - not_null
+      - name: email
+        tests:
+          - not_null
+      - name: phone_number
+      - name: created_at_utc
+        tests:
+          - not_null
+      - name: updated_at_utc
+      - name: address_guid
