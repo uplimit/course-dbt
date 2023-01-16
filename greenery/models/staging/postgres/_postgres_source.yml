@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+
+  - name: postgres # name of the source (this can be named whatever you want, but should be descriptive. this source (superheroes) is used for our week 1 tutorial so thats why i named it this way)
+    schema: public # this is the schema our raw data lives in
+    database: raw # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    tables:
+      - name: events 
+        # loaded_at_field: created_at #only needed if testing freshness
+      - name: users
+      
+      - name: addresses
+
+      - name: orders
+
+      - name: promos
+
+      - name: order_items
+      
+      - name: products
