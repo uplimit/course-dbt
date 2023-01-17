@@ -1,11 +1,11 @@
 --------------------------------------------------------------------------  
--- 1. How many users do we have? 130 Users
+ 1. How many users do we have? 130 Users
 --------------------------------------------------------------------------
     select 
         count(distinct user_id) as users_ct --130
     from dev_db.dbt_amoskimcheckrcom.staging_postgres_users;
 --------------------------------------------------------------------------
--- 2. On average, how many orders do we receive per hour? 7.53 Orders/hr
+ 2. On average, how many orders do we receive per hour? 7.53 Orders/hr
 --------------------------------------------------------------------------
     SELECT
         first_order,     --2021-02-10 00:00:05.000
@@ -20,7 +20,7 @@
         from dev_db.dbt_amoskimcheckrcom.staging_postgres_orders
     );
 --------------------------------------------------------------------------
--- 3. On average, how long does an order take from being placed to being delivered? 93.4 hrs
+ 3. On average, how long does an order take from being placed to being delivered? 93.4 hrs
 --------------------------------------------------------------------------
     select 
         (avg(datediff('minute', created_at, delivered_at)) / 60.00) as avg_delivery_time_hr --93.4
@@ -28,8 +28,8 @@
     where datediff('second', created_at, delivered_at) > 0  
 ;
 --------------------------------------------------------------------------
--- 4. How many users have only made one purchase? Two purchases? Three+ purchases?
--- (1 order,25 users), (2 orders, 28 users), (3+ orders, 71 users)
+ 4. How many users have only made one purchase? Two purchases? Three+ purchases?
+ (1 order,25 users), (2 orders, 28 users), (3+ orders, 71 users)
 --------------------------------------------------------------------------
     select 
         iff(order_ct>=3, '3+', order_ct::varchar) as order_ct,
@@ -44,8 +44,8 @@
     order by 1 asc
 )
 --------------------------------------------------------------------------
--- 5. On average, how many unique sessions do we have per hour? 
--- 10.14 sessions per hour
+ 5. On average, how many unique sessions do we have per hour? 
+ 10.14 sessions per hour
 --------------------------------------------------------------------------
     SELECT
         first_session,     --2021-02-09 23:55:08.000
