@@ -1,5 +1,5 @@
---------------------------------------------------------------------------  -- How many users do we have? 130
--- 1. ADDHow many users do we have? 130 Users
+--------------------------------------------------------------------------  
+-- 1. How many users do we have? 130 Users
 --------------------------------------------------------------------------
     select 
         count(distinct user_id) as users_ct --130
@@ -29,7 +29,8 @@
 ;
 --------------------------------------------------------------------------
 -- 4. How many users have only made one purchase? Two purchases? Three+ purchases?
--- (1 order,25 users), (2 orders, 28 users), (3+ orders, 71 users)--------------------------------------------------------------------------
+-- (1 order,25 users), (2 orders, 28 users), (3+ orders, 71 users)
+--------------------------------------------------------------------------
     select 
         iff(order_ct>=3, '3+', order_ct::varchar) as order_ct,
         count(*)
