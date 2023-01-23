@@ -1,0 +1,60 @@
+version: 2
+
+models:
+
+  - name: fact_page_views
+    description: ""
+    columns:
+      - name: event_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+      - name: session_id
+        description: ""
+
+      - name: user_id
+        description: ""
+
+      - name: product_id
+        description: ""
+
+      - name: page_url
+        description: ""
+
+      - name: created_at_utc
+        description: ""
+
+      - name: page_view_sequence
+        description: ""
+
+  - name: fact_sessions
+    description: ""
+    columns:
+      - name: session_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+      - name: user_id
+        description: ""
+
+      - name: first_session_event
+        description: ""
+
+      - name: last_session_event
+        description: ""
+
+      - name: session_length_mins
+        description: ""
+
+      - name: events_in_session
+        description: ""
+
+      - name: last_event_in_session
+        description: ""
+
+      - name: session_result
+        description: ""

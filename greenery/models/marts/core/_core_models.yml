@@ -1,0 +1,183 @@
+version: 2
+
+models:
+
+  - name: dim_dates
+    description: ""
+    columns:
+      - name: date_day
+        description: ""
+
+  - name: dim_products
+    description: ""
+    columns:
+      - name: product_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        description: ""
+
+      - name: price_usd
+        description: ""
+        tests:
+          - positive_values
+
+      - name: inventory
+        description: ""
+
+      - name: n_times_ordered
+        description: ""
+
+      - name: n_products_ordered
+        description: ""
+
+      - name: total_revenue_usd
+        description: ""
+
+      - name: most_recent_order_utc
+        description: ""
+
+  - name: dim_users
+    description: ""
+    columns:
+      - name: user_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+      - name: first_name
+        description: ""
+
+      - name: last_name
+        description: ""
+
+      - name: full_name
+        description: ""
+
+      - name: email
+        description: ""
+
+      - name: phone_number
+        description: ""
+
+      - name: created_at_utc
+        description: ""
+
+      - name: updated_at_utc
+        description: ""
+
+      - name: address
+        description: ""
+
+      - name: zipcode
+        description: ""
+
+      - name: state
+        description: ""
+
+      - name: country
+        description: ""
+
+      - name: n_orders
+        description: ""
+
+      - name: first_order_placed_at
+        description: ""
+
+      - name: most_recent_order_placed_at
+        description: ""
+
+      - name: lifetime_value
+        description: ""
+
+  - name: fact_orders
+    description: ""
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "order_cost_usd + shipping_cost_usd - discount_usd = order_total_usd"
+      - dbt_utils.expression_is_true:
+          expression: "delivered_at_utc > created_at_utc"
+
+    columns:
+      - name: order_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+      - name: user_id
+        description: ""
+
+      - name: address_id
+        description: ""
+
+      - name: created_at_utc
+        description: ""
+
+      - name: promo_type
+        description: ""
+
+      - name: discount
+        description: ""
+
+      - name: order_cost_usd
+        description: ""
+
+      - name: shipping_cost_usd
+        description: ""
+
+      - name: order_total_usd
+        description: ""
+
+      - name: tracking_id
+        description: ""
+
+      - name: shipping_service
+        description: ""
+
+      - name: estimated_delivery_at_utc
+        description: ""
+
+      - name: delivered_at_utc
+        description: ""
+
+      - name: order_status
+        description: ""
+
+      - name: is_delivered
+        description: ""
+
+      - name: time_to_delivery
+        description: ""
+
+      - name: delivery_estimate_difference
+        description: ""
+
+  - name: int_orders_users_products
+    description: ""
+    columns:
+      - name: orders_users_products_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        description: ""
+
+      - name: user_id
+        description: ""
+
+      - name: product_id
+        description: ""
+
+      - name: quantity
+        description: ""
+
+      - name: created_at_utc
+        description: ""
+

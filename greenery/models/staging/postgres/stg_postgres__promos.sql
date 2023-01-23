@@ -11,7 +11,7 @@ renamed as (
 
     select
         promo_id as promo_type,
-        discount,
+        discount::decimal(20,2) as discount_usd,
         status as promo_status
     from 
         source
