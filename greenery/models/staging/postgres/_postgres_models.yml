@@ -8,6 +8,9 @@ models:
       - name: address_id
         description: >
           Primary key for stg_postgres__addresses table
+        tests:
+          - unique
+          - not_null
   - name: stg_postgres__events
     description: >
       Staging model for event stream data.
@@ -15,6 +18,9 @@ models:
       - name: event_id
         description: >
           Primary key for stg_postgres__events table
+        tests:
+          - unique
+          - not_null
       - name: user_id
         description: >
           Foreign key to stg_postgres__users table
@@ -41,6 +47,9 @@ models:
       - name: order_id
         description: >
           Primary key for stg_postgres__orders table
+        tests:
+          - unique
+          - not_null
       - name: user_id
         description: >
           Foreign key to stg_postgres__users table
@@ -57,6 +66,9 @@ models:
       - name: product_id
         description: >
           Primary key for stg_postgres__products table
+        tests:
+          - unique
+          - not_null
   - name: stg_postgres__promos
     description: >
       Staging model for promos data
@@ -65,6 +77,9 @@ models:
         description: >
           Primary key to stg_postgres__promos table. 
           Not an ID - more of a promo descriptor that is nonetheless unique.
+        tests:
+          - unique
+          - not_null
   - name: stg_postgres__users
     description: >
       Staging model for users data
@@ -72,6 +87,9 @@ models:
       - name: user_id
         description: >
           Primary key to stg_postgres__users table.
+        tests:
+          - unique
+          - not_null
       - name: address_id
         description: >
           Foreign key to stg_postgres__addresses table. 
