@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: user_order_facts
+    description: Information about orders
+    columns:
+      - name: user_id
+      - name: created_at user_created_at
+      - name: order_ct
+      - name: first_order_created_at
+      - name: last_order_created_at
+      - name: all_products_ordered
+      - name: number_distinct_products_ordered
+      - name: total_order_costs
+      - name: total_order_revenue

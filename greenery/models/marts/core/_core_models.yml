@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: order_facts
+    description: Information about orders
+    columns:
+      - name: order_id
+      - name: user_id
+      - name: promo_id
+      - name: discount
+      - name: address_id
+      - name: address
+      - name: zipcode
+      - name: state
+      - name: country
+      - name: CREATED_AT
+      - name: order_cost
+      - name: shipping_cost
+      - name: order_total
+      - name: tracking_id
+      - name: shipping_service
+      - name: estimated_delivery_at
+      - name: delivered_at
+      - name: status
+      - name: order_items
+      - name: products_ordered
+
+  - name: user_session_agg
+    description: Information about users at session event level
+    columns:
+      - name: user_id
+      - name: session_id
+      - name: add_to_cart_ct
+      - name: checkout_ct
+      - name: package_shipped_ct
+      - name: page_view_ct
+      - name: first_session_event_at
+      - name: last_session_event_at   
+
