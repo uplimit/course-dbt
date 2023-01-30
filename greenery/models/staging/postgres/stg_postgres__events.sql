@@ -21,4 +21,4 @@ renamed as (
         source
 
 )
-select * from renamed order by created_at_utc
+select * from renamed 

@@ -45,7 +45,7 @@ final as (
         addresses.zipcode,
         addresses.state,
         addresses.country,
-        user_orders_agg.n_orders,
+        coalesce(user_orders_agg.n_orders, 0) as n_orders,
         user_orders_agg.first_order_placed_at,
         user_orders_agg.most_recent_order_placed_at,
         user_orders_agg.lifetime_value

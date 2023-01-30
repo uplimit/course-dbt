@@ -12,7 +12,8 @@ orders_products as (
     select
         *
     from
-        {{ ref('int_orders_users_products') }}
+        {{ ref('int_events_orders_products') }}
+    where order_id is not null
 
 ),
 
@@ -23,11 +24,10 @@ orders_products_joined as (
         products.product_id,
         products.price_usd,
         orders_products.quantity,
-        orders_products.created_at_utc,
         price_usd * quantity as product_total_cost
     from
         orders_products
-    left join products using(product_id)
+    left join products on orders_products.product_ordered_id = products.product_id
   
 ),
 
@@ -37,8 +37,7 @@ products_agg as (
         product_id,
         count(order_id) as n_times_ordered,
         sum(quantity) as n_products_ordered,
-        sum(product_total_cost) as total_revenue_usd,
-        max(created_at_utc) as most_recent_order_utc
+        sum(product_total_cost) as total_revenue_usd
     from
         orders_products_joined
     group by 1
@@ -54,8 +53,7 @@ final as (
         products.inventory,
         products_agg.n_times_ordered,
         products_agg.n_products_ordered,
-        products_agg.total_revenue_usd,
-        products_agg.most_recent_order_utc
+        products_agg.total_revenue_usd
     from
         products
     left join

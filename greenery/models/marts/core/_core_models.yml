@@ -157,27 +157,32 @@ models:
       - name: delivery_estimate_difference
         description: ""
 
-  - name: int_orders_users_products
+  - name: int_events_orders_products
     description: ""
     columns:
-      - name: orders_users_products_id
+      - name: event_order_product_id
         description: ""
         tests:
           - unique
           - not_null
+      - name: event_id
+        description: ""
 
-      - name: order_id
+      - name: session_id
         description: ""
 
       - name: user_id
         description: ""
 
-      - name: product_id
+      - name: product_viewed
+        description: ""
+
+      - name: order_id
+        description: ""
+
+      - name: product_ordered
         description: ""
 
       - name: quantity
-        description: ""
-
-      - name: created_at_utc
         description: ""
 

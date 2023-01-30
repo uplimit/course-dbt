@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: fact_product_sessions
+    description: ""
+    columns:
+      - name: event_order_product_id
+        description: ""
+        tests: 
+          - unique
+          - not_null
+      - name: event_id
+        description: ""
+
+      - name: session_id
+        description: ""
+
+      - name: event_product_id
+        description: ""
+
+      - name: event_type
+        description: ""
+
+      - name: created_at_utc
+        description: ""
+
+      - name: product_name
+        description: ""
