@@ -1,0 +1,31 @@
+version: 2
+
+model: 
+  - name: stg_postgres_orders
+    description: all orders, all the time!
+    columns: 
+      - name: order_id
+        description: unqiue identifier for an order 
+        tests: 
+          - not null 
+      - name: user_id
+        description: user identifier related to who placed the order 
+      - name: order_cost 
+        description: cost of the order less shipping 
+      - name: order_shipping_cost 
+        description: shipping cost of the order
+      - name: order_total_cost
+        description:  total order cost 
+    database: raw
+    schema: public
+    tables: 
+      - name: orders
+      - name: order_items
+      - name: addresses
+      - name: products
+      - name: events
+      - name: promos
+      - name: users
+
+
+      
