@@ -6,8 +6,9 @@
 }}
 
 select 
-  order_id,
   product_id,
-  quantity
+  name as product,
+  inventory,
+  price
 
-from {{ source('greenery', 'order_items') }}
+from {{ source('postgres', 'products') }}

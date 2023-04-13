@@ -2,7 +2,7 @@ version: 2
 
 sources:
 
-  - name: greenery
+  - name: postgres
     schema: public
     database: raw
 

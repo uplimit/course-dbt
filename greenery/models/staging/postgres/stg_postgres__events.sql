@@ -15,4 +15,4 @@ select
   created_at,
   page_url
 
-from {{ source('greenery', 'events') }}
+from {{ source('postgres', 'events') }}

@@ -1,4 +1,4 @@
-{% snapshot sst_greenery__products %}
+{% snapshot sst_postgres__products %}
 
 {{
   config(
@@ -10,6 +10,6 @@
    )
 }}
 
-select * from {{ ref('stg_greenery__products') }}
+select * from {{ ref('stg_postgres__products') }}
 
 {% endsnapshot %}

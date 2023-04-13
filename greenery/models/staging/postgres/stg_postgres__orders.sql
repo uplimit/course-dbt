@@ -20,4 +20,4 @@ select
   estimated_delivery_at,
   delivered_at
 
-from {{ source('greenery', 'orders') }}
+from {{ source('postgres', 'orders') }}

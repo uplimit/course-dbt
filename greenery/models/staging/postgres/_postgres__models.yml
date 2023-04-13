@@ -1,23 +1,23 @@
 version: 2
 
 models:
-  - name: stg_greenery__addresses
+  - name: stg_postgres__addresses
     description: Data on addresses
 
-  - name: stg_greenery__events
+  - name: stg_postgres__events
     description: Data on events
 
-  - name: stg_greenery__order_items
+  - name: stg_postgres__order_items
     description: Data on order items
 
-  - name: stg_greenery__orders
+  - name: stg_postgres__orders
     description: Data on orders
 
-  - name: stg_greenery__products
+  - name: stg_postgres__products
     description: Data on products
 
-  - name: stg_greenery__promos
+  - name: stg_postgres__promos
     description: Data on promos
 
-  - name: stg_greenery__users
+  - name: stg_postgres__users
     description: Data on users

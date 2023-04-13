@@ -10,4 +10,4 @@ select
   status,
   discount
 
-from {{ source('greenery', 'promos') }}
+from {{ source('postgres', 'promos') }}

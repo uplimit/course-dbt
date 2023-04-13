@@ -12,4 +12,4 @@ select
   state,
   zipcode
 
-from {{ source('greenery', 'addresses') }}
+from {{ source('postgres', 'addresses') }}
