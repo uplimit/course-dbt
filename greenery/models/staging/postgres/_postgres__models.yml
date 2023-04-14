@@ -1,0 +1,245 @@
+
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: "Addresses (dbt stage model)"
+    columns:
+      - name: address_id
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: address
+        description: "Street address"
+        tests:
+          - not_null
+      - name: zipcode
+        description: "Zip / Postal Code"
+      - name: state
+        description: "State / Provice / Region"
+      - name: country
+        description: "Country"
+        tests:
+          - not_null          
+    config:
+      column_types:
+        address_id: varchar(256)
+        address: varchar(256)
+        zipcode: int
+        state: varchar(256)
+        country: varchar(256)
+
+
+
+  - name: stg_postgres__events
+    description: "Events (Analytics) (dbt stage model)"
+    columns:
+      - name: event_id
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: session_id
+        description: "Session this event belongs to (FK)"
+        tests:
+          - not_null
+      - name: user_id
+        description: "User who triggered event (FK)"
+      - name: event_type
+        description: "Type of analytics event"
+      - name: page_url
+        description: "URL of page this event occured on"
+      - name: created_at
+        description: "Datetime this event was triggered"
+        tests:
+          - not_null         
+      - name: order_id
+        description: "Order attached to this event (FK)"
+      - name: product_id
+        description: "Product attached to this event (FK)"
+    config:
+      column_types:
+        event_id: varchar(256)
+        sesson_id: varchar(256)
+        user_id: varchar(256)
+        event_type: varchar(256)
+        page_url: varchar(256)
+        created_at: timestamp
+        order_id: varchar(256)
+        product_id: varchar(256)
+
+
+
+  - name: stg_postgres__order_items
+    description: "Line items as part of an order (dbt stage model)"
+    columns:
+      - name: order_item_id
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "The order this order item is attachd to (FK)"
+        tests:
+          - not_null
+      - name: product_id
+        description: "The product this order item is attached to (FK)"
+        tests:
+          - not_null
+      - name: quantity
+        description: "The quantity of this order item within the order it is attached to"
+        tests:
+          - not_null        
+    config:
+      column_types:
+        order_item_id: varchar(256)
+        order_id: varchar(256)
+        product_id: varchar(256)
+        quantity: int
+
+
+
+  - name: stg_postgres__orders
+    description: "Orders (dbt stage model)"
+    columns:
+      - name: order_id
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: promo_id
+        description: "The promotional campaign this order is attachd to (FK)"
+      - name: user_id
+        description: "The user this order is attached to (FK)"
+        tests:
+          - not_null        
+      - name: address_id
+        description: "The address this order should be delivered to (FK)"
+      - name: created_at
+        description: "Datetime this order was created"  
+        tests:
+          - not_null    
+      - name: order_cost
+        description: "Cost of the order"  
+        tests:
+          - not_null                         
+      - name: shipping_cost
+        description: "Shipping Cost of the order"  
+        tests:
+          - not_null                      
+      - name: order_total
+        description: "Total Cost of the order"          
+        tests:
+          - not_null 
+      - name: tracking_id
+        description: "The tracking number attached to the shipment of this order"                              
+      - name: shipping_service
+        description: "The shipping service used for this order"                                      
+      - name: estimated_delivery_at
+        description: "Datetime that the order is estimated to be delivered at"                                              
+      - name: status
+        description: "The status of the order"                                                      
+    config:
+      column_types:
+        order_id: varchar(256)
+        promo_id: varchar(256)
+        user_id: varchar(256)
+        address_id: varchar(256)
+        created_at: timestamp
+        order_cost: float
+        shipping_cost: float
+        order_total: float
+        tracking_id: varchar(256)
+        shipping_service: varchar(256)
+        estimated_delivery_at: timestamp
+        delivered_at: timestamp
+        status: varchar(256)
+
+  - name: stg_postgres__products
+    description: "Products (dbt stage model)"
+    columns:
+      - name: product_id
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: "Name of the product"
+        tests:
+          - not_null
+      - name: price
+        description: "The price of the product"
+        tests:
+          - not_null
+      - name: inventory
+        description: "The current inventory of the product"
+        tests:
+          - not_null        
+    config:
+      column_types:
+        product_id: varchar(256)
+        name: varchar(256)
+        price: float
+        inventory: int        
+
+
+
+  - name: stg_postgres__promos
+    description: "Promotional campaigns (dbt stage model)"
+    columns:
+      - name: promo_id
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: discount
+        description: "The discount amount attached to this promotion"
+        tests:
+          - not_null
+      - name: status
+        description: "The current status of the promotional campaign"
+        tests:
+          - not_null
+    config:
+      column_types:
+        promo_id: varchar(256)
+        discount: int
+        status: varchar(256)
+
+
+  - name: stg_postgres__users
+    description: "Users (dbt stage model)"
+    columns:
+      - name: user_id
+        description: "The primary key for this table (PK)"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "The user's first name"
+        tests:
+          - not_null
+      - name: last_name
+        description: "The user's last name"
+      - name: email
+        description: "The user's email"        
+      - name: phone_number
+        description: "The user's phone number"        
+      - name: created_at
+        description: "Datetime this user signed up"        
+      - name: updated_at
+        description: "Datetime this user record most recently was updated"        
+      - name: address_id
+        description: "The address attached to this user (FK)"                                
+    config:
+      column_types:
+        user_id: varchar(256)
+        first_name: varchar(256)
+        last_name: varchar(256)
+        email: varchar(256)
+        phone_number: varchar(256)
+        creatd_at: timestamp
+        updated_at: timestamp
+        address_id: varchar(256)
+
