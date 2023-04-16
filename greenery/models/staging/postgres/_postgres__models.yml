@@ -1,0 +1,204 @@
+version: 2
+
+models:
+  - name: stg_postgres_addresses
+    description: "Staged source addresses"
+    docs:
+      show: true
+    latest_version: 20230415
+    columns:
+      - name: address_id
+        description: "Address primary key, address ID code"
+        tests:
+          - unique
+          - not_null
+      - name: address
+        description: "Address: Associated customer street address"
+      - name: state
+        description: "Address: Associated customer state"
+      - name: zip_code
+        description: "Address: Associated customer zipcode"
+      - name: country
+        description: "Address: Associated customer country"
+
+  - name: stg_postgres_events
+    description: "Staged clickstream events"
+    columns:
+      - name: event_id
+        description: "Event Primary Key, event ID code"
+        tests:
+          - unique
+          - not_null
+      - name: session_id
+        description: "Associated session ID"
+        tests:
+          - not_null
+      - name: user_id
+        description: "Associated user ID"
+        tests:
+          - not_null
+      - name: page_url
+        description: "Associated page URL"
+        tests:
+          - not_null
+      - name: page_url_type
+        description: "Associated page URL type"
+        tests:
+          - not_null
+      - name: created_at_utc
+        description: "Associated creation time of event"
+        tests:
+          - not_null
+      - name: event_type
+        description: "Associated event type"
+        tests:
+          - not_null
+      - name: order_id
+        description: "Associated Order ID, if applicable"
+      - name: product_id
+        description: "Associated Product ID, if applicable"
+
+  - name: stg_postgres_order_items
+    description: "Staged order items"
+    columns:
+      - name: order_id
+        description: "Associated order ID for order_item"
+        tests:
+          - not_null
+      - name: product_id
+        description: "Associated product ID within a specified order"
+        tests:
+          - not_null
+      - name: quantity
+        description: "Associated item quantity for an item within a specified order "
+        tests:
+          - not_null
+
+  - name: stg_postgres_orders
+    description: "Staged orders"
+    columns:
+      - name: order_id
+        description: "Event Primary Key, order ID code"
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "Associated user ID for an order"
+        tests:
+          - not_null
+      - name: promo_id
+        description: "Associated promo ID for an order, if applicable"
+      - name: address_id
+        description: "Associated address ID for an order"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Associated time created for an order"
+        tests:
+          - not_null
+      - name: order_cost
+        description: "Associated cost for an order, excluding shipping"
+        tests:
+          - not_null
+      - name: shipping_cost
+        description: "Associated shipping cost for an order"
+        tests:
+          - not_null
+      - name: order_total
+        description: "Associated cost of an order, order_cost + shipping_cost"
+        tests:
+          - not_null
+      - name: tracking_id
+        description: "Associated tracking ID for an order"
+        tests:
+          - not_null
+          - unique
+      - name: shipping_service
+        description: "Associated shipping service for an order"
+        tests:
+          - not_null
+      - name: estimated_delivery_at
+        description: "Associated estimated delivery timestamp for an order"
+        tests:
+          - not_null
+      - name: delivered_at
+        description: "Associated delivery time for an order"
+      - name: status
+        description: "Associated delivery status for an order"
+        tests:
+          - not_null
+
+  - name: stg_postgres_products
+    description: "Staged products"
+    columns:
+      - name: product_id
+        description: "Primary Key, Product ID code"
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: "Product name"
+        tests:
+          - not_null
+      - name: price
+        description: "Associated Product price"
+        tests:
+          - not_null
+      - name: inventory
+        description: "Associated inventory count of given products"
+        tests:
+          - not_null
+
+  - name: stg_postgres_promos
+    description: "Staged promotional codes"
+    columns:
+      - name: promo_id
+        description: "Primary Key, Promotional ID code"
+        tests:
+          - unique
+          - not_null
+      - name: discount
+        description: "Associated promotional discount amount, in dollars"
+        tests:
+          - not_null
+      - name: statys
+        description: "Associated promotional code status, binary, active or inactive"
+        tests:
+          - not_null
+
+  - name: stg_postgres_users
+    description: "Staged users"
+    columns:
+      - name: created_at
+        description: "Associated datetime that user_id was created and added to system"
+        tests:
+          - not_null
+      - name: updated_at
+        description: "Associated datetime that user_id was updated in the system"
+        tests:
+          - not_null
+      - name: user_id
+        description: "Primary Key, User ID code"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "Associated first name of customer"
+        tests:
+          - not_null
+      - name: last_name
+        description: "Associated last name of customer"
+        tests:
+          - not_null
+      - name: email
+        description: "Associated email of customer"
+        tests:
+          - not_null
+      - name: phone_number
+        description: "Associated phone number of customer"
+        tests:
+          - not_null
+      - name: address_id
+        description: "Associated address id of customer"
+        tests:
+          - not_null

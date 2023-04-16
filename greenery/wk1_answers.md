@@ -6,7 +6,7 @@
 SELECT
     COUNT(DISTINCT user_id)
 FROM
-    dev_db.dbt_victoriaplum13gmailcom.src_postgres_users
+    dev_db.dbt_victoriaplum13gmailcom.stg_postgres_users
 ```
 
 **2. On average, how many orders do we receive per hour?**
@@ -17,10 +17,10 @@ On average, we recieve 7.5 orders an hour (rounded)
 WITH order_truncate AS
 (
     SELECT
-        DATE_TRUNC('HOUR',src_po.created_at) as created_at_hour
-        , COUNT(DISTINCT src_po.order_id) as distinct_order_id_count
+        DATE_TRUNC('HOUR',stg_po.created_at) as created_at_hour
+        , COUNT(DISTINCT stg_po.order_id) as distinct_order_id_count
     FROM
-        dev_db.dbt_victoriaplum13gmailcom.src_postgres_orders src_po
+        dev_db.dbt_victoriaplum13gmailcom.stg_postgres_orders stg_po
     GROUP BY created_at_hour
     ORDER BY created_at_hour
 )
@@ -39,12 +39,12 @@ On average, an order takes about ~3.89 days from being placed to being delivered
 WITH completed_orders AS
 (
     SELECT
-        src_po.order_id
-        , src_po.created_at
-        , src_po.delivered_at
+        stg_po.order_id
+        , stg_po.created_at
+        , stg_po.delivered_at
     FROM
-        dev_db.dbt_victoriaplum13gmailcom.src_postgres_orders src_po
-    WHERE src_po.delivered_at IS NOT NULL
+        dev_db.dbt_victoriaplum13gmailcom.stg_postgres_orders stg_po
+    WHERE stg_po.delivered_at IS NOT NULL
 )
 
 , order_times AS
@@ -79,10 +79,10 @@ We count the following:
 WITH user_order_counts AS
 (
 SELECT
-    src_po.user_id
-    , COUNT(DISTINCT src_po.order_id) as order_count
+    stg_po.user_id
+    , COUNT(DISTINCT stg_po.order_id) as order_count
 FROM 
-    dev_db.dbt_victoriaplum13gmailcom.src_postgres_orders src_po
+    dev_db.dbt_victoriaplum13gmailcom.stg_postgres_orders stg_po
 GROUP BY user_id
 )
 
@@ -105,7 +105,7 @@ WITH session_truncate AS
         DATE_TRUNC('HOUR',created_at) as created_at_hour
         , COUNT(DISTINCT session_id) as distinct_session_id_count
     FROM
-        dev_db.dbt_victoriaplum13gmailcom.src_postgres_events
+        dev_db.dbt_victoriaplum13gmailcom.stg_postgres_events
     GROUP BY created_at_hour
     ORDER BY created_at_hour
 )
