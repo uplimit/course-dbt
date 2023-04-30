@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: dim__promos
+    description: This table contains promo information, including discount percentage and status.
+    columns:
+      - name: promo_id
+        description: Unique identifier for the promo campaign
+        tests:
+          - not_null
+          - unique
+      - name: discount
+        description: Discount percentage offered by the promo campaign
+        tests:
+          - not_null
+      - name: status
+        description: Current status of the promo campaign (e.g., active or expired)
+        tests:
+          - not_null

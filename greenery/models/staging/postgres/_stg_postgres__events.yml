@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_postgres__events
+    description: "Staged clickstream events"
+    columns:
+      - name: event_id
+        description: "Event Primary Key, event ID code"
+        tests:
+          - unique
+          - not_null
+      - name: session_id
+        description: "Associated session ID"
+        tests:
+          - not_null
+      - name: user_id
+        description: "Associated user ID"
+        tests:
+          - not_null
+      - name: page_url
+        description: "Associated page URL"
+        tests:
+          - not_null
+      - name: page_url_type
+        description: "Associated page URL type"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Associated creation time of event"
+        tests:
+          - not_null
+      - name: event_type
+        description: "Associated event type"
+        tests:
+          - not_null
+      - name: order_id
+        description: "Associated Order ID, if applicable"
+      - name: product_id
+        description: "Associated Product ID, if applicable"

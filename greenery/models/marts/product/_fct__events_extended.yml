@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: fct__events_extended
+    description: This table contains extended event information, including user and product details.
+    columns:
+      - name: event_id
+        description: Unique identifier for the event
+        tests:
+          - not_null
+          - unique
+      - name: session_id
+        description: Unique identifier for the session associated with the event
+      - name: user_id
+        description: Unique identifier for the user who triggered the event
+      - name: page_url_type
+        description: Type of page URL where the event occurred
+      - name: event_timestamp
+        description: Timestamp when th event occurred
+        tests:
+          - not_null
+      - name: event_type

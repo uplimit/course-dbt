@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_postgres__products
+    description: "Staged products"
+    columns:
+      - name: product_id
+        description: "Primary Key, Product ID code"
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: "Product name"
+        tests:
+          - not_null
+      - name: price
+        description: "Associated Product price"
+        tests:
+          - not_null
+      - name: inventory
+        description: "Associated inventory count of given products"
+        tests:
+          - not_null

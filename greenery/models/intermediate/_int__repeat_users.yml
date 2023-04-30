@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: int__repeat_users
+    description: This table contains info on users who have made more than one order.
+    columns:
+      - name: user_id
+        description: Unique ID for the user
+        tests:
+          - not_null
+          - unique
+      - name: is_repeat_user
+        description: Boolean indicating if user has more than one order (marked as true)
+        tests:
+          - not_null

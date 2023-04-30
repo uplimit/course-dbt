@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: dim__customers
+    description: This table contains user information along with their associated addresses
+    columns:
+      - name: user_id
+        description: Unique identifier for the user
+        tests:
+          - not_null
+          - unique
+      - name: first_name
+        description: First name of the user
+      - name: last_name
+        description: Last name of the user
+      - name: email
+        description: Email address of the user
+        tests:
+          - not_null
+          - unique
+          - regex_test:
+              regex_pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9\\.\\.-]+\\.[a-zA-Z]{2,}$"
+      - name: phone_number
+        description: Phone number of the user
+      - name: address_id
+        description: Unique identifier for the address associated with the user
+        tests:
+          - not_null
+      - name: address
+        description: Full address of the user
+      - name: state
+        description: State of the user's address
+        tests:
+
+      - name: zip_code
+        description: Zip code of the user's address
+        tests:
+          - regex_test:
+              regex_pattern: "^[0-9]{5}(-[0-9]{4})?$"
+      - name: country
+        description: Country of the user's address_id
+      - name: created_at
+        description: Timestamp when the user was created
+        tests:
+          - not_null
+      - name: updated_at
+        description: Timestamp when the user was last updated

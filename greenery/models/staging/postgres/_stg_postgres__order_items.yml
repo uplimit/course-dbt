@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_postgres__order_items
+    description: "Staged order items"
+    columns:
+      - name: order_id
+        description: "Associated order ID for order_item"
+        tests:
+          - not_null
+      - name: product_id
+        description: "Associated product ID within a specified order"
+        tests:
+          - not_null
+      - name: quantity
+        description: "Associated item quantity for an item within a specified order "
+        tests:
+          - not_null

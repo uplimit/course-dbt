@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: fct__order_items_extended
+    description: This table contains extended order item information, including product details and applied promos.
+    columns:
+      - name: order_id
+        description: Unique identifier for the order
+        tests:
+          - not_null
+      - name: product_id
+        description: Unique identifier for the product in the order item
+        tests:
+          - not_null
+      - name: quantity
+        description: Quantity of the product in the order item
+        tests:
+          - not_null
+      - name: price
+        description: Price of the product in the order item
+        tests:
+          - not_null
+      - name: promo_id
+        description: Unique identifier for the promo campaign applied to the order (if any)
+      - name: promo_discount
+        description: Discount percentage offered by the applied promo campaign (if any)

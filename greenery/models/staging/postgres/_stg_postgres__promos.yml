@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: stg_postgres__promos
+    description: "Staged promotional codes"
+    columns:
+      - name: promo_id
+        description: "Primary Key, Promotional ID code"
+        tests:
+          - unique
+          - not_null
+      - name: discount
+        description: "Associated promotional discount amount, in dollars"
+        tests:
+          - not_null
+      - name: status
+        description: "Associated promotional code status, binary, active or inactive"
+        tests:
+          - not_null

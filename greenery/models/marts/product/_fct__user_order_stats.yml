@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: fct__user_order_stats
+    description: Contains user order stats, including the number of orders, repeat user status, delivery status nd delivery time.
+    columns:
+      - name: user_id
+        description: Unique identifier for the user
+        tests:
+          - not_null
+          - unique
+      - name: number_of_orders
+        description: Total number of orders placed by the user
+        tests:
+          - not_null
+      - name: is_repeat_user
+        description: Boolean flag indicating if the user has made more than one order (true)
+        tests:
+          - not_null
+      - name: is_delivered
+        description: Boolean flag indicating if the order has been delivered (true)
+        tests:
+          - not_null
+

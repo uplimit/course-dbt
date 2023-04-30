@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_postgres__users
+    description: "Staged users"
+    columns:
+      - name: created_at
+        description: "Associated datetime that user_id was created and added to system"
+        tests:
+          - not_null
+      - name: updated_at
+        description: "Associated datetime that user_id was updated in the system"
+        tests:
+          - not_null
+      - name: user_id
+        description: "Primary Key, User ID code"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "Associated first name of customer"
+        tests:
+          - not_null
+      - name: last_name
+        description: "Associated last name of customer"
+        tests:
+          - not_null
+      - name: email
+        description: "Associated email of customer"
+        tests:
+          - not_null
+      - name: phone_number
+        description: "Associated phone number of customer"
+        tests:
+          - not_null
+      - name: address_id
+        description: "Associated address id of customer"
+        tests:
+          - not_null

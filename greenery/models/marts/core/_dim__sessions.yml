@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: dim__sessions
+    description: This table contains session information, including user, start time, and end time.
+    columns:
+      - name: session_id
+        description: Unique identifier for the session
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        description: Unique identifier for the user who initiated the session
+
+      - name: start_time
+        description: Timestamp when the session started
+        tests:
+          - not_null
+
+      - name: end_time
+        description: Timestamp when the session ended (based on last event in the session)
+        tests:
+          - not_null

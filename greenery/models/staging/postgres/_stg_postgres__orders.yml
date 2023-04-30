@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: stg_postgres__orders
+    description: "Staged orders"
+    columns:
+      - name: order_id
+        description: "Event Primary Key, order ID code"
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "Associated user ID for an order"
+        tests:
+          - not_null
+      - name: promo_id
+        description: "Associated promo ID for an order, if applicable"
+      - name: address_id
+        description: "Associated address ID for an order"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Associated time created for an order"
+        tests:
+          - not_null
+      - name: order_cost
+        description: "Associated cost for an order, excluding shipping"
+        tests:
+          - not_null
+      - name: shipping_cost
+        description: "Associated shipping cost for an order"
+        tests:
+          - not_null
+      - name: order_total
+        description: "Associated cost of an order, order_cost + shipping_cost"
+        tests:
+          - not_null
+      - name: tracking_id
+        description: "Associated tracking ID for an order"
+      - name: shipping_service
+        description: "Associated shipping service for an order"
+      - name: estimated_delivery_at
+        description: "Associated estimated delivery timestamp for an order"
+      - name: delivered_at
+        description: "Associated delivery time for an order"
+      - name: status
+        description: "Associated delivery status for an order"
+        tests:
+          - not_null

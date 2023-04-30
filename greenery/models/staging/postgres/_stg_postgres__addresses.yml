@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: "Staged source addresses"
+    docs:
+      show: true
+    latest_version: 20230415
+    columns:
+      - name: address_id
+        description: "Address primary key, address ID code"
+        tests:
+          - unique
+          - not_null
+      - name: address
+        description: "Address: Associated customer street address"
+      - name: state
+        description: "Address: Associated customer state"
+      - name: zip_code
+        description: "Address: Associated customer zipcode"
+      - name: country
+        description: "Address: Associated customer country"
