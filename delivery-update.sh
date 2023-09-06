@@ -1,1 +1,0 @@
-psql -d dbt -f delivery_update.sql
