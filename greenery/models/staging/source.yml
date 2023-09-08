@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: greenery
+    database: dbt
+    schema: public
+
+    quoting:
+      database: false
+      schema: false 
+      identifier: false 
+    
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: orders
+        description: Contains information about orders placed by a user 
+
+      - name: addresses
+        description: Contains address information 
+
+      - name: events
+        description: Contains user event information including checkouts, add to carts, package shipments, and page views
+      
+      - name: order_items
+        description: Contains information about each product line-item in an order
+
+      - name: products
+        description: Contains information about the products sold by Greenery
+
+      - name: promos
+        description: Contains information about any promotions tied to  an order 
+
+      - name: superheroes
+        description: Contains information about superheroes 
+      
+      - name: users
+        loaded_at_field: created_at
+        description: Contain information about users 

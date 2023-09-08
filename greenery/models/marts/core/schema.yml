@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: this dim incclude number of orders containing a product. 
+    columns: 
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_shipping
+    description: this fact table inclue shipping information related ot order, that includes address, carrier and delivery time. 
+    columns: 
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_users
+    description: this dim will have information related to first order date and most recent order detail. 
+    columns:
+     - name: user_id
+       tests:
+        - not_null
+        - unique
