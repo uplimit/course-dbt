@@ -1,0 +1,43 @@
+version: 2
+
+sources:
+
+  - name: postgres # name of the source (this can be named whatever you want, but should be descriptive. this source (superheroes) is used for our week 1 tutorial so thats why i named it this way)
+    schema: public # this is the schema our raw data lives in
+    database: raw # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: addresses
+        description: >
+          Contains address details for user or order addresses
+      - name: events
+        loaded_at_field: created_at
+        description: >
+          Event stream data for our e-commerce website
+      - name: orders
+        loaded_at_field: created_at
+        description: >
+          Information about each order created on greenery's website
+      - name: order_items
+        description: >
+          Information about the items purchased within each order
+      - name: products
+        description: >
+          Information about the products available for purchase on greenery's website
+      - name: promos
+        description: >
+          Information about promos available for greenery purchases
+      - name: users
+        loaded_at_field: created_at
+        description: >
+           Information about each greenery userß
+        
