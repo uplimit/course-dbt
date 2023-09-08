@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: int_orders
+    description: "intermediate table that contains the order and promotion information of Greenery"
+    columns:
+      - name: order_id
+        description: "id of the order"
+        tests:
+          - unique
+          - not_null
+
+      - name: created_at
+        description: "order created timestamp"
+
+      - name: status
+        description: "status of the order"
+
+      - name: user_id
+        description: "id of the user"
+        tests:
+          - unique
+          - not_null
+
+      - name: address_id
+        description: "address of the user"
+        tests:
+          - unique
+          - not_null
+
+      - name: order_total
+        description: "total cost of the order including shipping"
+        tests:
+          - unique
+          - not_null
+
+      - name: promo_status
+        description: "whether the promo code is active or disabled"
+
+      - name: promo_discount
+        description: "absolute dollar amount that is given off with the code"
+
+      - name: order_cost
+        description: "dollar about of the items in the order"
+        tests:
+          - unique
+          - not_null
+
+      - name: shipping_cost
+        description: "cost of shipping for the order"
+        tests:
+          - unique
+          - not_null
+
+      - name: shipping_service
+        description: "company that was used for shipping"
+
+      - name: estimated_delivery_at
+        description: "estimated date of delivery"
+
+      - name: delivered_at
+        description: "actual timestamp of delivery"

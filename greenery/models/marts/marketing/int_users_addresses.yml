@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: int_users_addresses
+    description: "intermediate table that contains descrpitive info about Greenery's users and their address info"
+    columns:
+      - name: user_id
+        description: "id of the user"
+        tests:
+          - unique
+          - not_null
+
+      - name: first_name
+        description: "first name of the user"
+
+      - name: last_name
+        description: "last name of the user"
+
+      - name: email
+        description: "email of the user"
+
+      - name: phone_number
+        description: "phone number of the user"
+
+      - name: created_at
+        description: "user created timestamp"
+
+      - name: updated_at
+        description: "user updated timestamp"
+
+      - name: address
+        description: "user address"
+
+      - name: zipcode
+        description: "user zipcode"
+
+      - name: state
+        description: "user state"
+
+      - name: country
+        description: "user country"

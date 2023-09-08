@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: fact_user_sessions
+    description: "fact table that contains user session informaion"
+    columns:
+      - name: session_id
+        description: "id of the session"
+        tests:
+          - unique
+          - not_null
+
+      - name: user_id
+        description: "id of the user"
+
+      - name: session_start
+        description: "the timestamp of the start of the user's first session"
+
+      - name: session_end
+        description: "the timestamp of the end of the user's last session"
+
+      - name: session_length_mins
+        description: "the total session duration of the user in minutes"
+
+      - name: checkout_total
+        description: "user's checkouts"
+
+      - name: package_shipped_total
+        description: "user's packages shipped"
+
+      - name: add_to_cart_total
+        description: "user's number of add to carts"
+
+      - name: page_view_total
+        description: "user's number of page views"
+
+      - name: has_converted
+        description: "whether the user has converted (1) or not (0)"

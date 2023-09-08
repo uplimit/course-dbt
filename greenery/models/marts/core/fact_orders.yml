@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: "fact table that displays the orders, orered items and promos of Greenery"
+    columns:
+      - name: order_id
+        description: "id of the order"
+        tests:
+          - unique
+          - not_null
+
+      - name: created_at
+        description: "order created at"
+
+      - name: status
+        description: "status of the order"
+
+      - name: user_id
+        description: "user who made the order"
+        tests:
+          - unique
+          - not_null
+
+      - name: address_id
+        description: "address of the user"
+        tests:
+          - unique
+          - not_null
+
+      - name: order_total
+        description: "total cost of the order including shipping"
+        tests:
+          - positive_values
+
+      - name: promo_discount
+        description: "absolute dollar amount of the discount"
+        tests:
+          - positive_values
+
+      - name: order_cost
+        description: "dollar about of the items in the order"
+        tests:
+          - positive_values
+
+      - name: shipping_cost
+        description: "cost of shipping for the order"
+        tests:
+          - positive_values
+
+      - name: shipping_service
+        description: "company that was used for shipping"
+
+      - name: estimated_delivery_at
+        description: "estimated date of delivery"
+
+      - name: delivered_at
+        description: "actual timestamp of delivery"
+

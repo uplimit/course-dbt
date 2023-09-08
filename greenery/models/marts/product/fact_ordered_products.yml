@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: fact_ordered_products
+    description: "fact table that contains ordered products and their attributes"
+    columns:
+      - name: order_id
+        description: "id of the order"
+        tests:
+          - unique
+          - not_null
+
+      - name: created_at
+        description: "order created timestamp"
+
+      - name: product_name
+        description: "name of the product"
+
+      - name: product_id
+        description: "id of the product"
+        tests:
+          - unique
+          - not_null
+
+      - name: order_quantity
+        description: "quantity of the order"
+        tests:
+          - not_null
+          - positive_values
+
+      - name: product_price
+        description: "product price"
+        tests:
+          - not_null
+          - positive_values
+
+      - name: order_amount
+        description: "quantity multiplied by the price"
+        tests:
+          - not_null
+          - positive_values

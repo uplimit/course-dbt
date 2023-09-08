@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: int_product_events
+    description: "intermediate table that contains the mapping of sessions by product"
+    columns:
+      - name: product_id
+        description: "id of the product"
+        tests:
+          - unique
+          - not_null
+
+      - name: session_id
+        description: "id of the session"
+        tests:
+          - unique
+          - not_null
+
+      - name: checkout_total
+        description: "number of checkouts"
+
+      - name: package_shipped_total
+        description: "number of packages shipped"
+
+      - name: add_to_cart_total
+        description: "number of add to carts"
+
+      - name: page_view_total
+        description: "number of page views"

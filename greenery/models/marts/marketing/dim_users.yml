@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: dim_user
+    description: "dimension table that contains descriptive, purchase and session information about Greenery's users"
+    columns:
+      - name: user_id
+        description: "id of the user"
+        tests:
+          - unique
+          - not_null
+
+      - name: first_name
+        description: "user first name"
+
+      - name: last_name
+        description: "user last name"
+
+      - name: email
+        description: "user email"
+
+      - name: phone_number
+        description: "user phone number"
+
+      - name: user_first_order
+        description: "first order of the user created timestamp"
+
+      - name: user_last_order
+        description: "last order of the user created timestamp"
+
+      - name: order_count
+        description: "number of orders made by the user"
+        tests:
+          - not_null
+          - positive_values
+
+      - name: products_ordered
+        description: "number of products ordered"
+        tests:
+          - not_null
+          - positive_values
+
+      - name: order_quantity
+        description: "quanity of the products purchased"
+        tests:
+          - not_null
+          - positive_values
+
+      - name: order_amount
+        description: "amount of the order purchased (quantity * price)"
+        tests:
+          - not_null
+          - positive_values
+
+      - name: page_views
+        description: "user's number of page views"
+
+      - name: add_to_carts
+        description: "user's number of add to carts"
+
+      - name: checkouts
+        description: "user's checkouts"
+
+      - name: packages_shipped
+        description: "user's packages shipped"
+
+      - name: total_session_count
+        description: "total count of distinct user sessions"
