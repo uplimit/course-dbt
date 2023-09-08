@@ -1,0 +1,14 @@
+version: 2
+
+macros:
+  - name: order_revenue
+    description: >
+      price * quantity * (1 - discount)
+      Abstracted out from models to have a single place to make changes to the formula if needed
+    arguments:
+      - name: price_col
+        description: A numeric column name representing the price in the formula
+      - name: quantity_col
+        description: A numeric column name representing the quantity in the formula
+      - name: discount_col
+        description: A numeric column between zero and one representing the percent of revenue not collected

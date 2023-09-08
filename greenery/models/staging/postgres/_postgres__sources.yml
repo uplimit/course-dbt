@@ -1,0 +1,257 @@
+version: 2
+
+sources:
+    - name: 'postgres' # where the data is coming from
+      schema: public
+      database: raw
+      description: "All of the data in this dbt project taken from Postgres"
+      
+      meta:
+        owner: Jansen Manahan
+        owner_email: jmanahan@cargurus.com
+
+      quoting:
+        database: false
+        schema: false
+        identifier: false
+
+      freshness:
+        warn_after: {count: 7, period: day}
+        # do not error
+
+      tables:
+        - name: addresses
+          description: "Addresses related to the users and orders tables"
+          columns:
+            - name: address_id
+              description: "Alphanumeric nonsense string, listed as primary key of addresses table"
+              tests: # Used as primary key
+                - unique
+                - not_null
+
+            - name: address
+              description: "Street number, name, and suffix as one string"
+              
+            - name: zipcode
+              description: "Numerical ZIP code of the address, missing leading zeroes"
+
+            - name: state
+              description: "Full name of the first-level subdivision of the address, pre-standardized as of 2022-10-05"
+
+            - name: country
+              description: "Full name of the country of the address"
+              tests:
+                - accepted_values:
+                    values: ['United States'] # Be aware if new countries are added
+
+
+        - name: events
+          # loaded_at_field: created_at # Probably
+          description: "Selected actions taken on the website.  Related to users, porducts, and orders"
+          columns:
+            - name: event_id
+              description: "Alphanumeric nonsense string listed as primary key of events table"
+              tests: # Used as primary key
+                - unique
+                - not_null
+
+            - name: session_id
+              description: "Alphanumeric nonsense string frequently the same as the next row of the events table"
+
+            - name: user_id
+              description: "Alphanumeric nonsense string that correlates closely with session_id in the events table and is FK to users.user_id"
+
+            - name: page_url
+              description: "Full web adress related to an event"
+              # TODO: test that LEFT(page_url, 20) = 'https://greenary.com' to not be surprised by new sites
+
+            - name: created_at
+              description: "Timestamp related to an event.  Not strictly ordered.  No time zone" # Right? Not propagated from another table?
+
+            - name: event_type
+              description: "Lowercase descriptive string related to an event"
+              tests: # Don't get surprised by a change
+                - accepted_values: 
+                    values: ['checkout', 'package_shipped', 'add_to_cart', 'page_view']
+
+            - name: order_id
+              description: >
+                "Order ID related to an event"
+                "Is NULL if product_id has data"
+                "Has data for event types 'checkout' and 'package_shipped'"
+                "Foreign key to orders.order_id"
+              # TODO: tests on multiple columns
+
+            - name: product_id
+              description: >
+                "Product ID related to an event"
+                "Is NULL if order_id has data"
+                "Has data for event types 'add_to_cart' and 'page_view'"
+                "Foreign key to products.product_id"
+              # TODO: tests on multiple columns
+
+
+        - name: orders
+          # loaded_at_field: created_at # Probably
+          description: "Information about orders"
+          columns:
+            - name: order_id
+              description: "Listed primary key of the orders table.  Alphanumeric"
+              tests:
+                - unique
+                - not_null
+            
+            - name: user_id
+              description: "Alphanumeric foreign key to users.user_id"
+
+            - name: promo_id
+              description: "Sparsely populated descriptive string.  Foreign key to promos.promo_id"
+
+            - name: address_id
+              description: "Alphanumeric"
+
+            - name: created_at
+              description: "Timestamp related to an order.  Not strictly ordered.  No time zone" # Right? Not propagated from another table?
+
+            - name: order_cost
+              description: "A number related to an order"
+              tests:
+                - positive_values              
+
+            - name: shipping_cost
+              description: "A number related to an order"
+              tests:
+                - positive_values
+
+            - name: order_total
+              description: "A number often but not always the sum of order_cost and shipping_cost"
+              tests:
+                - positive_values
+
+            - name: tracking_id
+              description: "An alphanumeric related to an order.  Has some NULL values"
+
+            - name: shipping_service
+              description: "A descriptive string related to an order and also NULL when tracking_id is"
+              tests: # Don't be surprised
+                - accepted_values:
+                    values: ['dhl', 'fedex', 'ups', 'usps']
+                # TODO: multi-column test to ensure continuation of co-NULL
+            
+            - name: estimated_delivery_at
+              description: "A timestamp related to an order, always NULL when tracking_id is, and sometimes when it isn't"
+
+            - name: delivered_at
+              description: >
+                "A timestamp related to an order. Has NULL values if status is not 'delivered'."
+                "NULLs do not correlate perfectly with NULL values in other columns"
+              # TODO: multi-column test to ensure NULL based on status
+
+            - name: status
+              description: "A descriptive string related to an order"
+              tests: # Don't be surprised
+                - accepted_values:
+                    values: ['delivered', 'shipped', 'preparing']
+
+
+        - name: order_items
+          description: "An intersection between the orders and products tables"
+          columns:
+            - name: order_id
+              description: "Foreign key to the orders table.  Part of this table's primary key"
+              tests:
+                - not_null
+                - relationships:
+                    to: source('postgres', 'orders')
+                    field: order_id
+
+            - name: product_id
+              description: "Foreign key to the products table.  Part of this table's primary key"
+              tests:
+                - not_null
+                - relationships:
+                    to: source('postgres', 'products')
+                    field: product_id
+
+            - name: quantity
+              description: "An integer related to an order product"
+              tests:
+                - positive_values
+
+
+        - name: products
+          description: "Information about stocked and sold inventory items"
+          columns:
+            - name: product_id
+              description: "Listed primary key alphanumeric field in the products tables"
+              tests:
+                - unique
+                - not_null
+
+            - name: name
+              description: "Description string related to a product"
+
+            - name: price
+              description: "Numerical value related to a product"
+              tests:
+                - positive_values
+
+            - name: inventory
+              description: "Integer related to a product"
+              tests:
+                - positive_values
+
+
+        - name: promos
+          description: "Information related to a promo"
+          columns:
+            - name: promo_id
+              description: "A descriptive string listed as the primary key of the promo table.  Inconsistent capitalization"
+              tests:
+                - unique
+                - not_null
+
+            - name: discount
+              description: "An integer related to a promo"
+              tests:
+                - positive_values
+
+            - name: status
+              description: "A string related to a promo"
+              tests: # No surprises
+                - not_null
+                - accepted_values:
+                    values: ['active', 'inactive']
+
+
+        - name: users
+          # loaded_at: created_at # Probably
+          description: "Information about users of the website"
+          columns:
+            - name: user_id
+              description: "Listed primary key of the users table.  Alphanumeric"
+              tests:
+                - unique
+                - not_null
+
+            - name: first_name
+              description: "A string related to the user"
+
+            - name: last_name
+              description: "A string related to the user"
+
+            - name: email
+              description: "A string related to the user.  Follows a specific format including an '@' character in the middle somewhere"
+
+            - name: phone_number
+              description: "A string related to the user.  Follows a strict format of ###-###-#### where # represted [0-9] in regex"
+              # TODO: test for format
+
+            - name: created_at
+              description: "A timestamp related to the user.  No time zone"
+
+            - name: updated_at
+              description: "A timestamp related to the user.  No time zone.  Always >= created_at"
+
+            - name: address_id
+              description: "Foreign key related to the address_id column of the addresses table"
