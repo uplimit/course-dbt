@@ -1,0 +1,16 @@
+version: 2
+
+macros:
+  - name: calculate_rates 
+    arguments:
+      - name: numerator_column_name
+        type: column name
+        description: "The name of a column that will be the numerator in the rate calculation"
+      
+      - name: denominator_column_name
+        type: column name
+        description: "The name of a column that will be the denominator in the rate calculation"
+
+      - name: dp
+        type: integer
+        description: "The number of decimal places to round to. Default is 2."

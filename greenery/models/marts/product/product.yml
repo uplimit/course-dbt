@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: int_events_grouped_by_product_date
+    description: event data grouped by product x date 
+  
+  - name: int_orders_grouped_by_product_date
+    description: orders data grouped by product x date
+
+  - name: facts_products_date 
+    description: product date grouped by product x date  
+  
+  - name: int_sessions_grouped_by_product
+    description: session data from stg_event data grouped product
+  
+  - name: facts_product_conversions
+    description: conversion rates at the product-level 
+    columns: 
+      - name: view_cart_conversion_rate 
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0  
+              max_value: 100  
+      - name: cart_purchase_conversion_rate 
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0  
+              max_value: 100  
+      - name: view_purchase_conversion_rate 
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0  
+              max_value: 100              
+          
+  
+  - name: facts_conversions 
+    description: calculate overall conversion rates
+    columns: 
+      - name: view_cart_conversion_rate 
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0  
+              max_value: 100  
+      - name: cart_purchase_conversion_rate 
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0  
+              max_value: 100  
+      - name: view_purchase_conversion_rate 
+        tests: 
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0  
+              max_value: 100       
+                
+  - name: int_events_grouped_by_sessions 
+    description: events data grouped by session
+    columns:
+      - name: session_id 
+        tests:
+          - not_null
+          - unique 
