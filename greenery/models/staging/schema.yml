@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: stg_users
+    description: Demographics about each user. 
+    columns:
+      - name: user_id 
+        tests:
+          - not_null
+          - unique 
+  -  name: stg_addresses 
+     description: Address information. 
+     columns: 
+      - name: address_id 
+        description: "The primary key for this table"
+        tests: 
+          - unique 
+          - not_null 
+  -  name: stg_events
+     description: Information anytime an item is added to the cart, someone checks out, someone visits a page, and when a package is shipped.
+     columns: 
+      - name: event_id 
+        description: "The primary key for this table"
+        tests: 
+          - unique 
+          - not_null 
+  -  name: stg_order_items 
+     description: For each order x product, how many products were ordered.  
+     columns: 
+      - name: order_product_id 
+        description: "The primary key for this table"
+        tests: 
+          - unique 
+          - not_null 
+      - name: order_id 
+        description:  "Unique ID for order in this schema"
+        tests: 
+          - not_null 
+      - name: product_id 
+        description:  "Unique ID for product in this schema"
+        tests: 
+          - not_null 
+  -  name: stg_orders 
+     description: Information on the order like how much it cost, tracking id, and delivery date.   
+     columns: 
+      - name: order_id 
+        description: "The primary key for this table"
+        tests: 
+          - unique 
+          - not_null 
+      - name: user_id 
+        description: "Unique ID for user in this schema"
+        tests: 
+          - not_null 
+      - name: address_id 
+        description:  "Unique ID for address in this schema"
+        tests: 
+        - not_null 
+  - name: stg_products 
+    description: Information on the product like name, price, and inventory. 
+    columns:
+      - name: product_id 
+        description: "Unique ID for user in this schema"
+        tests:
+          - not_null
+          - unique 
+  - name: stg_promos
+    description: Information on the promos, how much is the discount, and whether or not they can be used. 
+    columns:
+      - name: promo_id 
+        description: "Unique ID for user in this schema"
+        tests:
+          - not_null
+          - unique 
+
