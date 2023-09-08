@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: int_order_order_items
+    description: >
+      Denormalied order-grained table with aggregations information for key
+      facts.
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique

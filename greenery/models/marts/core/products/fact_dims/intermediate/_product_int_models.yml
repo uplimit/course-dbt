@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: int_user_session_events
+    description: >
+      User/session/order grained table with aggregated events and timestamp analysis.
+    columns:
+      - name: unique_key
+        tests:
+          - not_null
+          - unique
