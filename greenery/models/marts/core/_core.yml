@@ -1,0 +1,123 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "product information"
+    columns:
+      - name: product_id
+        description: "product id"
+
+      - name: name
+        description: "name of product"
+
+      - name: price
+        description: "price of product"
+        tests:
+         - positive_values
+
+      - name: inventory
+        description: "amount of the inventory we have for this product"
+        tests:
+         - positive_values
+
+      - name: total_orders
+        description: "total orders each user purchased by product"
+        tests: 
+         - positive_values
+
+      - name: total_sessions
+        description: "total sessions by product"
+
+      - name: conversion_rate
+        description: "total orders divide by total sessions by product"
+
+  - name: dim_users
+    description: "user information"
+    columns:
+      - name: user_id
+        description: "user id"
+
+      - name: first_name
+        description: "user first name"
+
+      - name: last_name
+        description: "user last name"
+
+      - name: email
+        description: "user email"
+
+      - name: phone_number
+        description: "user phone number"
+
+      - name: created_at
+        description: "user created at date and time"
+        tests: 
+         - not_null
+
+      - name: updated_at
+        description: "user information update date and time"
+        tests: 
+         - not_null
+
+      - name: address_id
+        description: "user address id"
+        tests: 
+         - not_null
+
+      - name: address
+        description: "user address"
+
+      - name: zipcode
+        description: "user zipcode"
+
+      - name: state
+        description: "user state"
+
+      - name: country
+        description: "user country"
+        
+  - name: fact_orders
+    description: "all order information"
+    columns:
+      - name: order_id
+        description: "order id"
+
+      - name: user_id
+        description: "user id of the order"
+
+      - name: promo_id
+        description: "promo code that was used"
+
+      - name: address_id
+        description: "address id of order"
+
+      - name: created_at
+        description: "day and time order was created"
+
+      - name: order_cost
+        description: "total cost of products in order"
+        tests:
+         - positive_values
+
+      - name: shipping_cost
+        description: "shipping cost of order"
+        
+      - name: order_total
+        description: "total order cost including shipping cost"
+        tests:
+         - positive_values
+
+      - name: tracking_id
+        description: "order tracking id"
+
+      - name: shipping_service
+        description: "order shipping service"
+
+      - name: estimated_delivery_at
+        description: "estimated delivery of order"
+
+      - name: delivered_at
+        description: "when order was delivered"
+
+      - name: status
+        description: "status of order"

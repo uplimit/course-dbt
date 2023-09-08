@@ -1,0 +1,27 @@
+version: 2 
+
+sources:
+  - name: _postgres__sources
+    database: raw
+    schema: public
+    
+    tables:
+      - name: users
+        loaded_at_field: created_at
+        description: ""
+      - name: addresses 
+        description: ""
+      - name: orders
+        loaded_at_field: created_at
+        description: ""
+      - name: promos
+        description: ""
+      - name: order_items
+        description: ""
+      - name: products
+        description: ""
+      - name: events
+        loaded_at_field: created_at
+        description: ""
+
+
