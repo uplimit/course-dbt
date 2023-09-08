@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: fact_order_events
+    description: "order events data by user"
+    columns:
+      - name: user_id
+        description: "unique user id"
+        tests: 
+          - unique
+          - not_null
+
+      - name: total_orders
+        description: "total orders per user id"
+        tests:
+         - positive_values
+
+      - name: total_promos_used
+        description: "total promo codes used per user id"
+
+      - name: recent_order_date
+        description: "recent order date"
+
+      - name: total_spent
+        description: "total spent by user id"
+
+      - name: num_sessions
+        description: "total number of sessions by user id"
+
+      - name: first_session_date
+        description: "user first session date"
+
+      - name: last_session_date
+        description: "user last session date"
+
+      - name: total_session_duration
+        description: "total hours of sessions"
+
+      - name: session_checkout
+        description: "total session checkouts during the session"
+
+      - name: session_package_shipped
+        description: "total packege shipments during the session"
+
+      - name: session_page_view
+        description: "total page views during the session"
+
+      - name: session_add_to_cart
+        description: "total products add to cart during the session"
+
+  - name: fact_product_funnel
+    description: "product funnel table with conversion rates"
+    columns:
+      - name: page_view_rate
+        description: "page view sessions divided by total sessions multiply by 100"
+
+      - name: add_to_cart_rate
+        description: "add to cart sessions divided by total sessions multiply by 100"
+
+      - name: checkout_rate
+        description: "checkout sessions divided by total sessions multiply by 100"
