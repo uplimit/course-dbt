@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: products_performance
+    columns:
+      - name: unique_key
+        tests: 
+          - unique
