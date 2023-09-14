@@ -31,3 +31,5 @@ sources:
       - name: users
         loaded_at_field: created_at
         description: Contains user information
+      - name: promos
+        description: Contains e-commerce promo information
