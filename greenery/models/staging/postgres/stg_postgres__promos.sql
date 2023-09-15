@@ -5,7 +5,7 @@
 }}
 
 SELECT 
-    promo_id::VARCHAR(256),
-    discount::INTEGER,
-    status::VARCHAR(128)
+    promo_id::VARCHAR(256) as promo_id,
+    discount::INTEGER as discount,
+    status::VARCHAR(128) as status
 FROM {{ source('postgres', 'promos') }}
