@@ -1,0 +1,118 @@
+version: 2
+
+models:
+  - name: stg_addresses
+    description: Staging model for the addresses table
+    columns:
+      - name: address_id
+        description: UUID for each address
+      - name: address
+        description: address
+      - name: zipcode
+        description: The zipcode of the address
+      - name: state
+        description: State/Province
+      - name: country
+        description: Country
+
+  - name: stg_events
+    description: Staging model for events table
+    columns:
+      - name: event_id
+        description: UUID for each event
+      - name: session_id
+        description: UUID of each browsing session
+      - name: user_id
+        description: UUID of the user who performed the event
+      - name: page_url
+        description: URL page of the event
+      - name: created_at
+        description: Timestamp for the event
+      - name: event_type
+        description: Type of event (add_to_cart, checkout, package_shipped, page_view)
+      - name: order_id
+        description: UUID of the order (only for checkout and package_shipped events)
+      - name: product_id
+        description: UUID of the product for product-specific events (only for checkout and page_view events)
+
+  - name: stg_order_items
+    description: Staging model for the order items
+    columns:
+      - name: order_id
+        description: UUID of the order
+      - name: product_id
+        description: UUID of the product(s) in the order
+      - name: quantity
+        description: Number of units of the product in the order
+
+  - name: stg_orders
+    description: Staging model for orders
+    columns:
+      - name: order_id
+        description: UUID for each order
+      - name: user_id
+        description: UUID of the user who placed the order
+      - name: promo_id
+        description: UUID of the promo code used in the order (not required)
+      - name: address_id
+        description: Delivery address ID for the order
+      - name: created_at
+        description: Timestamp for the order
+      - name: order_cost
+        description: Dollar amount of the order
+      - name: shipping_cost
+        description: Cost of shipping for the order
+      - name: order_total
+        description: Total cost of the order (includes shipping)
+      - name: tracking_id
+        description: Tracking number of the order
+      - name: shipping_service
+        description: Company used for shipping
+      - name: estimated_delivery_at
+        description: Estimated delivery date
+      - name: delivered_at
+        description: Actual delivery date
+      - name: status
+        description: Status of the order
+
+  - name: stg_products
+    description: Staging model for products
+    columns:
+      - name: product_id
+        description: UUID for each product
+      - name: name
+        description: Name of the product
+      - name: price
+        description: Price of the product in dollars
+      - name: inventory
+        description: Inventory for each product
+ 
+  - name: stg_promos
+    description: Staging model for promos
+    columns:
+      - name: promo_id
+        description: Every promocode generated
+      - name: discount
+        description: Dollar amount given off by using the code
+      - name: status
+        description: Status of the promo code (active or inactive)
+
+  - name: stg_users
+    description: Staging model for users
+    columns:
+      - name: user_id
+        description: UUID for each user
+      - name: first_name
+        description: First name of the user
+      - name: last_name
+        description: Last name of the user
+      - name: email
+        description: Email address of the user
+      - name: phone_number
+        description: Phone number of the user
+      - name: created_at
+        description: Timestamp when the user was created
+      - name: updated_at
+        description: Timestamp when the user was last updated
+      - name: address_id
+        description: Default delivery address for the user
