@@ -1,0 +1,18 @@
+version: 2
+
+models:
+
+  - name: stg_postgres__products
+    description: Table containing products details such as ID, name, price and inventory
+    columns:
+      - name: product_id
+        description: Unique product ID in the platform (Primary key)
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: Product name
+      - name: price
+        description: Product price
+      - name: inventory
+        description: Current amount of the product in stock

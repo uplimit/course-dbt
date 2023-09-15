@@ -1,0 +1,26 @@
+version: 2
+
+models:
+
+  - name: stg_postgres__events
+    description: Events based on customers interaction with website
+    columns:
+      - name: event_id
+        description: Unique event ID in the platform (Primary key)
+        tests:
+          - unique
+          - not_null
+      - name: session_id
+        description: session browsing ID  (Primary key)
+      - name: user_id
+        description: User ID indicating to whom the event is associated with
+      - name: page_url
+        description: URL of the event
+      - name: created_at
+        description: Timestamp of the event 
+      - name: event_type
+        description: Type of event 
+      - name: order_id
+        description: Order ID related to the event if there was one
+      - name: product_id
+        description: Product ID related to the event if there was one
