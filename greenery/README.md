@@ -13,9 +13,9 @@
 | Metric                          | Value      |
 |---------------------------------|------------|
 | Total Users                     | 130        |
-| Average Orders per Hour         | 7.520       |
-| Average Hours to Deliver        | 93.403      |
+| Average Orders per Hour         | 7.520      |
+| Average Hours to Deliver        | 93.403     |
 | Users with One Purchase         | 25         |
 | Users with Two Purchases        | 28         |
 | Users with Three+ Purchases     | 71         |
-| Average Sessions per Hour       | 16.327      |
+| Average Sessions per Hour       | 16.327     |
