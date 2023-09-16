@@ -1,0 +1,118 @@
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: Table with addresses of clients
+    columns:
+      - name: address_id
+        description: Address unique identifier
+      - name: address
+        description: Address
+      - name: zipcode
+        description: Zipcode
+      - name: state
+        description: Atate
+      - name: country
+        description: Country
+
+  - name: stg_postgres__events
+    description: Table with events
+    columns:
+      - name: event_id
+        description: Event unique identifier
+      - name: session_id
+        description: Session unique identifier
+      - name: user_id
+        description: User unique identifier
+      - name: event_type
+        description: Type of event
+      - name: page_url
+        description: Webpage of event
+      - name: created_at
+        description: Timestamp of creation
+      - name: order_id
+        description: Order unique identifier
+      - name: product_id
+        description: Product unique identifier
+
+  - name: stg_postgres__order_items
+    description: Table with ordered items
+    columns:
+      - name: order_id
+        description: Order unique identifier
+      - name: product_id
+        description: Product unique identifier
+      - name: quantity
+        description: Quantity of ordered items
+
+  - name: stg_postgres__orders
+    description: Table with description of orders
+    columns:
+      - name: order_id
+        description: Order unique identifier
+      - name: promo_id
+        description: Promo unique identifier
+      - name: user_id
+        description: User unique identifier
+      - name: address_id
+        description: Address unique identifier
+      - name: created_at
+        description: Creation timestamp
+      - name: order_cost
+        description: Cost of the order
+      - name: shipping_cost
+        description: Cost of the shipping
+      - name: order_total
+        description: Total cost of the order (including shipping)
+      - name: tracking_id
+        description: Tracking unique identifier
+      - name: shipping_service
+        description: Shipping service provider
+      - name: estimated_delivery_at
+        description: Date of estimated delivery
+      - name: delivered_at
+        description: Date of executed delivery
+      - name: status
+        description: Status of delivery
+
+  - name: stg_postgres__products
+    description: Table with description of products
+    columns:
+      - name: product_id
+        description: Product unique identifier
+      - name: name
+        description: Product name
+      - name: price
+        description: Product price
+      - name: inventory
+        description: Amount of available products
+
+  - name: stg_postgres__promos
+    description: Table with description of promos
+    columns:
+      - name: promo_id
+        description: Promo unique identifier
+      - name: discount
+        description: Discount percentage
+      - name: status
+        description: Status of promo (active/inactive)
+
+  - name: stg_postgres__users
+    description: Table with users information
+    columns:
+      - name: user_id
+        description: User unique identifier
+      - name: first_name
+        description: User first name
+      - name: last_name
+        description: User last name
+      - name: email
+        description: User email address
+      - name: phone_number
+        description: User phone number
+      - name: created_at
+        description: Timestamp of creation
+      - name: updated_at
+        description: Timestamp of update
+      - name: address_id
+        description: Address unique identifier
