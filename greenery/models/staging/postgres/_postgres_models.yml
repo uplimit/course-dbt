@@ -11,7 +11,7 @@ models:
       - name: zipcode
         description: Zipcode
       - name: state
-        description: Atate
+        description: State
       - name: country
         description: Country
 
