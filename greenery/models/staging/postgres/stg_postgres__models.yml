@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_addresses
+  - name: stg_postgres_addresses
     description: Staging model for the addresses table
     columns:
       - name: address_id
@@ -15,7 +15,7 @@ models:
       - name: country
         description: Country
 
-  - name: stg_events
+  - name: stg_postgres_events
     description: Staging model for events table
     columns:
       - name: event_id
@@ -35,7 +35,7 @@ models:
       - name: product_id
         description: UUID of the product for product-specific events (only for checkout and page_view events)
 
-  - name: stg_order_items
+  - name: stg_postgres_order_items
     description: Staging model for the order items
     columns:
       - name: order_id
@@ -45,7 +45,7 @@ models:
       - name: quantity
         description: Number of units of the product in the order
 
-  - name: stg_orders
+  - name: stg_postgres_orders
     description: Staging model for orders
     columns:
       - name: order_id
@@ -75,7 +75,7 @@ models:
       - name: status
         description: Status of the order
 
-  - name: stg_products
+  - name: stg_postgres_products
     description: Staging model for products
     columns:
       - name: product_id
@@ -87,7 +87,7 @@ models:
       - name: inventory
         description: Inventory for each product
  
-  - name: stg_promos
+  - name: stg_postgres_promos
     description: Staging model for promos
     columns:
       - name: promo_id
@@ -97,7 +97,7 @@ models:
       - name: status
         description: Status of the promo code (active or inactive)
 
-  - name: stg_users
+  - name: stg_postgres_users
     description: Staging model for users
     columns:
       - name: user_id

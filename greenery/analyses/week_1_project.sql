@@ -3,7 +3,7 @@ WITH
 	qtt_users AS (
 		SELECT
 			COUNT(DISTINCT user_id) AS distinct_users
-		FROM {{ ref("stg_users") }}
+		FROM {{ ref("stg_postgres_users") }}
 	)--qtt_users
 
 
@@ -13,7 +13,7 @@ WITH
 		SELECT
 			date_trunc('HOUR', created_at) AS hour
 			, COUNT(DISTINCT order_id) 	   AS order_count
-		FROM {{ ref("stg_orders") }}
+		FROM {{ ref("stg_postgres_orders") }}
 		GROUP BY date_trunc('HOUR', created_at)
 	)--orders_per_hour
 
@@ -29,7 +29,7 @@ WITH
 	, avg_delivery_time AS (
         SELECT 
 			AVG(DATEDIFF(hour, created_at, delivered_at)) AS avg_hours_to_deliver
-        FROM {{ ref("stg_orders") }}
+        FROM {{ ref("stg_postgres_orders") }}
         WHERE delivered_at IS NOT NULL
 	)--avg_delivery_time
 
@@ -40,7 +40,7 @@ WITH
         SELECT 
 			user_id
 			, COUNT(DISTINCT order_id) AS total_purchases
-        FROM {{ ref("stg_orders") }}
+        FROM {{ ref("stg_postgres_orders") }}
         GROUP BY user_id
     )--purchases_by_user  
 
@@ -59,7 +59,7 @@ WITH
         SELECT
             DATE_TRUNC('HOUR', created_at) AS session_hour
             , COUNT(DISTINCT session_id)     AS session_count
-        FROM {{ ref("stg_events") }}
+        FROM {{ ref("stg_postgres_events") }}
         GROUP BY DATE_TRUNC('HOUR', created_at) 
     )
 
