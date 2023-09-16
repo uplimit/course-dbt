@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "This model represents the staging table for orders data."
+
+  - name: stg_users
+    description: "This model represents the staging table for users data."
+
+  - name: stg_promos
+    description: "This model represents the staging table for promotions data."
+
+  - name: stg_products
+    description: "This model represents the staging table for products data."
+
+  - name: stg_addresses
+    description: "This model represents the staging table for addresses data."
+
+  - name: stg_events
+    description: "This model represents the staging table for events data."
+
+  - name: stg_order_items
+    description: "This model represents the staging table for order items data."
