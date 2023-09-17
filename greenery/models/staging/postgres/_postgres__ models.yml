@@ -1,0 +1,127 @@
+version: 2
+
+models:
+
+  - name: stg_users
+    description: Staging user data sourced from postgres.
+    columns:
+      - name: user_uuid
+        description: Primary key.
+        tests:
+          - not_null
+          - unique
+      - name: address_uuid
+        description: Foreign key to the stg_addresses 
+      - name: first_name
+      - name: last_name
+      - name: phone_number
+      - name: email
+      - name: user_created_at
+        description: UTC timestamp of when user was last created.
+      - name: updated_at
+        description: UTC timestamp of when data was last updated.
+
+  - name: stg_addresses
+    description: Staging address data sourced from postres. Holds all addresses used by registered users.
+    columns:
+      - name: address_id
+        description: Primary key.
+        tests:
+          - not_null
+          - unique
+      - name: address
+        description: Data contains home number and street name.
+      - name: country
+      - name: state
+      - name: zipcode
+
+  - name: stg_web_events
+    description: Staging events data sourced from postres. Data contains user web event details.
+    columns:
+      - name: event_uuid
+        description: Primary key.
+        tests:
+          - not_null
+          - unique
+      - name: user_uuid
+        description: Foreign key to users table.
+      - name: event_type
+        description: Web event type - checkout, package_shipped, add_to_cart, page_view.
+      - name: order_uuid
+      - name: page_url
+        description: URL of the event. 
+      - name: product_uuid
+      - name: session_uuid
+      - name: event_created_at
+        description: utc timestamp of event.
+
+  - name: stg_order_items
+    description: Staging items-in-order data sourced from postres. Data contains details of items in the order.
+    columns:
+      - name: order_uuid
+        description: Primary key
+        tests:
+          - not_null
+      - name: product_uuid
+        description: Foreign key to products table.
+      - name: quantity
+        description: Quantity of the item bought in the order.
+
+  - name: stg_orders
+    description: Staging order data sourced from postres.
+    columns:
+      - name: order_uuid
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        description: Users foreign key.
+      - name: address_id
+        description: Addresses foreign key.
+      - name: promo_name
+        description: Promotions foreign key.
+      - name: order_status
+        description: The status of the order - delivered, shipped or preparing.
+      - name: shipping_service
+        description: The service provider for shipping - dhl, fedex ups, usps. Value can be Null.
+      - name: order_tracking_uuid
+        description: Unique UUID for tracking the order.
+      - name: order_cost
+        description: The total cost of the order.
+      - name: shipping_cost
+        description: Cost of shipping the order
+      - name: order_total
+        description: SUM of order_cost and order_shipping_cost
+      - name: estimated_delivery_at
+        description: Estimaed timestamp in UTC of when order may get delivered.
+      - name: delivered_at
+        description: Real timestamp in UTC of when order was delivered.
+      - name: order_created_at
+        description: UTC timestamp of when the order created.
+
+  - name: stg_products
+    description: Staging product data sourced from postres.
+    columns:
+      - name: product_id
+        description:  Primary key
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+      - name: price
+      - name: inventory
+        description: Quantity of product left in inventory.
+
+  - name: stg_promos
+    description: Staging promotions data sourced from postres.
+    columns:
+      - name: promo_name
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+      - name: discount_amount
+      - name: promo_status
+        description: The status of the promotion - active or inactive.
+        
