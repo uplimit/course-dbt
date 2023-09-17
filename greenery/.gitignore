@@ -1,4 +1,1 @@
-
-target/
-dbt_packages/
-logs/
+.dbtenv/

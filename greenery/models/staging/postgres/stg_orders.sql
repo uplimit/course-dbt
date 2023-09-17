@@ -14,7 +14,7 @@ SELECT
     shipping_cost,
     order_total,
     shipping_service,
-    DATE(estimated_delivery_at) as estimated_delivery_at,
-    DATE(delivered_at) as delivered_at,
+    estimated_delivery_at,
+    delivered_at,
     status
 FROM {{ source('postgres', 'orders') }}
