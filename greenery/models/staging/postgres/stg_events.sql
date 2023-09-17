@@ -10,7 +10,7 @@ SELECT
     user_id,
     event_type,
     page_url,
-    DATE(created_at) as created_at,
+    created_at,
     order_id,
     product_id
 FROM {{ source('postgres', 'events') }}

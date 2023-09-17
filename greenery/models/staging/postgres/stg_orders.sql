@@ -9,7 +9,7 @@ SELECT
     user_id,
     promo_id,
     address_id,
-    DATE(created_at) as created_at,
+    created_at,
     order_cost,
     shipping_cost,
     order_total,
