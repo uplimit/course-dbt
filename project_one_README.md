@@ -35,10 +35,12 @@ where delivered_at is not NULL
 ## How many users have only made one purchase? Two purchases? Three+ purchases?
 
 A:
-NUMBER_OF_ORDERS_GROUP	NUMBER_OF_USER_WITH_ORDERS
-1 order	                25
-2 order	                28
-3+ orders	            71
+
+NUMBER_OF_ORDERS_GROUP  | NUMBER_OF_USER_WITH_ORDERS
+------------- | -------------
+1 order  | 25
+2 order | 28
+3+ orders | 71
 
 ```
 WITH ORDER_COUNT AS (
