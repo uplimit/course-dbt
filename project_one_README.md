@@ -1,11 +1,11 @@
-# How many users do we have?
+## How many users do we have?
 A: 130
 ``` 
 SELECT COUNT ( DISTINCT USER_UUID) 
 FROM DEV_DB.DBT_JHUANDERSONMACIASGMAILCOM.STG_USERS
 ```
 
-# On average, how many orders do we receive per hour?
+## On average, how many orders do we receive per hour?
 
 A: 7.520833
 ``` 
@@ -22,7 +22,7 @@ SELECT AVG(count)
 FROM ORDERS_COUNT_PER_HOUR
 ```
 
-# On average, how long does an order take from being placed to being delivered?
+## On average, how long does an order take from being placed to being delivered?
 A: 93.403279 Hours
 ```
 SELECT
@@ -32,7 +32,7 @@ FROM
 where delivered_at is not NULL
 ```
 
-# How many users have only made one purchase? Two purchases? Three+ purchases?
+## How many users have only made one purchase? Two purchases? Three+ purchases?
 
 A:
 NUMBER_OF_ORDERS_GROUP	NUMBER_OF_USER_WITH_ORDERS
@@ -61,7 +61,7 @@ ORDER BY number_of_orders_group
 
 Note: you should consider a purchase to be a single order. In other words, if a user places one order for 3 products, they are considered to have made 1 purchase.
 
-# On average, how many unique sessions do we have per hour?
+## On average, how many unique sessions do we have per hour?
 A: 16.327586
 ```
 WITH SESSION_COUNT_PER_HOUR AS (
