@@ -18,13 +18,13 @@ models:
       - name: email
       - name: user_created_at
         description: UTC timestamp of when user was last created.
-      - name: updated_at
+      - name: user_updated_at
         description: UTC timestamp of when data was last updated.
 
   - name: stg_addresses
     description: Staging address data sourced from postres. Holds all addresses used by registered users.
     columns:
-      - name: address_id
+      - name: address_uuid
         description: Primary key.
         tests:
           - not_null
@@ -45,18 +45,18 @@ models:
           - unique
       - name: user_uuid
         description: Foreign key to users table.
-      - name: event_type
+      - name: web_event_type
         description: Web event type - checkout, package_shipped, add_to_cart, page_view.
       - name: order_uuid
       - name: page_url
         description: URL of the event. 
       - name: product_uuid
       - name: session_uuid
-      - name: event_created_at
+      - name: web_event_created_at
         description: utc timestamp of event.
 
   - name: stg_order_items
-    description: Staging items-in-order data sourced from postres. Data contains details of items in the order.
+    description: Staging details of items in the order data sourced from postres. 
     columns:
       - name: order_uuid
         description: Primary key
@@ -77,7 +77,7 @@ models:
           - unique
       - name: user_id
         description: Users foreign key.
-      - name: address_id
+      - name: address_uuid
         description: Addresses foreign key.
       - name: promo_name
         description: Promotions foreign key.
@@ -103,7 +103,7 @@ models:
   - name: stg_products
     description: Staging product data sourced from postres.
     columns:
-      - name: product_id
+      - name: product_uuid
         description:  Primary key
         tests:
           - not_null

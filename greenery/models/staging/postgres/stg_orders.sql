@@ -9,7 +9,7 @@ with source as (
         *
     from {{ source('postgres', 'orders') }}
 )
---difference between recasting and transoforming col in source
+
 , reaname_recast as ( 
     SELECT 
         order_id as order_uuid,

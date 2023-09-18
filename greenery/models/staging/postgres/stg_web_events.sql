@@ -9,12 +9,12 @@ with source as (
         *
     from {{ source('postgres', 'events') }}
 )
---difference between recasting and transoforming col in source
+
 , reaname_recast as ( 
     SELECT
       event_id as event_uuid,
       user_id as user_uuid,
-      event_type,
+      event_type as web_event_type,
       order_id as order_uuid,
       page_url,
       product_id as product_uuid,
