@@ -39,12 +39,12 @@
     from order_count;
 
 5] On average, how many unique sessions do we have per hour?
-    -We average at 61.3 sessions per hour
+    -We average at 16.3 sessions per hour
     with
         cte_hourly_sessions as (
         select
         date_trunc('hour', created_at) as hourly_session,
-        count(session_id) as total_sessions
+        count(distinct session_id) as total_sessions
     from DEV_DB.DBT_KLYMPERIFLEXPORTCOM.stg_events
     group by 1)
 
