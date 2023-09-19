@@ -15,5 +15,5 @@ SELECT
     publisher,
     skin_color,
     alignment,
-    weight 
+    weight
 FROM {{ source('tutorial', 'superheroes') }}
