@@ -13,8 +13,9 @@ SELECT
     order_cost,
     shipping_cost,
     order_total,
+    tracking_id,
     shipping_service,
     estimated_delivery_at,
     delivered_at,
-    status
+    status as order_status
 FROM {{ source('postgres', 'orders') }}

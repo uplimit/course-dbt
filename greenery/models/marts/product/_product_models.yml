@@ -1,0 +1,10 @@
+models:
+  - name: fact_page_views
+    description: Contains page views and sessions by product
+    columns:
+      - name: date
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
