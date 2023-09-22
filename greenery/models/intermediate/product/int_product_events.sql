@@ -16,7 +16,7 @@ b.name as product_name
 
 
 FROM {{ ref('stg_events') }}  a
-LEFT JOIN {{ ref('dim_products') }}  b
+LEFT JOIN {{ ref('stg_products') }}  b
 ON a.product_id = b.product_id
 
 WHERE a.product_id is not null
