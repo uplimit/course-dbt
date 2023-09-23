@@ -1,0 +1,22 @@
+version: 2
+
+models:
+
+  - name: users_orders_facts
+    description: Table containing users details such as ID, name, last name, email, phone number, etc
+    columns:
+      - name: user_id
+        description: Unique user ID in the platform (Primary key)
+        tests:
+        - unique
+        - not_null
+      - name: count_orders
+        description: number of orders delivered by user
+      - name: count_promo_orders
+        description: number of promos used by the user
+      - name: first_order_date
+        description: First order made by the user
+      - name: last_order_date
+        description: Last order made by the user
+      - name: avg_order_total
+        description: Average total order in dollars made by the user
