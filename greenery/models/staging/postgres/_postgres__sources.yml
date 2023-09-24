@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+
+  - name: postgres # project name
+    schema: public 
+    database: raw 
+
+    tables:
+      - name: addresses
+        description: >
+          Address IDs for each customer
+      - name: users
+        description: >
+          Table that has customers ID and information
+      - name: promos
+        description: >
+          Promo codes, status, and discounts.
+      - name: products
+        description: >
+          Products list including name, price, and inventory.
+      - name: orders
+        description: >
+          Oders event table.
+      - name: order_items
+        description: >
+          Producsts for each order event.
+      - name: events
+        description: >
+          Events by user and webpage.

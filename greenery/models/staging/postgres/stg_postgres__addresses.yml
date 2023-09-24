@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: Table for customer adresses
+    columns:
+      - name: address_id
+        description: Unique address ID in the platform (Primary key)
+        tests:
+          - unique
+          - not_null
+      - name: address
+        description: Address description (street number, name etc)
+      - name: zipcode
+        description: The zipcode
+      - name: state
+        description: Address' State 
+      - name: country
+        description: Address' country 
