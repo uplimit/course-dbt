@@ -1,0 +1,44 @@
+version: 2
+
+models:
+
+  - name: fact_user_orders
+    columns:
+      - name: user_id
+        description: Unique UUID for each user
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_postgres__users')
+              field: user_id
+      - name: first_order_date
+        description: Date of first order for the user
+      - name: last_order_date
+        description: Date of first order for the user
+      - name: total_spent
+        description: Date of first order for the user
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: num_orders
+        description: Number of orders made
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: num_shipped
+        description: Number of orders shipped
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: num_delivered
+        description: Number of orders delivered
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: num_preparing
+        description: Number of orders preparing
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+

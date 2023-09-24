@@ -4,11 +4,35 @@ sources:
   - name: postgres
     database: RAW
     schema: PUBLIC
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
     tables:
       - name: addresses
-      - name: users
-      - name: promos
-      - name: products
-      - name: orders
-      - name: order_items
+        loaded_at_field: created_at
+        description: Contains information about the addresses of the users
       - name: events
+        loaded_at_field: created_at
+        description: Contains the events that have happened on the platform (activity on the website))        
+      - name: orders
+        loaded_at_field: created_at
+        description: Contains information about the orders made on the platform
+      - name: order_items
+        loaded_at_field: created_at
+        description: Contains information about the items in each order
+      - name: products
+        loaded_at_field: created_at
+        description: Contains information about the products sold on the platform
+      - name: promos
+        loaded_at_field: created_at
+        description: Contains information about all of the promotions ran (present and past)
+      - name: users
+        loaded_at_field: created_at
+        description: Contains information about the users of the plafform

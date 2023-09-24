@@ -6,113 +6,269 @@ models:
     columns:
       - name: address_id
         description: UUID for each address
+        tests:
+          - not_null
+          - unique
       - name: address
-        description: address
+        description: Street name and number
+        tests:
+          - not_null        
       - name: zipcode
         description: The zipcode of the address
+        tests:
+          - not_null
       - name: state
         description: State/Province
+        tests:
+          - not_null
       - name: country
         description: Country
+        tests:
+          - not_null
 
   - name: stg_postgres__events
     description: Staging model for events table
     columns:
       - name: event_id
         description: UUID for each event
+        tests:
+          - not_null
+          - unique
       - name: session_id
         description: UUID of each browsing session
+        tests:
+          - not_null
       - name: user_id
         description: UUID of the user who performed the event
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_postgres__users')
+              field: user_id
       - name: page_url
         description: URL page of the event
+        tests:
+          - not_null        
       - name: created_at
         description: Timestamp for the event
+        tests:
+          - not_null
       - name: event_type
         description: Type of event (add_to_cart, checkout, package_shipped, page_view)
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['add_to_cart', 'checkout', 'package_shipped', 'page_view']
       - name: order_id
         description: UUID of the order (only for checkout and package_shipped events)
+        tests:
+          - relationships:
+              to: ref('stg_postgres__orders')
+              field: order_id
+          - not_null:
+              where: "event_type in ('checkout', 'package_shipped')"
       - name: product_id
         description: UUID of the product for product-specific events (only for checkout and page_view events)
+        tests:
+          - relationships:
+              to: ref('stg_postgres__products')
+              field: product_id
+          - not_null:
+              where: "event_type in ('add_to_cart', 'page_view')"
 
   - name: stg_postgres__order_items
     description: Staging model for the order items
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - order_id
+            - product_id
     columns:
       - name: order_id
         description: UUID of the order
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_postgres__orders')
+              field: order_id
       - name: product_id
         description: UUID of the product(s) in the order
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_postgres__products')
+              field: product_id
       - name: quantity
         description: Number of units of the product in the order
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+
 
   - name: stg_postgres__orders
     description: Staging model for orders
     columns:
       - name: order_id
         description: UUID for each order
+      - name: order_id
+        description: UUID for each unique order on platform
+        tests:
+          - unique
+          - not_null        
       - name: user_id
         description: UUID of the user who placed the order
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_postgres__users')
+              field: user_id
       - name: promo_id
         description: UUID of the promo code used in the order (not required)
+        tests:
+          - relationships:
+              to: ref('stg_postgres__promos')
+              field: promo_id
       - name: address_id
         description: Delivery address ID for the order
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_postgres__addresses')
+              field: address_id
       - name: created_at
         description: Timestamp for the order
+        tests:
+          - not_null
       - name: order_cost
         description: Dollar amount of the order
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: false
       - name: shipping_cost
         description: Cost of shipping for the order
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: false
       - name: order_total
         description: Total cost of the order (includes shipping)
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: false
       - name: tracking_id
         description: Tracking number of the order
+        tests:
+          - not_null:
+              where: "status != 'preparing'"
       - name: shipping_service
         description: Company used for shipping
+        tests:
+          - not_null:
+              where: "status != 'preparing'"
       - name: estimated_delivery_at
         description: Estimated delivery date
       - name: delivered_at
         description: Actual delivery date
+        tests:
+          - not_null:
+              where: "status = 'delivered'"
       - name: status
         description: Status of the order
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['delivered', 'preparing', 'shipped']
 
   - name: stg_postgres__products
     description: Staging model for products
     columns:
       - name: product_id
         description: UUID for each product
+        tests:
+          - unique
+          - not_null
       - name: name
         description: Name of the product
+        tests:
+          - not_null
       - name: price
         description: Price of the product in dollars
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: false
       - name: inventory
         description: Inventory for each product
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
  
   - name: stg_postgres__promos
     description: Staging model for promos
     columns:
       - name: promo_id
         description: Every promocode generated
+        tests:
+          - unique
+          - not_null
       - name: discount
         description: Dollar amount given off by using the code
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: false
       - name: status
         description: Status of the promo code (active or inactive)
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['active', 'inactive']
 
   - name: stg_postgres__users
     description: Staging model for users
     columns:
       - name: user_id
         description: UUID for each user
+        tests:
+          - unique
+          - not_null
       - name: first_name
         description: First name of the user
+        tests:
+          - not_null
       - name: last_name
         description: Last name of the user
+        tests:
+          - not_null
       - name: email
         description: Email address of the user
+        tests:
+          - unique
+          - not_null
       - name: phone_number
         description: Phone number of the user
+        tests:
+          - not_null
       - name: created_at
         description: Timestamp when the user was created
+        tests:
+          - not_null
       - name: updated_at
         description: Timestamp when the user was last updated
+        tests:
+          - not_null
       - name: address_id
         description: Default delivery address for the user
+        tests:
+          - relationships:
+              to: ref('stg_postgres__addresses')
+              field: address_id

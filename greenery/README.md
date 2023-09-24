@@ -19,3 +19,34 @@
 | Users with Two Purchases        | 28         |
 | Users with Three+ Purchases     | 71         |
 | Average Sessions per Hour       | 16.327     |
+
+
+# Week 2
+
+## Business objectives:
+
+- **What is our user repeat rate?**: The ratio of users who made two or more purchases over total users.
+- **Define good indicators for potential repeat users**
+- **Define good indicators for potential non-repeat users**
+
+
+## Results:
+
+| Metric                          | Value      |
+|---------------------------------|------------|
+| Repeat rate                     | 79.84%     |
+
+- **Define good indicators for potential repeat users**
+  - **Number of itens on previous order**
+  - **Usage of promo codes**
+  - **Number of sessions until purchase**
+  - **Average delivery time for the user**
+  - **Good Reviews on the products**
+  - **Good Reviews of the platform itself**
+
+- **Define good indicators for potential non-repeat users**
+  - **Type of product ordered (one-type purchases)**
+  - **Email spam rate**
+  - **Average delivery time for the user**
+  - **Bad Reviews on the products**
+  - **Bad Reviews of the platform itself**
