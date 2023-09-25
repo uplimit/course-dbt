@@ -27,3 +27,9 @@ Bad indicators:
 1. Customer support contact.
 2. User returned their first order.
 3. User left negative review
+
+Part 2.
+I guess the most important tests are checking that the IDs are not null and that the IDs are unique. This will be the primary check for the correctness of the data.
+
+Part 3:
+Data was changed for four products: Pothos, Philodendron, Monstera, String of pearls.

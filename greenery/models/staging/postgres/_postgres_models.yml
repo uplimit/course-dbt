@@ -6,6 +6,9 @@ models:
     columns:
       - name: address_id
         description: Address unique identifier
+        tests:
+          - not_null
+          - unique
       - name: address
         description: Address
       - name: zipcode
@@ -20,10 +23,17 @@ models:
     columns:
       - name: event_id
         description: Event unique identifier
+        tests:
+          - not_null
+          - unique
       - name: session_id
         description: Session unique identifier
+        tests:
+          - not_null
       - name: user_id
         description: User unique identifier
+        tests:
+          - not_null
       - name: event_type
         description: Type of event
       - name: page_url
@@ -40,8 +50,12 @@ models:
     columns:
       - name: order_id
         description: Order unique identifier
+        tests:
+          - not_null
       - name: product_id
         description: Product unique identifier
+        tests:
+          - not_null
       - name: quantity
         description: Quantity of ordered items
 
@@ -50,12 +64,18 @@ models:
     columns:
       - name: order_id
         description: Order unique identifier
+        tests:
+          - not_null
       - name: promo_id
         description: Promo unique identifier
       - name: user_id
         description: User unique identifier
+        tests:
+          - not_null
       - name: address_id
         description: Address unique identifier
+        tests:
+          - not_null
       - name: created_at
         description: Creation timestamp
       - name: order_cost
@@ -80,6 +100,8 @@ models:
     columns:
       - name: product_id
         description: Product unique identifier
+        tests:
+          - not_null
       - name: name
         description: Product name
       - name: price
@@ -92,6 +114,8 @@ models:
     columns:
       - name: promo_id
         description: Promo unique identifier
+        tests:
+          - not_null
       - name: discount
         description: Discount percentage
       - name: status
@@ -102,6 +126,8 @@ models:
     columns:
       - name: user_id
         description: User unique identifier
+        tests:
+          - not_null
       - name: first_name
         description: User first name
       - name: last_name
@@ -116,3 +142,5 @@ models:
         description: Timestamp of update
       - name: address_id
         description: Address unique identifier
+        tests:
+          - not_null
