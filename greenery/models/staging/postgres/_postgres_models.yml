@@ -84,6 +84,10 @@ models:
         description: Cost of the shipping
       - name: order_total
         description: Total cost of the order (including shipping)
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1000
       - name: tracking_id
         description: Tracking unique identifier
       - name: shipping_service
