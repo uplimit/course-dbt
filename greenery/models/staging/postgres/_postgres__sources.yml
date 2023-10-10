@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+
+  - name: postgress # this data originates from postgress
+    schema: public # this is the schema our raw data lives in
+    database: raw # this is the name of the database that our source data lives in
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+
+    tables:
+      # The source tables with raw data from postgress
+      - name: events
+      - name: users
+      - name: addresses
+      - name: orders
+      - name: products
+      - name: order_items
+      - name: promos

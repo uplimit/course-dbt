@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_addresses
+    description: Addresses in the platform with geographical dimentions
+    columns:
+     - name: address_id
+       tests:
+          - unique
+  - name: stg_events
+    description: All events occuring on the platform with url, product type, users, timestamps
+    columns:
+     - name: event_id
+       tests:
+          - unique
+  - name: stg_order_items
+    description: Information on quantity of items and product in a specific order
+    columns:
+     - name: order_id
+       tests:
+          - unique
+  - name: stg_orders
+    description: All platform orders with metdata info such as user, costs, delivery times etc
+    columns:
+     - name: order_id
+       tests:
+          - unique
+  - name: stg_products
+    description: Products on the platform with name, price and inventory availability
+    columns:
+     - name: product_id
+       tests:
+          - unique
+  - name: stg_promos
+    description: Promotion codes and discounts
+    columns:
+     - name: promo_id
+       tests:
+          - unique
+  - name: stg_users
+    description: Platfom's users personal information
+    columns:
+     - name: user_id
+       tests:
+          - unique
