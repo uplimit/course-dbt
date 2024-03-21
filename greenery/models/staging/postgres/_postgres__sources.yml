@@ -1,0 +1,71 @@
+version: 2
+
+sources:
+
+  - name: postgres # name of the source (this can be named whatever you want, but should be descriptive. this source (superheroes) is used for our week 1 tutorial so thats why i named it this way)
+    schema: public # this is the schema our raw data lives in
+    database: raw # this is the name of the database that our source data lives in
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false      
+
+    tables: # this is where we define table metadata (name, description, load timestamps)
+      - name: addresses 
+        description: >
+          Contains addresses including columns for zipcodes states and countries
+        columns:
+          - name: address_id
+            description: Primary key of the addresses table
+            tests:
+              - unique
+              - not_null
+      - name: events
+        description: >
+          Contains raw events for greenery website
+        columns:
+          - name: event_id
+            description: Primary key of the events table
+            tests:
+              - unique
+              - not_null      
+      - name: orders
+        description: >
+          Contains orders for greenery website including user address cost and delivery info 
+        columns:
+          - name: order_id
+            description: Primary key of the addresses table
+            tests:
+              - unique
+              - not_null      
+      - name: order_items
+        description: >
+          Contains info on products and quantity of products purchased in each order 
+      - name: products
+        description: >
+          Contains products sold by greenery 
+        columns:
+          - name: product_id
+            description: Primary key of the products table
+            tests:
+              - unique
+              - not_null      
+      - name: promos
+        description: >
+          Contains promotions or promo codes used on the greenery website
+        columns:
+          - name: promo_id
+            description: Primary key of the promos table
+            tests:
+              - unique
+              - not_null      
+      - name: users
+        description: >
+          Contains one row per user 
+        columns:
+          - name: user_id
+            description: Primary key of the users table
+            tests:
+              - unique
+              - not_null      
