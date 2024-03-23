@@ -1,0 +1,16 @@
+models:
+  - name: postgres__addresses
+    description: contains user addresses 
+  - name: postgres__events
+    description: contains event data as fired by users
+  - name: postgres__order_items
+    description: contains data at the product level per each order
+  - name: postgres__orders
+    description: contains user addresses 
+  - name: postgres__products
+    description: contains products data
+  - name: postgres__promo
+    description: contains promo data
+  - name: postgres__users
+    description: contains user data
+  

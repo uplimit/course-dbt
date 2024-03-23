@@ -1,0 +1,54 @@
+sources:
+  - name: greenery_sources
+    database: raw 
+    schema: public
+
+    tables: 
+    - name: events
+      columns: 
+      - name: event_id 
+      tests: 
+        - unique
+        - not null
+
+    - name: products
+      olumns: 
+      - name: product_id 
+      tests: 
+        - unique
+        - not null
+
+    - name: users
+      columns: 
+      - name: user_id 
+      tests: 
+        - unique
+        - not null
+
+    - name: addresses
+      columns: 
+      - name: address_id 
+      tests: 
+        - unique
+        - not null
+
+    - name: orders
+      columns: 
+      - name: order_id 
+      tests: 
+        - unique
+        - not null
+
+    - name: promos
+      columns: 
+      - name: promo_id 
+      tests: 
+        - unique
+        - not null
+
+    - name: order_items
+      columns: 
+      - name: order_item_id 
+      tests: 
+        - unique
+        - not null
