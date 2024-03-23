@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name:  stg_postgres__users
+    description: Users of the Greenery platform
+  - name:  stg_postgres__orders
+    description: Orders made on the Greenery platform
+  - name:  stg_postgres__products
+    description: Products available on the Greenery platform
+  - name:  stg_postgres__order_items
+    description: Order Items for an Order
+  - name:  stg_postgres__promos
+    description: Promo with code
+  - name:  stg_postgres__addresses
+    description: Shipping and Billing Address
+  - name:  stg_postgres__events
+    description: Event generated from browsing/ordering 
