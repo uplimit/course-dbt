@@ -15,4 +15,4 @@ select
     , e.order_id 
     , e. product_id 
 
-from {{ source('greenery_sources','events') }} e
+from {{ source('postgres','events') }} e

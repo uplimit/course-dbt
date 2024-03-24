@@ -11,4 +11,4 @@ select
     , p.price
     , p.inventory
 
-from {{ source('greenery_sources','products') }} p
+from {{ source('postgres','products') }} p

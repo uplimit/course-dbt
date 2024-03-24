@@ -12,4 +12,4 @@ select
     , a.state
     , a.country
 
-from {{ source('greenery_sources','addresses') }} a
+from {{ source('postgres','addresses') }} a

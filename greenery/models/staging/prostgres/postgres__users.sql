@@ -16,4 +16,4 @@ select
     , u.updated_at
     , u.address_id
 
-from {{ source('greenery_sources','users') }} u
+from {{ source('postgres','users') }} u

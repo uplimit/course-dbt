@@ -20,4 +20,4 @@ select
     , o.delivered_at
     , o.status
 
-from {{ source('greenery_sources','orders') }} o
+from {{ source('postgres','orders') }} o

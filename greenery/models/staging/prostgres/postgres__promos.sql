@@ -10,4 +10,4 @@ select
     , p.discount
     , p.status
 
-from {{ source('greenery_sources','promos') }} p
+from {{ source('postgres','promos') }} p

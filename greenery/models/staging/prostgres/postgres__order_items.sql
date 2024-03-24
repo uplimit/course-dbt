@@ -12,4 +12,4 @@ select
     , oi.order_id || '-' ||  oi. product_id as order_item_id
     , oi.quantity
 
-from {{ source('greenery_sources','order_items') }} oi
+from {{ source('postgres','order_items') }} oi
