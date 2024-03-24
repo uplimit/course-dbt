@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: "A table that contains user addresses"
+
+  - name: stg_postgres__events
+    description: "A table that contains information on events"
+
+  - name: stg_postgres__orders
+    description: "A table that contains user orders"
+
+  - name: stg_postgres__order_items
+    description: "A table that contains user order items"
+
+  - name: stg_postgres__products
+    description: "A table that contains information on products"
+
+  - name: stg_postgres__promos
+    description: "A table that contains information about promos"
+
+  - name: stg_postgres__users
+    description: "A table that contains information on users"
