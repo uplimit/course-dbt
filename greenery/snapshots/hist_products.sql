@@ -1,6 +1,7 @@
+{% snapshot hist_products %}  
+
 {{
   config(
-    materialized = 'table',
     target_database = target.database,
     target_schema = target.schema,
     strategy='check',
@@ -13,3 +14,5 @@ select
     p.* 
 
 from {{ ref('postgres__products') }} p
+
+{% endsnapshot %}
