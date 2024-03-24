@@ -44,9 +44,9 @@ Note: you should consider a purchase to be a single order. In other words, if a 
 
 
 Ans: 
-    Users with purchase count 1: 25
-    Users with purchase count 2: 28
-    Users wuth purchase count >3: 71
+    Users with purchase count 1: 25 ;
+    Users with purchase count 2: 28 ;
+    Users wuth purchase count >=3: 71 ;
 
 Query:
 ```
