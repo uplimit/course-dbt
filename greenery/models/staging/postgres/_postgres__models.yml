@@ -2,9 +2,39 @@ version: 2
 
 models:
   - name: stg_addresses
+    columns:
+      - name: address_id
+        tests:
+          - not_null
+          - unique
   - name: stg_events
+    columns:
+      - name: event_id
+        tests:
+          - not_null
+          - unique
   - name: stg_orders
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
   - name: stg_order_items
   - name: stg_products
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
   - name: stg_promos
+    columns:
+      - name: promo_id
+        tests:
+          - not_null
+          - unique
   - name: stg_users
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
