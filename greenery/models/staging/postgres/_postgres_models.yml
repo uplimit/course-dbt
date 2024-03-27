@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: Dimension table for addresses on the platform.  
+    columns:
+      - name: address_id
+      - name: address
+      - name: zipcode
+      - name: state 
+      - name: country
+  - name: stg_postgres__events
+    description: Fact table of events occuring on the site. Information includes which page the event occured and if the event was associated with a product or order.   
+    columns:
+      - name: event_id
+      - name: session_id
+      - name: user_id
+      - name: page_url 
+      - name: created_at
+      - name: event_type
+      - name: order_id
+      - name: product_id
+  - name: stg_postgres__order_items
+    description: A bridge table between products and orders highlighting the quantity of products per order.
+    columns:
+      - name: order_id
+      - name: product_id
+      - name: quantity
+  - name: stg_postgres__orders
+    description: A fact table of orders that occured on the site. Includes information regarding cost and shipping details.    
+    columns:
+      - name: order_id
+      - name: user_id
+      - name: promo_id
+      - name: address_id 
+      - name: created_at
+      - name: order_cost
+      - name: shipping_cost
+      - name: order_total
+      - name: tracking_id
+      - name: shipping_service
+      - name: estimated_delivery_at
+      - name: delivered_at
+      - name: status
+  - name: stg_postgres__products
+    description: A dimension table for product information regarding price and inventory. 
+    columns:
+      - name: product_id
+      - name: name
+      - name: price
+      - name: inventory 
+  - name: stg_postgres__promos
+    description: A dimension table for the various promos, their discount amount and status.     
+    columns:
+      - name: promo_id
+      - name: discount
+      - name: status
+  - name: stg_postgres__users
+    description: A dimension table for the various promos, their discount amount and status.     
+    columns:
+      - name: user_id
+      - name: first_name
+      - name: last_name
+      - name: email 
+      - name: phone_number
+      - name: created_at
+      - name: updated_at
+      - name: address_id 
