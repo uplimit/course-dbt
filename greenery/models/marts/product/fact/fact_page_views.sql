@@ -19,7 +19,6 @@ select
     -- orders 
     , products.* exclude product_id 
 
-
 from {{ ref('int_page_views') }} pageviews
 
 left join {{ ref('int_users') }} users 

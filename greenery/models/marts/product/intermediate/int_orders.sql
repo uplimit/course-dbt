@@ -33,6 +33,7 @@ select
     , order_item.quantity as order_product_quantity 
     -- products 
     , product.product_name 
+    -- ToDo: check currency info for the below column (price) & make updates accordingly
     , product.product_price
 
 from {{ ref('postgres__orders') }} orders

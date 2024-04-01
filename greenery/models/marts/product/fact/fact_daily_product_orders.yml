@@ -1,0 +1,8 @@
+models:
+  - name: fact_daily_product_orders
+    description: Contains daily product (delivered) orders stats
+    columns: 
+      - name: order_product_date_key
+        tests: 
+          - unique
+          - not_null
