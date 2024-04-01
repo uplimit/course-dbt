@@ -3,21 +3,125 @@ version: 2
 models:
   - name: stg_postgres__addresses
     description: "A table that contains user addresses"
+    columns:
+      - name: address_id
+        tests:
+          - not null
+          - unique
+      - name: address_id
+      - name: zipcode
+        tests:
+          - not null 
+      - name: state 
+      - name: country
 
   - name: stg_postgres__events
     description: "A table that contains information on events"
+    columns:
+      - name: event_id
+        tests:
+          - not null
+          - unique
+      - name: session_id
+      - name: user_id
+        tests:
+          - not null 
+      - name: page_url 
+      - name: created_at
+      - name: event_type
+      - name: order_id
+        tests:  
+          - not null
+      - name: product_id
+        tests:
+          - not null        
 
   - name: stg_postgres__orders
     description: "A table that contains user orders"
+    columns:
+      - name: order_id
+        tests:  
+          - not null
+          - unique
+      - name: user_id
+        tests:
+          - not null
+      - name: promo_id
+      - name: address_id
+        tests:
+          - not null
+      - name: created_at
+        tests:
+          - not null
+      - name: order_cost
+        tests:
+          - positive_values 
+      - name: shipping_cost
+        tests:
+          - positive_values
+      - name: order_total
+        tests:
+          - positive_values    
+      - name: tracking_id
+        tests:
+          - not null
+      - name: shipping_service
+      - name: estimated_delivery_at
+      - name: delivered_at
+      - name: order_status  
+        tests:
+          - not null 
 
   - name: stg_postgres__order_items
     description: "A table that contains user order items"
+    columns:
+      - name: order_id
+        tests:
+          - not null
+      - name: product_id
+        tests:
+          - not null
+      - name: quantity
+        tests:
+          - positive_values
 
   - name: stg_postgres__products
     description: "A table that contains information on products"
+    columns:
+      - name: product_id
+        tests:
+          - not null
+          - unique
+      - name: product_name
+      - name: price
+        tests:
+          - positive_values
+      - name: inventory
 
   - name: stg_postgres__promos
     description: "A table that contains information about promos"
+    columns:
+      - name: promo_id
+        tests:
+          - not null
+          - unique
+      - name: discount
+        tests:
+          - positive_values
+      - name: promo_status
 
   - name: stg_postgres__users
     description: "A table that contains information on users"
+    columns:
+      - name: user_id
+        tests:
+          - unique
+          - not null
+      - name: first_name
+      - name: last_name
+      - name: email 
+      - name: phone_number
+      - name: created_at
+      - name: updated_at
+      - name: address_id
+        
