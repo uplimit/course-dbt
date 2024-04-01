@@ -98,15 +98,25 @@ from tmp t
 ;
 
 ### Week2 
-PART 1 : MARTS
-1. Explain the product mart models you added. Why did you organize the models in the way you did?
+PART 1 : MODELS
+1. What is our user repeat rate?
+
+Repeat Rate = Users who purchased 2 or more times / users who purchased
+
+![alt text](image-4.png)
+
+2. What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
+- I'd look at the events (page views) data for users who ordered vs not to understand how far in the funnel they progressed. 
+- I'd assume/hypothesise that users who progressed till checkout are highly likely to finish the order
+
+3. Explain the product mart models you added. Why did you organize the models in the way you did?
 - First, i created a marts folder with sub folders (core, marketing, product), though ONLY product has models within. 
 - The product folder has 2 sub folders - intermediate & fact. All preliminary transformation models can be found within the intermediate folder & the final (fact) can be found in the fact folder 
 - fact_page_views model combines page views + users & products datasets. This will help us understand page views for every product across times & users 
 - fact_daily_product_orders is a simple fact table that helps us report on daily product orders 
 - We can now use these 2 facts on the reporing layer & filter by a specific product to understand page views or orders over time. 
 
-2. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense. 
+4. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense. 
 Please see the DAG here ! 
 ![alt text](image-1.png)
 
@@ -119,3 +129,6 @@ PART 2 : TESTS
 4. Real time alerts : We gotta link our dbt notifications to slack so that we can get real time notifications on test failures. I believe if we use dbt core, we would get notifications via email. 
 
 PART 2 : SNAPSHOTS
+- Which products had their inventory change from week 1 to week 2? 
+Please see query/output below ! 
+![alt text](image-5.png)
