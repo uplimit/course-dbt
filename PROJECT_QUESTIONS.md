@@ -96,3 +96,26 @@ select
     
 from tmp t
 ;
+
+### Week2 
+PART 1 : MARTS
+1. Explain the product mart models you added. Why did you organize the models in the way you did?
+- First, i created a marts folder with sub folders (core, marketing, product), though ONLY product has models within. 
+- The product folder has 2 sub folders - intermediate & fact. All preliminary transformation models can be found within the intermediate folder & the final (fact) can be found in the fact folder 
+- fact_page_views model combines page views + users & products datasets. This will help us understand page views for every product across times & users 
+- fact_daily_product_orders is a simple fact table that helps us report on daily product orders 
+- We can now use these 2 facts on the reporing layer & filter by a specific product to understand page views or orders over time. 
+
+2. Use the dbt docs to visualize your model DAGs to ensure the model layers make sense. 
+Please see the DAG here ! 
+![alt text](image-1.png)
+
+PART 2 : TESTS 
+1. I have created 2 .yml files for the 2 facts & added a unique/not null test on the primary key. Please see test results below : 
+![alt text](image-2.png)
+2. I have added primary key <> foregin key tests to the staging yml/model so we should be good from an upstream data quality perspective 
+3. Ran 'dbt test' on the entire project & all tests are passing !! 
+![alt text](image-3.png)
+4. Real time alerts : We gotta link our dbt notifications to slack so that we can get real time notifications on test failures. I believe if we use dbt core, we would get notifications via email. 
+
+PART 2 : SNAPSHOTS
