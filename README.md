@@ -1,6 +1,6 @@
 # Analytics engineering with dbt
 
-### Week 1 Exercises
+### Week 1 Challenges
 
 
 
