@@ -5,6 +5,10 @@ sources:
 
     tables:
     - name: events
+      tests:
+      - dbt_expectations.expect_table_column_count_to_be_between:
+          min_value: 8 # (Optional)
+          max_value: 10 # (Optional)
       columns: 
         - name: event_id
           tests: 

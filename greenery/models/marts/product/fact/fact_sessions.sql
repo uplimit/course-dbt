@@ -1,6 +1,6 @@
 {{
     config(
-        materialized = 'table'
+        materialized = 'incremental'
         , unique_key = 'session_id'
     )
 }}
@@ -24,10 +24,7 @@ select
     , max(e.event_is_from_weekend) as session_has_weekend_event
     , listagg(distinct e.event_type,',') within group (order by e.event_type) as session_event_types
     -- counts 
-    , count(distinct case when e.event_type = 'checkout' then e.event_id end) as count_of_checkout_events_in_session
-    , count(distinct case when e.event_type = 'package_shipped' then e.event_id end) as count_of_package_shipped_events_in_session
-    , count(distinct case when e.event_type = 'add_to_cart' then e.event_id end) as count_of_add_to_cart_events_in_session
-    , count(distinct case when e.event_type = 'page_view' then e.event_id end) as count_of_page_view_events_in_session
+    , {{ distinct_event_counts_per_event_type () }}  
     , count(distinct e.event_id) as count_of_events_in_session
     -- calcs 
     , datediff(minute,session_start_at,session_end_at) as session_duration_in_minutes

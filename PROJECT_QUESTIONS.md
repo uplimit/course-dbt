@@ -132,3 +132,31 @@ PART 2 : SNAPSHOTS
 - Which products had their inventory change from week 1 to week 2? 
 Please see query/output below ! 
 ![alt text](image-5.png)
+
+### Week3 
+
+Part 1 
+1. What is our overall conversion rate?
+![alt text](image-6.png)
+2. What is our conversion rate by product?
+Not sure what's the expected calculation / outcome here as i see in the events data, for those rows where product_id is populated there is no corresponding order_id so not sure how we know if a product related event ended up in an order. 
+![alt text](image-7.png)
+
+Part 2 : Macros
+Create a macro to simplify part of a model(s).
+Please see 'distinct_event_counts_per_event_type' macro that's being used in 'fact_session'
+
+Part 3 : Post hook / grants 
+Please check  greenery/dbt_project.yml for grants
+
+Part 4 : Packages 
+Please 'packages.yml' where i have 2 packages installed, dbt_utils & dbt_expectations. See below corresponding usage : 
+- dbt_utils.generate_surrogate_key from dbt_utils to generate an unique key in postgres__order_items
+- Column additions to events source data : dbt_expectations.expect_table_column_count_to_be_between
+
+Part 5 : Show (using dbt docs and the model DAGs) how you have simplified or improved a DAG using macros and/or dbt packages.
+See above comments 
+
+Part 6 : Dbt Snapshots 
+Products that had inventory changes from week 2 > week 3 
+![alt text](image-8.png)
