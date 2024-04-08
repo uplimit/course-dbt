@@ -21,3 +21,7 @@
    More generally, we can imagine that users who frequently order from us, without regard to the specific product, are more likely to order again. This suggests company loyalty (compared to product loyalty).
 
    We can also conduct group studies and make inferences about specific users. For example, we can draw conclusions about various age groups across various product categories. This would require modeling those additional dimensions.
+
+3. Explain the product mart models you added. Why did you organize the models in the way you did?
+
+   I added a product page views model in anticipation of a common business question: How are various products performing? We can now answer this by analyzing product events: page views, times added to cart, number of checkouts, and whether the product shipped. We can analyze the popularity of a product, how easy it is order (via session length), and we can check the health of the fulfillment pipeline (whether the product shipped).
