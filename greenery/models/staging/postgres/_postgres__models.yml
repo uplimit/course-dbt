@@ -65,9 +65,11 @@ models:
       - name: order_cost
       - name: shipping_cost
       - name: order_total
-      - name: tracking_id
         tests:
-          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 1000
+      - name: tracking_id
       - name: shipping_service
       - name: estimated_delivery_at
       - name: delivered_at
