@@ -8,11 +8,11 @@ select
     coalesce(events.product_id, order_items.product_id) as product_id,
     session_started_at,
     session_ended_at,
-    sum(case when events.event_type == 'page_view' then 1 else 0 end) as page_views,
-    sum(case when events.event_type == 'add_to_cart' then 1 else 0 end) as add_to_carts,
-    sum(case when events.event_type == 'checkout' then 1 else 0 end) as checkouts,
+    sum(case when events.event_type = 'page_view' then 1 else 0 end) as page_views,
+    sum(case when events.event_type = 'add_to_cart' then 1 else 0 end) as add_to_carts,
+    sum(case when events.event_type = 'checkout' then 1 else 0 end) as checkouts,
     sum(
-        case when events.event_type == 'package_shipped' then 1 else 0 end
+        case when events.event_type = 'package_shipped' then 1 else 0 end
     ) as packages_shipped,
     datediff('minute', session_started_at, session_ended_at) as session_length_minutes
 from events
