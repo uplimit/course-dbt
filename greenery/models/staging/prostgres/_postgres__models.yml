@@ -1,0 +1,57 @@
+models:
+  - name: postgres__addresses
+    description: contains user addresses 
+    columns: 
+      - name: address_id
+        tests: 
+          - unique
+          - not_null
+
+  - name: postgres__events
+    description: contains event data as fired by users
+    columns: 
+      - name: event_id
+        tests: 
+          - unique
+          - not_null
+
+  - name: postgres__order_items
+    description: contains data at the product level per each order
+    columns: 
+      - name: order_item_id
+        tests: 
+          - unique
+          - not_null
+
+  - name: postgres__orders
+    description: contains user addresses 
+    columns: 
+      - name: order_id
+        tests: 
+          - unique
+          - not_null
+
+  - name: postgres__products
+    description: contains products data
+    columns: 
+      - name: product_id
+        tests: 
+          - unique
+          - not_null
+
+  - name: postgres__promos
+    description: contains promo data
+    columns: 
+      - name: promo_id
+        tests: 
+          - unique
+          - not_null
+
+  - name: postgres__users
+    description: contains user data
+    columns: 
+      - name: user_id
+        tests: 
+          - unique
+          - not_null
+  

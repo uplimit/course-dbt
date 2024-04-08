@@ -1,0 +1,98 @@
+sources:
+  - name: postgres
+    database: raw 
+    schema: public
+
+    tables:
+    - name: events
+      tests:
+      - dbt_expectations.expect_table_column_count_to_be_between:
+          min_value: 8 # (Optional)
+          max_value: 10 # (Optional)
+      columns: 
+        - name: event_id
+          tests: 
+            - unique
+            - not_null
+        - name: user_id
+          tests:
+            - relationships:
+                to: raw.public.users
+                field: user_id
+        - name: order_id
+          tests:
+            - relationships:
+                to: raw.public.orders
+                field: order_id
+        - name: product_id
+          tests:
+            - relationships:
+                to: raw.public.products
+                field: product_id
+
+    - name: products
+      columns: 
+        - name: product_id 
+          tests: 
+            - unique
+            - not_null
+
+    - name: users
+      columns: 
+        - name: user_id
+          tests: 
+            - unique
+            - not_null
+
+    - name: addresses
+      columns: 
+        - name: address_id
+          tests: 
+            - unique
+            - not_null
+
+    - name: orders
+      columns: 
+        - name: order_id
+          tests: 
+            - unique
+            - not_null
+        - name: user_id
+          tests:
+            - relationships:
+                to: raw.public.users
+                field: user_id
+        - name: promo_id
+          tests:
+            - relationships:
+                to: raw.public.promos
+                field: promo_id
+        - name: address_id
+          tests:
+            - relationships:
+                to: raw.public.addresses
+                field: address_id
+
+    - name: promos
+      columns: 
+        - name: promo_id
+          tests: 
+            - unique
+            - not_null
+
+    - name: order_items
+      columns: 
+        - name: order_id || product_id
+          tests: 
+            - unique
+            - not_null
+        - name: order_id
+          tests:
+            - relationships:
+                to: raw.public.orders
+                field: order_id
+        - name: product_id
+          tests:
+            - relationships:
+                to: raw.public.products
+                field: product_id
