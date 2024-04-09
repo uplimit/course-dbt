@@ -13,13 +13,62 @@ models:
         tests:
           - not_null
           - unique
+      - name: user_id
+        tests:
+          - relationships:
+              to: ref("stg_postgres__users")
+              field: user_id
+      - name: event_type
+        tests:
+          - accepted_values:
+              values:
+                - page_view
+                - add_to_cart
+                - checkout
+                - package_shipped
+      - name: order_id
+        tests:
+          - relationships:
+              to: ref("stg_postgres__orders")
+              field: order_id
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref("stg_postgres__products")
+              field: product_id
   - name: stg_postgres__orders
     columns:
       - name: order_id
         tests:
           - not_null
           - unique
+      - name: user_id
+        tests:
+          - relationships:
+              to: ref("stg_postgres__users")
+              field: user_id
+      - name: promo_id
+        tests:
+          - relationships:
+              to: ref("stg_postgres__promos")
+              field: promo_id
+      - name: address_id
+        tests:
+          - relationships:
+              to: ref("stg_postgres__addresses")
+              field: address_id
   - name: stg_postgres__order_items
+    columns:
+      - name: order_id
+        tests:
+          - relationships:
+              to: ref("stg_postgres__orders")
+              field: order_id
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref("stg_postgres__products")
+              field: product_id
   - name: stg_postgres__products
     columns:
       - name: product_id
@@ -38,3 +87,8 @@ models:
         tests:
           - not_null
           - unique
+      - name: address_id
+        tests:
+          - relationships:
+              to: ref("stg_postgres__addresses")
+              field: address_id
