@@ -1,4 +1,4 @@
-image: ghcr.io/dbt-labs/snowflake:latest
+image: ghcr.io/dbt-labs/dbt-snowflake:1.8.3
 tasks:
   - command: mkdir -p /workspace/.dbt && ln -snf /workspace/.dbt ~/.dbt
 ports:
