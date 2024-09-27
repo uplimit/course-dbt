@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: int_product_conversions
+    description: "intermediate table that contains product conversion information"
+    columns:
+      - name: product_id
+        description: "id of the product"
+        tests:
+          - unique
+          - not_null
+
+      - name: converted_sessions
+        description: "total converted sessions"
+
+      - name: total_sessions
+        description: "total sessions (any event type)"
+
+      - name: conversion_rate
+        description: "(converted sessions/total sessions)*100"

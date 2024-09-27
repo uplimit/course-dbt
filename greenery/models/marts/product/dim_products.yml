@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "dimensions table that contains product information"
+    columns:
+      - name: product_id
+        description: "id of the product"
+        tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        description: "name of the product"
+        tests:
+          - unique
+          - not_null
+
+      - name: product_price
+        description: "price of the product"
+
+      - name: product_quantity
+        description: "quantity of the product purchased"
+      
+      - name: order_amount
+        description: "amount of the product purchased"
+
+      - name: add_to_cart_total
+        description: "total number of add to carts of the product"
+
+      - name: checkout_total
+        description: "total number of checkouts of the product"
+
+      - name: package_shipped_total
+        description: "total number of packages shipped by the product"
+
+      - name: converted_sessions
+        description: "total number of converted sessions by product"
+
+      - name: total_sessions
+        description: "total number of any type of session by product"
+
+      - name: conversion_rate
+        description: "conversion rate by product: (converted_sessions/total_sessions)*100"
+
+
