@@ -1,5 +1,4 @@
-image:
-  file: .gitpod.Dockerfile
+image: ghcr.io/dbt-labs/dbt-snowflake:1.8.3
 tasks:
   - command: mkdir -p /workspace/.dbt && ln -snf /workspace/.dbt ~/.dbt
 ports:
@@ -7,5 +6,3 @@ ports:
     onOpen: open-browser
   - port: 8081
     onOpen: open-preview
-  - port: 5432
-    onOpen: ignore
