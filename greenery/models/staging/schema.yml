@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: stg_superheroes
+    description: Demographics about each superhero such as name, hair color, height and weight. 
+    columns:
+      - name: name
+        tests:
+          - not_null
+      - name: height
+        tests:
+          - positive_values
+      - name: weight_lbs
+        tests:
+          - positive_values
+  - name: stg_addresses
+    description: Contains demographic information about each address.
+    columns:
+      - name: address_id
+      - name: address
+      - name: zipcode
+      - name: state
+      - name: country
+  - name: stg_users
+    description: Contains information about each user 
+    columns:
+      - name: user_id
+      - name: first_name
+      - name: last_name
+      - name: email
+      - name: phone_number
+      - name: created_at
+      - name: updated_at
+      - name: address_id
+  - name: stg_promos
+    description: Contains information about each promotion 
+    columns:
+      - name: promo_id
+      - name: discount
+      - name: status
+  - name: stg_products
+    description: Contains information about each product  
+    columns:
+      - name: product_id
+      - name: name
+      - name: price
+      - name: inventory
+  - name: stg_orders
+    description: Contains information about each order  
+    columns:
+      - name: order_id
+      - name: user_id
+      - name: address_id
+      - name: created_at
+      - name: order_cost
+      - name: shipping_cost
+      - name: order_total
+      - name: tracking_id
+      - name: shipping_service
+      - name: estimated_delivery_at
+      - name: delivery_at
+      - name: status
+  - name: stg_order_items
+    description: Contains information about each order at item level 
+    columns:
+      - name: order_id
+      - name: product_id
+      - name: quantity
+  - name: stg_events
+    description: Contains information about each event
+    columns:
+      - name: session_id
+      - name: user_id
+      - name: page_url
+      - name: created_at
+      - name: event_type
+      - name: order_id
+      - name: product_id

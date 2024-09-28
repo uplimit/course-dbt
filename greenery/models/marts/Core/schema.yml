@@ -1,0 +1,21 @@
+version: 2
+
++post-hook:
+  - "grant select on {{ this }} to role reporting"  
+
+on-run-end:
+  - "GRANT USAGE ON SCHEMA {{ 'dbt_jen_w' }} TO reporting"
+
+models:
+  - name: dim_users
+    columns:
+      - name: user_id
+        tests: 
+          - unique
+          - not_null
+  - name: fact_orders
+    columns:
+        - name: order_id
+          tests: 
+            - unique
+            - not_null
