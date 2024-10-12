@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: int_orders_grouped_by_user
+    description: Order data grouped by user
+    columns:
+      - name: user_id 
+        tests:
+          - not_null
+          - unique 
+
+  - name: int_events_grouped_by_user
+    description: events data grouped by user 
+    columns:
+      - name: user_id 
+        tests:
+          - not_null
+          - unique  
+
+ 
+  - name: dim_users
+    description:  Info users combining a bunch of tables together
+    columns:
+      - name: user_id 
+        tests:
+          - not_null
+          - unique  
+  
+  - name: facts_orders 
+    description: Info on orders combining a bunch of tables together
+    columns:
+      - name: order_id 
+        tests:
+          - not_null
+          - unique  
+  
