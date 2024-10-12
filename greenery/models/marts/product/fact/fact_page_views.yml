@@ -1,0 +1,8 @@
+models:
+  - name: fact_page_views
+    description: contacts page views (from event data) with enriched user & product info
+    columns: 
+      - name: pageview_id
+        tests: 
+          - unique
+          - not_null
