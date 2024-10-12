@@ -1,0 +1,1 @@
+SELECT * FROM dev_db.dbt_danieloutschoolcom.stg_postgres__orders;
