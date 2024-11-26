@@ -1,0 +1,17 @@
+version: 2 
+
+models:
+  - name: stg_addresses
+    description: "Table contains information on customer address - fields include address_id, address, zipcode, state, country"
+  - name: stg_events
+    description: "Table contains browsing sessions on the platform - fields include event_id, session_id, user_id, page_url, created_at, event_type, order_id, product_id"
+  - name: stg_order_items
+    description: "Table contains order id, products in each order, and quantity in each order - fields include order_id, product_id, quantity"
+  - name: stg_orders 
+    description: "Table contains all orders information - fields include order_id, user_id, promo_id, address_id, created_at, order_cost, shipping_cost, order_total, tracking_id, shipping_service, estimated_delivery_at, delivered_at, status"
+  - name: stg_products
+    description: "Table contains information about each product - fields include   product_id, name, price, inventory"
+  - name: stg_promos
+    description: "Table contains information on promo codes offered in the platform - fields include promo_id, discount, status"
+  - name: stg_users 
+    description: "Table contains information on users - fields include user_id, first_name, last_name, email, phone_number, created_at, updated_at, address_id"
