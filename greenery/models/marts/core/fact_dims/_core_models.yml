@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: dim_users
+    description: >
+      Denormalied user-grained table with aggregations information for key
+      facts.
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_date
+    description: >
+      Generic Date dimension starting from the first day of the earliest month in
+       our source data and going until 1 year after today.
+    columns:
+      - name: date_day
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_products
+    description: >
+      Denormalized product-grained table with aggregation information for key
+      facts.
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_orders
+    description: >
+      Since there is only 1 source for orders information, the orders fact will 
+      be nearly identical to the orders staging table with additional calculations.
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_events
+    description: >
+      Since there is only 1 source for events information, the events fact will 
+      be nearly identical to the events staging table with additional calculations.
+    columns:
+      - name: event_id
+        tests:
+          - not_null
+          - unique

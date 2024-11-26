@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: fct_user_orders
+    description: >
+      "How frequently are users ordering and how is the ordering experience?"
+      User-grained table with aggregated order/order item information
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
