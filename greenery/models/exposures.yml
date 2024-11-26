@@ -1,0 +1,17 @@
+version: 2
+
+exposures:
+  - name: product_funnel
+    label: Product funnel of Greenery data
+    type: dashboard
+    maturity: high
+    url: https://app.sigmacomputing.com/corise-dbt/workbook/My-Workbook-1gQ02tYzd7dWwrNWtJof0t/edit?:nodeId=3oxgp-Qknb
+    description: >
+      This dashboard shows product funnel for Greenery data
+
+    depends_on:
+      - ref('fact_page_views')
+      - ref('stg_postgres__users')
+
+    owner:
+      name: Yulia
