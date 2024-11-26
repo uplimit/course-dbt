@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_users
+    description: Contains informaiton about users, such as name, email, phone, address.
+  - name: stg_addresses
+    description: Contains information about user addresses.
+  - name: stg_events
+    description: Contains information about Webpage event info.
+  - name: stg_orders
+    description: Contains information about orders and shipping status.
+  - name: stg_products
+    description: Contains information about Greenery's products.
+  - name: stg_order_items
+    description: Contains informaion about items ordered.
+  - name: stg_promos
+    description: Contains information about promotions.
