@@ -1,0 +1,37 @@
+version: 2
+sources:
+  - name: greenery_src
+    schema: public
+    database: dbt
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+    tables:
+      - name: addresses
+        description: >
+          Contains delivery location information associated with greenery's users (GDPR)
+      - name: events
+        loaded_at_field: created_at
+        description: >
+          Contains information regarding greenery's users site events
+      - name: orders
+        loaded_at_field: created_at
+        description: >
+          Contains information regarding orders, deliveries and shipping
+      - name: order_items
+        description: >
+          Contains list of items per order
+      - name: products
+        description: >
+          Contains information regarding greenery's products
+      - name: promos
+        description: >
+          Contains information regarding greenery's promotions
+      - name: users
+        loaded_at_field: created_at
+        description: >
+          Contains demographic information and contact details for greenery's users (GDPR)

@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: int_session_events
+    description: Basic details about the sessions associated with events
+    columns:
+      - name: session_id
+        tests:
+          - unique
+          - not_null
+  - name: fct_sessions
+    description: Aggregated session performance data
+    columns:
+      - name: session_id
+        tests:
+          - unique
+          - not_null

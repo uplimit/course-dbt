@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: int_user_orders
+    description: Order data structured around the users placing them
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
