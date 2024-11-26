@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: >
+      Staging model for address data. 
+    columns:
+      - name: address_id
+        description: >
+          Primary key for stg_postgres__addresses table
+  - name: stg_postgres__events
+    description: >
+      Staging model for event stream data.
+    columns:
+      - name: event_id
+        description: >
+          Primary key for stg_postgres__events table
+      - name: user_id
+        description: >
+          Foreign key to stg_postgres__users table
+      - name: order_id
+        description: >
+          Foreign key to stg_postgres__orders table
+      - name: product_id
+        description: >
+          Foreign key to stg_postgres__products table
+  - name: stg_postgres__order_items
+    description: >
+      Staging model for order items data
+    columns: 
+      - name: order_id
+        description: >
+          Foreign key to stg_postgres__orders table
+      - name: product_id
+        description: >
+          Foreign key to stg_postgres__products table
+  - name: stg_postgres__orders
+    description: >
+      Staging model for orders data
+    columns:
+      - name: order_id
+        description: >
+          Primary key for stg_postgres__orders table
+      - name: user_id
+        description: >
+          Foreign key to stg_postgres__users table
+      - name: address_id
+        description: >
+          Foreign key to stg_postgres__addresses table
+      - name: promo_type
+        description: >
+          Foreign key to stg_postgres__promos table
+  - name: stg_postgres__products
+    description: >
+      Staging model for products data
+    columns:
+      - name: product_id
+        description: >
+          Primary key for stg_postgres__products table
+  - name: stg_postgres__promos
+    description: >
+      Staging model for promos data
+    columns:
+      - name: promo_type
+        description: >
+          Primary key to stg_postgres__promos table. 
+          Not an ID - more of a promo descriptor that is nonetheless unique.
+  - name: stg_postgres__users
+    description: >
+      Staging model for users data
+    columns: 
+      - name: user_id
+        description: >
+          Primary key to stg_postgres__users table.
+      - name: address_id
+        description: >
+          Foreign key to stg_postgres__addresses table. 
