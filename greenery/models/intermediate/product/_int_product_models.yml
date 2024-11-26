@@ -1,0 +1,8 @@
+models:
+  - name: int_product_events
+    description: Intermediate table joining stg_events and stg_products
+    columns:
+      - name: event_id
+        tests:
+          - unique
+          - not_null

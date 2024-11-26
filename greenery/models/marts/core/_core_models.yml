@@ -1,0 +1,27 @@
+
+models:
+  - name: dim_products
+    description: Product information table with product_id as unique identifier
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+  - name: dim_users
+    description: Users information table with user_id as unique identifier
+    columns:
+      - name: user_id
+        tests:
+          - unique
+          - not_null
+  - name: fact_orders
+    description: Orders fact table, containing all information about orders
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: quantity
+        tests:
+          - positive_values
+  
