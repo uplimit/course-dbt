@@ -1,0 +1,22 @@
+[0m02:30:44  Running with dbt=1.2.1
+[0m02:30:45  version: 2
+
+models:
+  - name: int_product_conv_rate
+    description: ""
+    columns:
+      - name: product_id
+        description: ""
+
+      - name: product_name
+        description: ""
+
+      - name: total_orders
+        description: ""
+
+      - name: total_sessions
+        description: ""
+
+      - name: conversion_rate
+        description: ""
+
