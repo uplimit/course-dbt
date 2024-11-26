@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: tbl_promo_metrics
+    description: Promo-granular information
+    meta:
+      owner: "Jansen Manahan"
+
+    columns:
+      - name: promo_id
+        description: Primary key inherited from stg_promo
+        tests: # Used as primary key
+          - unique
+          - not_null
+
+      - name: promo_name
+        description: Inherited from stg_promo
+
+      - name: discount_percentage
+        description: Inherited from stg_promo
+
+      - name: promo_status
+        description: Inherited from stg_promo
+
+      - name: promo_first_used_at
+        description: Earliest stg_order.order_created_at related to this promo
+
+      - name: promo_last_used_at
+        description: >
+          Most recent stg_order.order_created_at related to this promo
+          Assumed to be a proxy for when promo_status switched from active to inactive
+
+      - name: promo_order_count
+        description: Number of orders with this promo
+
+      - name: promo_user_count
+        description: Number of users who have placed orders with this promo
+
+      - name: promo_cost
+        description: >
+          The sum of current product price times the quantity in orders using this promo
+          times discount_percentage
+        tests:
+          - positive_values
+          - not_null

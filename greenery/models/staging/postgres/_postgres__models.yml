@@ -1,0 +1,242 @@
+version: 2
+
+models:
+  - name: stg_address
+    description: "Clean addresses"
+
+    meta:
+      owner: "Jansen Manahan"
+
+    columns:
+      - name: address_id
+        description: "Alphanumeric nonsense string, listed as primary key of addresses table"
+        tests: # Used as primary key
+          - unique
+          - not_null
+
+      - name: street_address
+        description: "Street number, name, and suffix as one string"
+        
+      - name: zip_code
+        description: "String ZIP code of the address, including leading zeroes"
+
+      - name: state_name
+        description: "Full name of the first-level subdivision of the address, pre-standardized as of 2022-10-05"
+
+      - name: country_name
+        description: "Full name of the country of the address"
+        tests:
+          - accepted_values:
+              values: ['United States'] # Be aware if new countries are added
+
+
+  - name: stg_event
+    description: "Clean events"
+
+    meta:
+      owner: "Jansen Manahan"
+
+    columns:
+    - name: event_id
+      description: "Alphanumeric nonsense string listed as primary key of events table"
+      tests: # Used as primary key
+        - unique
+        - not_null
+
+    - name: session_id
+      description: "Alphanumeric nonsense string frequently the same as the next row of the events table"
+
+    - name: user_id
+      description: "Alphanumeric nonsense string that correlates closely with session_id in the events table and is FK to users.user_id"
+
+    - name: page_url
+      description: "Full web adress related to an event"
+
+    - name: event_created_at
+      description: "Timestamp related to an event.  Not strictly ordered.  No time zone"
+
+    - name: event_type
+      description: "Lowercase descriptive string related to an event"
+
+    - name: order_id
+      description: >
+        "Order ID related to an event"
+        "Is NULL if product_id has data"
+        "Has data for event types 'checkout' and 'package_shipped'"
+        "Foreign key to orders.order_id"
+      # TODO: tests on multiple columns
+
+    - name: product_id
+      description: >
+        "Product ID related to an event"
+        "Is NULL if order_id has data"
+        "Has data for event types 'add_to_cart' and 'page_view'"
+        "Foreign key to products.product_id"
+      # TODO: tests on multiple columns
+
+
+  - name: stg_order_item
+    description: "Clean order items"
+
+    meta:
+      owner: "Jansen Manahan"
+
+    columns:
+    - name: surrogate_key
+      description: "Order ID and Product ID together are this table's primary key"
+      tests:
+        - unique
+
+    - name: order_id
+      description: "Foreign key to the orders table.  Part of this table's primary key"
+      tests:
+        - not_null
+        - relationships:
+            to: ref('stg_order')
+            field: order_id
+
+    - name: product_id
+      description: "Foreign key to the products table.  Part of this table's primary key"
+      tests:
+        - not_null
+        - relationships:
+            to: ref('stg_product')
+            field: product_id
+
+    - name: quantity
+      description: "An integer related to an order product"
+
+
+  - name: stg_order
+    description: "Clean orders"
+    meta:
+      owner: Jansen Manahan
+
+    columns:
+    - name: order_id
+      description: "Listed primary key of the orders table.  Alphanumeric"
+      tests:
+        - unique
+        - not_null
+    
+    - name: user_id
+      description: "Alphanumeric foreign key to users.user_id"
+
+    - name: promo_id
+      description: "Sparsely populated descriptive string.  Foreign key to promos.promo_id"
+
+    - name: address_id
+      description: "Alphanumeric"
+
+    - name: order_created_at
+      description: "Timestamp related to an order.  Not strictly ordered.  No time zone"
+
+    - name: order_cost # TODO: rename with better context
+      description: "A number related to an order"        
+
+    - name: shipping_cost
+      description: "A number related to an order"
+
+    - name: total_order_cost
+      description: "A number often but not always the sum of order_cost and shipping_cost"
+
+    - name: tracking_id
+      description: "An alphanumeric related to an order.  Has some NULL values"
+
+    - name: shipping_service
+      description: "A descriptive string related to an order and also NULL when tracking_id is"
+      # TODO: multi-column test to ensure continuation of co-NULL
+    
+    - name: estimated_delivered_at
+      description: "A timestamp related to an order, always NULL when tracking_id is, and sometimes when it isn't"
+
+    - name: actual_delivered_at
+      description: >
+        "A timestamp related to an order. Has NULL values if status is not 'delivered'."
+        "NULLs do not correlate perfectly with NULL values in other columns"
+      # TODO: multi-column test to ensure NULL based on status
+
+    - name: order_status
+      description: "A descriptive string related to an order"
+
+
+  - name: stg_product
+    description: "Cleaned products.products"
+    meta:
+      owner: "Jansen Manahan"
+    
+    columns:
+      - name: product_id
+        description: "Listed primary key alphanumeric field in the products tables"
+        tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        description: "Description string related to a product"
+
+      - name: price
+        description: "Numerical value related to a product"
+
+      - name: inventory
+        description: "Integer related to a product"
+
+
+  - name: stg_promo
+    description: "Cleaned promos"
+    meta:
+      owner: "Jansen Manahan"
+    
+    columns:
+      - name: promo_id
+        description: "A descriptive string listed as the primary key of the promo table.  Inconsistent capitalization"
+        tests:
+          - unique
+          - not_null
+
+      - name: promo_name
+        description: "Promo ID with consistent capitalization"
+
+      - name: discount_percentage
+        description: "Percentage discount associated with the promo, ranging from zero to one"
+        tests:
+          - no_greater_than_one
+          - positive_values
+
+      - name: promo_status
+        description: "A string related to a promo"
+
+
+  - name: stg_user
+    description: "Cleaned users"
+    meta:
+      owner: "Jansen Manahan"
+    
+    columns:
+      - name: user_id
+        description: "Listed primary key of the users table.  Alphanumeric"
+        tests:
+          - unique
+          - not_null
+
+      - name: first_name
+        description: "A string related to the user"
+
+      - name: last_name
+        description: "A string related to the user"
+
+      - name: email
+        description: "A string related to the user.  Follows a specific format including an '@' character in the middle somewhere"
+
+      - name: phone_number
+        description: "A string related to the user.  Follows a strict format of ###-###-#### where # represted [0-9] in regex"
+        # TODO: test for format
+
+      - name: address_id
+        description: "Foreign key related to the address_id column of the addresses table"
+
+      - name: user_created_at
+        description: "A timestamp related to the user.  No time zone"
+
+      - name: user_updated_at
+        description: "A timestamp related to the user.  No time zone.  Always >= created_at"
