@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "Products we sell"
+    columns:
+      - name: product_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_users
+    description: "Prospective and purchasing customers "
+    columns:
+      - name: user_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+  - name: fact_orders
+    description: "Orders that have been placed "
+    columns:
+      - name: order_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+

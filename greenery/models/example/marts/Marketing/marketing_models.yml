@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: user_order_fact
+    description: "High level information about our users such as most recent order, how many total orders, and customer attributes "
+    columns:
+      - name: user_guid
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
