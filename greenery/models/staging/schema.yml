@@ -1,0 +1,111 @@
+version: 2
+
+models:
+  - name: stg_orders__orders
+    description: A staging model for oders data.
+    columns:
+      - name: order_id
+        description: Unique identifier for an order.
+        tests:
+          - unique
+      - name: user_id
+      - name: promo_id
+      - name: address_id
+      - name: created_at
+      - name: order_cost
+      - name: order_total
+      - name: tracking_id
+      - name: shipping_service
+      - name: estimated_delivery_at
+      - name: delivered_at
+      - name: status
+  - name: stg_addresses__addresses
+    description: A staging model for addresses data.
+    columns:
+      - name: addresses_id
+        description: Unique identifier for an address.
+        tests:
+          - unique
+      - name: address
+      - name: zipcode
+      - name: state
+      - name: country
+  - name: stg_events__events
+    description: A staging model for addresses data.
+    columns:
+      - name: event_id
+        description: Unique identifier for an event.
+        tests:
+          - unique
+      - name: session_id
+      - name: user_id
+      - name: page_url
+      - name: created_at
+      - name: event_type
+      - name: order_id
+      - name: product_id
+  - name: stg_order_items__order_items
+    description: A staging model for order items data.
+    columns:
+      - name: order_id
+        description: Unique identifier for an event.
+        tests:
+          - unique
+      - name: product_id
+      - name: qunantity
+  - name: stg_products__products
+    description: A staging model for products data.
+    columns:
+      - name: product_id
+        description: Unique identifier for product.
+        tests:
+          - unique
+      - name: product_id
+      - name: name
+      - name: price
+      - name: inventory
+  - name: stg_promos__promos
+    description: A staging model for promos data.
+    columns:
+      - name: promo_id
+        description: Unique identifier for promos.
+        tests:
+          - unique
+      - name: discount
+      - name: status
+  - name: stg_superheroes__superheroes
+    description: A staging model for superheroes data.
+    columns:
+      - name: id
+        description: Unique identifier for superheroes.
+        tests:
+          - unique
+      - name: name
+      - name: gender
+      - name: eye_color
+      - name: hair_color
+      - name: height
+      - name: publisher
+      - name: skin_color
+      - name: alignment
+      - name: weight
+      - name: created_at
+      - name: updated_at
+  - name: stg_users__users
+    description: A staging model for users data.
+    columns:
+      - name: user_id
+        description: Unique identifier for users.
+        tests:
+          - unique
+      - name: first_name
+      - name: last_name
+      - name: email
+      - name: phone_number
+      - name: created_at 
+      - name: updated_at
+      - name: address_id
+
+
+
+     
