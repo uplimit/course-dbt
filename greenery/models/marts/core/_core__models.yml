@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_products
+    columns:
+    - name: product_id
+      description: Unique UUID for each product
+      tests:
+        - unique
+        - not_null
+        - relationships:
+            to: ref('stg_postgres__products')
+            field: product_id
+
+  - name: dim_users
+    columns:
+      - name: user_id
+        description: Unique UUID for each user
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('stg_postgres__users')
+              field: user_id
+
+  - name: fact_orders
+    columns:
+      - name: order_id
+        description: Unique UUID for each order
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: Unique UUID for each user
+        tests:
+          - relationships:
+              to: ref('stg_postgres__users')
+              field: user_id

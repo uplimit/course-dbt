@@ -1,0 +1,47 @@
+version: 2
+
+models:
+
+  - name: fact_page_views
+    columns:
+      - name: event_id
+        description: Unique UUID for each event
+        tests:
+          - unique
+          - not_null
+      - name: session_id
+        description: Unique UUID for each session
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: Unique UUID for each user
+        tests:
+          - relationships:
+              to: ref('stg_postgres__users')
+              field: user_id
+      - name: product_id
+        description: UUID of the product viewed
+        tests:
+          - relationships:
+              to: ref('stg_postgres__products')
+              field: product_id
+      - name: page_url
+        description: URL where the session and events happened
+        tests:
+          - not_null
+      - name: created_date
+        description: date for the event
+        tests:
+          - not_null
+      - name: product_id
+        description: UUID for the product (if any) added to cart during the session
+      - name: product_name
+        description: Name for the product (if any) added to cart during the session
+      - name: added_to_cart_during_session
+        description: Flag to spot if product was added to cart during the session
+      - name: added_to_cart_by_user
+        description: Flag to spot if product was added to cart by user
+      - name: quantity_purchased_by_user
+        description: Number of products purchased by user
+
