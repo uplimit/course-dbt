@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: fct_user_orders
+    description: user order information and promo information
+    columns: 
+      - name: user_id
+        tests:
+          - not_null
+          

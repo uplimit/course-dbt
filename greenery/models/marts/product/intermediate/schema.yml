@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_session_events_agg
+    description: Aggregated session events by user

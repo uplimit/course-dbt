@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: fct_sessions
+    description: events for related session and User information
+  - name: fct_page_views
+    description: Page view events
+  - name: fct_events
+    description: events
