@@ -1,0 +1,13 @@
+version: 2
+
+models:
+
+  - name: stg_postgres__order_items
+    description: Table that links orders with products and quantities
+    columns:
+      - name: order_id
+        description: Order ID
+      - name: product_id
+        description: Product ID
+      - name: quantity
+        description: Quantity ordered

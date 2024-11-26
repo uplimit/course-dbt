@@ -1,0 +1,16 @@
+version: 2
+
+models:
+
+  - name: stg_postgres__promos
+    description: Table containing promo details such as ID, discount amount, and status
+    columns:
+      - name: promo_id
+        description: Unique promo ID in the platform (Primary key)
+        tests:
+          - unique
+          - not_null
+      - name: discount
+        description: Discount given for that promo
+      - name: status
+        description: indicating if promo code is active or inactive

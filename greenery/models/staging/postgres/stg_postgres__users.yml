@@ -1,0 +1,26 @@
+version: 2
+
+models:
+
+  - name: stg_postgres__users
+    description: Table containing users details such as ID, name, last name, email, phone number, etc
+    columns:
+      - name: user_id
+        description: Unique user ID in the platform (Primary key)
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: Users first name
+      - name: last_name
+        description: Users last name
+      - name: email
+        description: Users email address
+      - name: phone_number
+        description: Users phone number
+      - name: created_at
+        description: timestamp indicating sing up creattion time
+      - name: updated_at
+        description: timestamp indicating last update time
+      - name: address_id
+        description: Users default delivery address

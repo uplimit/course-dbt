@@ -1,0 +1,36 @@
+version: 2
+
+models:
+
+  - name: stg_postgres__orders
+    description: Table with customers orders and its information
+    columns:
+      - name: order_id
+        description: Unique order ID in the platform (Primary key)
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: User ID related to the order
+      - name: promo_id
+        description: Promo ID if there was on applied to the order
+      - name: address_id
+        description: Delivery address ID
+      - name: created_at
+        description: Timestamp indicating when the order was created
+      - name: order_cost
+        description: Cost for the respective order
+      - name: shipping_cost
+        description: Cost of shipping
+      - name: order_total
+        description: Total cost of the order
+      - name: tracking_id
+        description: Tracking number for the order
+      - name: shipping_service
+        description: Company that was used for shipping
+      - name: estimated_delivery_at
+        description: Estimated date of delivery
+      - name: delivered_at
+        description: Actual time of delivery
+      - name: status
+        description: Order Status
